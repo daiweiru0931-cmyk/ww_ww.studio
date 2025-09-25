@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
+import icon from "../assets/wei-info-icon.png";
 
 const InfoBox = () => {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  // 多段文字
   const texts = [
-    "Designer, based in Tokyo.",
-    "Visual & website creative developer.",
-    "Transforming ideas into digital logic."
+    "Hi! I am WeiRu.",
+    "Visual & Website creative designer, based in Taiwan.",
+    "Transforming ideas into digital logic.",
+    "Welcome to my portfolio."
   ];
 
   const [displayText, setDisplayText] = useState("");
-  const [textIndex, setTextIndex] = useState(0); // 哪一段文字
-  const [charIndex, setCharIndex] = useState(0); // 打到第幾個字
+  const [textIndex, setTextIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // 打字效果
   useEffect(() => {
     const currentText = texts[textIndex];
     let timer;
@@ -39,33 +39,16 @@ const InfoBox = () => {
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, textIndex, texts]);
 
-  // 滑鼠移動效果 (logo 跟隨)
-  const handleMouseMove = (e) => {
-    const { offsetX, offsetY, currentTarget } = e.nativeEvent;
-    const { clientWidth, clientHeight } = currentTarget;
-    const x = (offsetX / clientWidth - 0.5) * 20;
-    const y = (offsetY / clientHeight - 0.5) * 20;
-    setPos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setPos({ x: 0, y: 0 });
-  };
-
   return (
-    <div
-      className="info-box"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="info-box">
       <div className="info-left">
         <img
-          src="/images/logo.png"
-          alt="WW logo"
-          className="info-logo"
+          src={icon}
+          alt="WW icon"
+          className="info-icon"
           style={{
-            transform: `translate(${pos.x}px, ${pos.y}px)`,
-            transition: "transform 0.1s ease-out",
+            width: "20px",
+            height: "20px"
           }}
         />
         <span className="info-text">{displayText}</span>

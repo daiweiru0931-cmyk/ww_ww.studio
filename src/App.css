@@ -144,9 +144,9 @@
      InfoBox
      ============================== */
   .info-box {
-    width: 350px;
+    width: 500px;
     height: 35px;
-    border: 1px solid #555;
+    border: 1px solid #999;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -165,7 +165,7 @@
     overflow: hidden;
   }
   
-  .info-logo {
+  .info-icon {
     width: 20px;
     height: 20px;
   }
