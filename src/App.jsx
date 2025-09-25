@@ -1,6 +1,7 @@
 import React from 'react';
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
+import AccordionGallery from './components/AccordionGallery';
 import './App.css'; 
 
 function App() {
@@ -47,12 +48,7 @@ function App() {
 
       {/* Work Preview Section */}
       <section className="work-preview">  
-        <div className="work-preview-images">
-          <img src="placeholder.jpg" alt="Website work preview image" />
-          <img src="placeholder.jpg" alt="Website work preview image" />
-          <img src="placeholder.jpg" alt="Website work preview image" />
-          <img src="placeholder.jpg" alt="Website work preview image" />
-        </div>
+        <AccordionGallery />
       </section>
 
       {/* About Section */}

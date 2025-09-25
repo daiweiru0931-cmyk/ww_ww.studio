@@ -1,0 +1,101 @@
+/* Work Preview Section 外層容器 */
+.work-preview {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.work-preview-images {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Accordion Gallery 容器樣式 */
+.accordion-gallery {
+  display: flex;
+  width: 100%;
+  height: 550px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 20px; /* 整體左右縮進 10px（可選） */
+}
+
+/* 畫廊項目 (<a> 標籤) */
+.gallery-item {
+  flex-grow: 1;     /* 元素可以放大，按比例佔空間 */
+  flex-shrink: 1;   /* 元素可以縮小，必要時會被壓縮 */
+  flex-basis: 180px; /* 元素的初始大小基準值是 220px */
+  min-width: 150px;
+  margin: 0 5px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 展開狀態的樣式 */
+.gallery-item.is-expanded {
+  flex-grow: 4;
+}
+
+/* 內部內容容器 */
+.item-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+/* 確保圖片維持比例且填滿，並增加 hover 放大效果 */
+.item-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 5px; /* (可選) 讓內縮後的圖片邊緣更柔和 */
+  transition: transform 0.6s ease;
+}
+
+/* 滑鼠懸停時圖片延伸左右放大 */
+.gallery-item:hover img {
+  transform: scale(1.1); /* 放大 10% */
+  border-radius: 5px;
+}
+
+/* 專案文字資訊 */
+.project-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;                        /* 蓋滿整張 */
+  padding: 20px;
+  display: flex;                        /* 用 flex 控制文字位置 */
+  flex-direction: column;              /* 垂直排列 */
+  justify-content: flex-end;           /* 文字固定在最下方 */
+  background: rgba(0, 0, 0, 0.2);      /* 半透明覆蓋 */
+  transform: translateY(100%);         /* 預設隱藏 */
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.project-info h3 {
+  font-size: 16px;        /* 標題大小固定 */
+  margin: 0 0 8px 0;      /* 標題下方間距固定 */
+}
+
+.project-info p {
+  font-size: 12px;        /* 文字大小固定 */
+  margin: 0;              /* 取消段落默認間距 */
+}
+
+/* 展開時顯示文字資訊 */
+.gallery-item.is-expanded .project-info {
+  transform: translateY(0);
+  opacity: 1;
+}

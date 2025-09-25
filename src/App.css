@@ -2,14 +2,15 @@
    General Styles & Utilities
    ============================== */
    :root {
-    --primary-color: #000;
-    --secondary-color: #fff;
-    --light-gray: #f5f5f5;
+    --background-color: #f6f3ef;
+    --dark-gray: #333;
+    --gray: #555;
     --text-color: #333;
   }
   
   body {
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+    background-color: var(--background-color);
     color: #333;
     line-height: 1.6;
     margin: 0;
@@ -31,27 +32,6 @@
     margin: 0;
   }
   
-  .section-label {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  
-  .view-more-btn {
-    background-color: transparent;
-    border: 1px solid var(--text-color);
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-  }
-  
-  .view-more-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-  }
-  
   /* ==============================
      Header
      ============================== */
@@ -60,8 +40,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5rem;
-    border-bottom: 1px solid #eee;
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
   }
   
   .logo {
@@ -73,15 +52,18 @@
     display: flex;
     gap: 2rem;
     font-size: 0.9rem;
+    color: var(--dark-gray);
   }
   
   .contact-btn {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: #333;
+    color: #ffffff;
     border: none;
-    padding: 0.75rem 2rem;
+    border-radius: 2.4rem;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
     font-size: 0.9rem;
+    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   }
   
   /* ==============================
@@ -92,29 +74,30 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 5rem;
-    background-color: var(--light-gray);
-    border-bottom: 1px solid #ddd;
+    background-color: var(--background-color);;
     gap: 5rem;
   }
   
   /* -- Left Title Effect -- */
   .all-letters {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   }
   
   .h1-text {
     font-size: 48px;
     font-weight: bold;
+    color: var(--dark-gray);
   }
   
   .p-text {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: normal;
     margin-top: 10px;
+    color: var(--gray);
   }
   
   .encrypted {
-    color: #888;
+    color: #999;
   }
   
   /* 確保亂碼也跟著跑字級 */
@@ -123,7 +106,7 @@
   }
   
   .p-text.encrypted {
-    font-size: 20px;
+    font-size: 24px;
   }
   
   /* -- Right text -- */
@@ -132,34 +115,37 @@
     display: flex;
     flex-direction: column; /* 直向排列 */
     align-items: flex-end;  /* 靠右對齊 */
-    gap: 0.5rem;
   }
   
   .hero-right h3 {
-    margin: 0;
-    font-size: 1.3rem;
+    margin-top: 12px;
+    margin-bottom: 3px;
+    font-size: 1.2rem;
     font-weight: 500;
+    color: var(--dark-gray);
+    
   }
   
   .hero-right p {
     margin: 0;
-    font-size: 1rem;
-    color: #555;
+    font-size: 0.8rem;
+    color: var(--gray);
+    
   }
   
   .hero-right .info-box-container {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
   }
   
   /* ==============================
      InfoBox
      ============================== */
   .info-box {
-    width: 400px;
-    height: 30px;
+    width: 350px;
+    height: 35px;
     border: 1px solid #555;
     border-radius: 5px;
     display: flex;
@@ -185,8 +171,9 @@
   }
   
   .info-text {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500;
+    color: var(--dark-gray);
   }
   
   .info-btn {
@@ -195,7 +182,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #555;
+    color: var(--dark-gray);
     transition: transform 0.2s ease;
   }
   
@@ -207,23 +194,18 @@
   /* ==============================
      Work Preview Images
      ============================== */
-  .work-preview-images {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    padding: 0 5rem;
-  }
   
-  .work-preview-images img {
-    width: 23%;
-    height: auto;
-    object-fit: cover;
-  }
   
   /* ==============================
      About Section
      ============================== */
+  .section-label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+    display: block;
+  }   
+
   .about, .service {
     padding: 5rem;
     background-color: var(--secondary-color);
@@ -259,6 +241,20 @@
     font-size: 0.9rem;
     color: #666;
     line-height: 1.8;
+  }
+
+  .view-more-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .view-more-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
   }
   
   /* ==============================
