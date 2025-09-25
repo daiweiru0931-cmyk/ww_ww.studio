@@ -1,319 +1,346 @@
-/* General Styles & Utilities */
-:root {
-  --primary-color: #000;
-  --secondary-color: #fff;
-  --light-gray: #f5f5f5;
-  --text-color: #333;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  color: var(--text-color);
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.section-label {
-  font-size: 0.9rem;
-  color: #888;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.view-more-btn {
-  background-color: transparent;
-  border: 1px solid var(--text-color);
-  padding: 0.5rem 1.5rem;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.view-more-btn:hover {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-}
-
-/* --- Header --- */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 5rem;
-  border-bottom: 1px solid #eee;
-  background-color: var(--secondary-color);
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.nav ul {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-}
-
-.contact-btn {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  border: none;
-  padding: 0.75rem 2rem;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-/* --- Hero Section --- */
-.hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 5rem;
-  background-color: var(--light-gray);
-  border-bottom: 1px solid #ddd;
-  gap: 5rem;
-}
-
-/* -- Left Title Effect -- */
-.all-letters {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.h1-text {
-  font-size: 48px;
-  font-weight: bold;
-}
-
-.p-text {
-  font-size: 20px;
-  font-weight: normal;
-  margin-top: 10px;
-}
-
-.encrypted {
-  color: #888; 
-  font-size: inherit; /* 確保亂碼大小一致 */
-}
-
-/* -- Right text -- */
-.hero-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column; /* 直向排列 */
-  align-items: flex-end;  /* 靠右對齊 */
-  gap: 0.5rem;
-}
-
-.hero-right h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.hero-right p {
-  margin: 0;
-  font-size: 1rem;
-  color: #555;
-}
-
-.hero-right .info-box-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin-top: 0.5rem;
-}
-
-/* -- InfoBox -- */
-.info-box {
-  width: 400px;           /* 固定寬度 */
-  height: 30px;           /* 固定高度 */
-  border: 1px solid #555;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  background: #fff;
-  overflow: hidden;       /* 防止文字打字超出框 */
-  box-sizing: border-box; /* 包含 padding */
-}
-
-.info-left {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  white-space: nowrap;    /* 不換行，文字跑長條動畫 */
-  overflow: hidden;       /* 多餘文字隱藏 */
-}
-
-.info-logo {
-  width: 20px;
-  height: 20px;
-}
-
-.info-text {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.info-btn {
-  font-size: 1rem;
-  font-weight: bold;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--primary-color); /* 設定文字顏色 */
-  transition: transform 0.2s ease;
-}
-
-.info-btn:hover {
-  transform: rotate(90deg);
-  color: var(--secondary-color); /* 滑鼠懸停變色，可選 */
-}
-
-/* --- work preview images --- */
-.work-preview-images {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 0 5rem;
-}
-
-.work-preview-images img {
-  width: 23%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* --- About Section --- */
-.about, .service {
-  padding: 5rem;
-  background-color: var(--secondary-color);
-}
-
-.about-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 3rem;
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-}
-
-.about-text p {
-  font-size: 1.2rem;
-  color: #555;
-}
-
-.about-description {
-  flex: 2;
-}
-
-.about-description p {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.8;
-}
-
-/* --- Taste Section --- */
-.taste {
-  padding: 5rem;
-  background-color: var(--light-gray);
-}
-
-.taste-images {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.taste-images img {
-  width: 30%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* --- Service Section --- */
-.service {
-  padding: 5rem;
-}
-
-.service-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 5rem;
-}
-
-.service-text {
-  flex: 1;
-}
-
-.service-text h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.service-text h3 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-top: 0;
-}
-
-.service-text p {
-  font-size: 0.9rem;
-  color: #666;
-  line-height: 1.8;
-}
-
-.service-diagram {
-  flex: 1;
-  background-color: #eee;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 1px solid #ddd;
-}
-
-/* --- Footer --- */
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 5rem;
-  border-top: 1px solid #eee;
-  background-color: var(--secondary-color);
-}
-
-.footer-nav ul {
-  display: flex;
-  gap: 2rem;
-  font-size: 0.9rem;
-}
+/* ==============================
+   General Styles & Utilities
+   ============================== */
+   :root {
+    --primary-color: #000;
+    --secondary-color: #fff;
+    --light-gray: #f5f5f5;
+    --text-color: #333;
+  }
+  
+  body {
+    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .section-label {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .view-more-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .view-more-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+  }
+  
+  /* ==============================
+     Header
+     ============================== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5rem;
+    border-bottom: 1px solid #eee;
+    background-color: var(--secondary-color);
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .nav ul {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+  }
+  
+  .contact-btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  /* ==============================
+     Hero Section
+     ============================== */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5rem;
+    background-color: var(--light-gray);
+    border-bottom: 1px solid #ddd;
+    gap: 5rem;
+  }
+  
+  /* -- Left Title Effect -- */
+  .all-letters {
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .h1-text {
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .p-text {
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 10px;
+  }
+  
+  .encrypted {
+    color: #888;
+  }
+  
+  /* 確保亂碼也跟著跑字級 */
+  .h1-text.encrypted {
+    font-size: 48px;
+  }
+  
+  .p-text.encrypted {
+    font-size: 20px;
+  }
+  
+  /* -- Right text -- */
+  .hero-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 直向排列 */
+    align-items: flex-end;  /* 靠右對齊 */
+    gap: 0.5rem;
+  }
+  
+  .hero-right h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  
+  .hero-right p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .hero-right .info-box-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  /* ==============================
+     InfoBox
+     ============================== */
+  .info-box {
+    width: 400px;
+    height: 30px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #fff;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  .info-left {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .info-logo {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .info-text {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .info-btn {
+    font-size: 1rem;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    transition: transform 0.2s ease;
+  }
+  
+  .info-btn:hover {
+    transform: rotate(90deg);
+    color: #999;
+  }
+  
+  /* ==============================
+     Work Preview Images
+     ============================== */
+  .work-preview-images {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 5rem;
+  }
+  
+  .work-preview-images img {
+    width: 23%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* ==============================
+     About Section
+     ============================== */
+  .about, .service {
+    padding: 5rem;
+    background-color: var(--secondary-color);
+  }
+  
+  .about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+  
+  .about-text {
+    flex: 1;
+  }
+  
+  .about-text h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .about-text p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .about-description {
+    flex: 2;
+  }
+  
+  .about-description p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.8;
+  }
+  
+  /* ==============================
+     Taste Section
+     ============================== */
+  .taste {
+    padding: 5rem;
+    background-color: var(--light-gray);
+  }
+  
+  .taste-images {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .taste-images img {
+    width: 30%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* ==============================
+     Service Section
+     ============================== */
+  .service {
+    padding: 5rem;
+  }
+  
+  .service-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 5rem;
+  }
+  
+  .service-text {
+    flex: 1;
+  }
+  
+  .service-text h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-text h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  
+  .service-text p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.8;
+  }
+  
+  .service-diagram {
+    flex: 1;
+    background-color: #eee;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+  }
+  
+  /* ==============================
+     Footer
+     ============================== */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5rem;
+    border-top: 1px solid #eee;
+    background-color: var(--secondary-color);
+  }
+  
+  .footer-nav ul {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+  }
+  

@@ -145,7 +145,10 @@ export default function DecryptedText({
             {displayTextArr[idx].split('').map((char, i) => {
               const revealed = revealedIndicesArr[idx]?.has(i);
               return (
-                <span key={i} className={revealed ? t.className : encryptedClassName}>
+                <span
+                  key={i}
+                  className={revealed ? t.className : `${t.className} ${encryptedClassName}`}
+                >
                   {char}
                 </span>
               );
