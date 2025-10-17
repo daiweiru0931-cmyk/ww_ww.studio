@@ -36,12 +36,12 @@ export default function DecryptedText({
         texts.map(t => {
           // 判斷 h1 或 p
           if (t.className.includes('h1-text')) {
-            if (width <= 480) return 32;
-            if (width <= 768) return 40;
+            if (width <= 480) return 24;
+            if (width <= 768) return 36;
             return 48;
           } else if (t.className.includes('p-text')) {
-            if (width <= 480) return 16;
-            if (width <= 768) return 20;
+            if (width <= 480) return 8;
+            if (width <= 768) return 16;
             return 24;
           } else {
             // 預設值
