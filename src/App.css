@@ -6,18 +6,21 @@
     --dark-gray: #333;
     --gray: #555;
     --text-color: #333;
+    --secondary-color: #fff;
+    --light-gray: #f5f5f5;
+    --primary-color: #333;
   }
   
   body {
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
     background-color: var(--background-color);
-    color: #333;
+    color: var(--text-color);
     line-height: 1.6;
     margin: 0;
     padding: 0;
   }
   
-  h1, h2, h3, h4, h5, h6 {
+  h1,h2,h3,h4,h5,h6 {
     font-weight: normal;
   }
   
@@ -33,37 +36,107 @@
   }
   
   /* ==============================
-     Header
+     Header + 漢堡選單
      ============================== */
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5rem;
+    padding: 1.5rem 2rem;
     background-color: var(--background-color);
+    position: relative;
+    z-index: 100;
   }
   
-  .logo {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
-  
-  .nav ul {
+  .header-right {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  /* CONTACT 按鈕 */
+  .contact-btn {
+    background-color: var(--gray);
+    color: #fff;
+    border: none;
+    border-radius: 2.4rem;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+    transition: background 0.3s ease;
+  }
+  
+  .contact-btn:hover {
+    background-color: #999;
+  }
+  
+  /* 漢堡按鈕 */
+  .menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 101;
+  }
+  
+  .menu-icon span {
+    height: 2px;
+    width: 100%;
+    background: var(--dark-gray);
+    transition: all 0.3s ease;
+  }
+  
+  .menu-icon.open span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+  .menu-icon.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-icon.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+  
+  /* 右側滑出選單 */
+  .side-menu {
+    box-sizing: border-box; /* 讓 padding 算在 width 裡面 */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    padding: 8rem 2rem;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    font-size: 0.9rem;
+    transform: translateX(100%);
+  }
+  
+  .side-menu.open {
+    transform: translateX(0); /* 滑出 */
+  }  
+  
+  .side-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1rem;
     color: var(--dark-gray);
   }
   
-  .contact-btn {
-    background-color: #333;
-    color: #ffffff;
-    border: none;
-    border-radius: 2.4rem;
-    padding: 0.75rem 1.5rem;
+  .side-menu li {
     cursor: pointer;
-    font-size: 0.9rem;
-    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+    transition: color 0.3s ease;
+  }
+  
+  .side-menu li:hover {
+    color: var(--primary-color);
   }
   
   /* ==============================
@@ -74,63 +147,46 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 5rem;
-    background-color: var(--background-color);;
     gap: 5rem;
+    flex-wrap: wrap;
   }
   
-  /* -- Left Title Effect -- */
   .all-letters {
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   }
   
   .h1-text {
-    font-size: 48px;
     font-weight: bold;
     color: var(--dark-gray);
   }
   
   .p-text {
-    font-size: 24px;
-    font-weight: normal;
-    margin-top: 10px;
     color: var(--gray);
+    margin-top: 10px;
   }
   
   .encrypted {
     color: #999;
   }
   
-  /* 確保亂碼也跟著跑字級 */
-  .h1-text.encrypted {
-    font-size: 48px;
-  }
-  
-  .p-text.encrypted {
-    font-size: 24px;
-  }
-  
-  /* -- Right text -- */
   .hero-right {
     flex: 1;
     display: flex;
-    flex-direction: column; /* 直向排列 */
-    align-items: flex-end;  /* 靠右對齊 */
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 250px;
   }
   
   .hero-right h3 {
     margin-top: 12px;
     margin-bottom: 3px;
     font-size: 1.2rem;
-    font-weight: 500;
     color: var(--dark-gray);
-    
   }
   
   .hero-right p {
-    margin: 0;
     font-size: 0.8rem;
     color: var(--gray);
-    
   }
   
   .hero-right .info-box-container {
@@ -144,7 +200,8 @@
      InfoBox
      ============================== */
   .info-box {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 35px;
     border: 1px solid #999;
     border-radius: 5px;
@@ -153,7 +210,6 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     background: #fff;
-    overflow: hidden;
     box-sizing: border-box;
   }
   
@@ -192,11 +248,6 @@
   }
   
   /* ==============================
-     Work Preview Images
-     ============================== */
-  
-  
-  /* ==============================
      About Section
      ============================== */
   .section-label {
@@ -204,28 +255,26 @@
     color: #555;
     margin-bottom: 1rem;
     display: block;
-  }   
-
+  }
+  
   .about, .service {
-    padding: 5rem;
-    background-color: var(--secondary-color);
+    padding: 5rem 2rem;
   }
   
   .about-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
   
   .about-text {
     flex: 1;
+    min-width: 250px;
   }
   
   .about-text h2 {
     font-size: 2rem;
     font-weight: bold;
-    margin: 0;
   }
   
   .about-text p {
@@ -235,6 +284,7 @@
   
   .about-description {
     flex: 2;
+    min-width: 250px;
   }
   
   .about-description p {
@@ -242,7 +292,7 @@
     color: #666;
     line-height: 1.8;
   }
-
+  
   .view-more-btn {
     background-color: transparent;
     border: 1px solid var(--text-color);
@@ -261,19 +311,18 @@
      Taste Section
      ============================== */
   .taste {
-    padding: 5rem;
+    padding: 5rem 2rem;
     background-color: var(--light-gray);
   }
   
   .taste-images {
     display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
   
   .taste-images img {
-    width: 30%;
+    flex: 1 1 calc(33% - 1rem);
     height: auto;
     object-fit: cover;
   }
@@ -281,30 +330,24 @@
   /* ==============================
      Service Section
      ============================== */
-  .service {
-    padding: 5rem;
-  }
-  
   .service-content {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 5rem;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
   
   .service-text {
     flex: 1;
+    min-width: 250px;
   }
   
   .service-text h2 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
   }
   
   .service-text h3 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: bold;
-    margin-top: 0;
   }
   
   .service-text p {
@@ -315,9 +358,10 @@
   
   .service-diagram {
     flex: 1;
-    background-color: #eee;
-    width: 300px;
+    min-width: 200px;
+    max-width: 300px;
     height: 300px;
+    background-color: #eee;
     border-radius: 50%;
     border: 1px solid #ddd;
   }
@@ -327,16 +371,93 @@
      ============================== */
   .footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 5rem;
+    padding: 1.5rem 2rem;
     border-top: 1px solid #eee;
     background-color: var(--secondary-color);
   }
   
   .footer-nav ul {
     display: flex;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
     font-size: 0.9rem;
+  }
+  
+  /* ==============================
+     響應式 RWD
+     ============================== */
+  @media (max-width: 1024px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .hero-right {
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
+  
+    .about-content, .service-content {
+      flex-direction: column;
+    }
+  
+    .taste-images img {
+      flex: 1 1 100%;
+    }
+  
+    .side-menu {
+      width: 70%;
+      padding: 6rem 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .header {
+      padding: 1rem 1.5rem;
+    }
+  
+    .contact-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+    }
+
+    .side-menu {
+      width: 100%;
+    }
+  
+    .hero {
+      padding: 3rem 1.5rem;
+    }
+  
+    .about, .service {
+      padding: 3rem 1.5rem;
+    }
+  
+    .footer {
+      padding: 1rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .menu-icon {
+      width: 30px;
+      height: 20px;
+    }
+  
+    .hero-right h3 {
+      font-size: 1rem;
+    }
+  
+    .hero-right p {
+      font-size: 0.75rem;
+    }
+  
+    .service-diagram {
+      height: 200px;
+      width: 200px;
+    }
   }
   

@@ -1,24 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
 import './App.css'; 
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // 點擊空白處關閉側邊選單
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.side-menu') && !e.target.closest('.menu-icon')) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) document.addEventListener('click', handleOutsideClick);
+    else document.removeEventListener('click', handleOutsideClick);
+
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [menuOpen]);
+
   return (
     <div className="App">
       {/* Header Section */}
       <header className="header">
         <div className="logo">WW studio</div>
-        <nav className="nav">
+
+        <div className="header-right">
+          {/* CONTACT 按鈕 */}
+          <button className="contact-btn">CONTACT</button>
+
+          {/* 漢堡按鈕 */}
+          <div
+            className={`menu-icon ${menuOpen ? 'open' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
+
+        {/* 右側滑出選單 */}
+        <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <ul>
             <li>ABOUT</li>
             <li>WORKS</li>
             <li>TASTE</li>
             <li>SERVICES</li>
           </ul>
-        </nav>
-        <button className="contact-btn">CONTACT</button>
+        </div>
       </header>
 
       {/* Hero Section */}
@@ -31,7 +63,7 @@ function App() {
             ]}
             speed={50}
             maxIterations={20}
-            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"
+            characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
             encryptedClassName="encrypted"
             parentClassName="all-letters"
           />
