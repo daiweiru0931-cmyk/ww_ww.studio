@@ -4,7 +4,8 @@ import icon from "../assets/wei-info-icon.png";
 const InfoBox = () => {
   const texts = [
     "Hi! I am WeiRu.",
-    "Visual & Website creative designer, based in Taiwan.",
+    "Visual & Website creative designer.",
+    "Based in Taiwan.",
     "Transforming ideas into digital logic.",
     "Welcome to my portfolio."
   ];

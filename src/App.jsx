@@ -39,16 +39,15 @@ function App() {
             <span></span>
             <span></span>
           </div>
-
         </div>
 
         {/* 右側滑出選單 */}
         <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
           <ul>
-            <li>ABOUT</li>
-            <li>WORKS</li>
-            <li>TASTE</li>
-            <li>SERVICES</li>
+            <li>About</li>
+            <li>Works</li>
+            <li>Service</li>
+            <li>Taste</li>
           </ul>
         </div>
       </header>
@@ -89,13 +88,73 @@ function App() {
         <div className="about-content">
           <div className="about-text">
             <h2>visual & website creative developer</h2>
-            <p>視覺與網站 創意開發</p>
+            <p>視覺＆網站 開發設計師</p>
           </div>
           <div className="about-description">
             <p>
-              Your descriptive text here. This section seems to describe the studio's philosophy or process in both English and Japanese.
+              A visual designer specializing in brand identity and web design, <br/>
+              with a deep interest in translating visuals into digital logic.
             </p>
-            <button className="view-more-btn">VIEW MORE &gt;</button>
+            <p>
+              專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。
+            </p>
+            <button className="view-more-btn">VIEW MORE &nbsp; &gt;</button>
+          </div>
+          <div className="service-diagram"></div>
+        </div>
+      </section>
+
+      {/* Service Section */}
+      <section className="service">
+        <span className="section-label">( Service )</span>
+        <div className="service-content">
+          <div className="service-text">
+            <h2>視覺與網站 創意開發</h2>
+            <p>
+              專注於品牌識別與網頁設計，<br/>
+              以設計轉化為核心，探索主題與價值的細微之處，<br/>
+              提供具深度與創意的視覺解決方案，將品牌的理想形態具體化。
+            </p>
+          </div>
+
+          {/* Service Layout */}
+          <div className="service-wrapper">
+            {/* 左側 Web Design */}
+            <div className="service-item left">
+              <h2>Web Design</h2>
+              <p>
+                WOSH designはノーコードWEBプラットフォーム「Studio」の「Gold Expert」です🏆
+                お客様自身でも管理しやすく、より効率的・効果的なサイト運用が可能です💻
+              </p>
+              <p>
+                WOSH design is one of the few nationwide "Studio Certified Experts SILVER Rank."
+                Leveraging our extensive experience, we will maximize the appeal of your services!
+              </p>
+
+              <div className="service-image">
+                <img src="web-design-sample.jpg" alt="Web Design Sample" />
+              </div>
+            </div>
+
+            {/* 中間虛線分隔線 */}
+            <div className="service-divider"></div>
+
+            {/* 右側 Graphic Design */}
+            <div className="service-item right">
+              <h2>Graphic Design</h2>
+              <p>
+                あなたのサービスや商品の魅力を最大限に引き出し、クリエイティブなアイデアで
+                効率的且つ効果的に「伝わる」デザインを制作いたします🖋
+              </p>
+              <p>
+                From logo design to business cards, flyers, brochures, and product packaging,
+                we create effective and efficient designs that truly resonate.
+              </p>
+
+              <div className="service-image">
+                <img src="graphic-design-sample.jpg" alt="Graphic Design Sample" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -110,23 +169,7 @@ function App() {
         </div>
       </section>
 
-      {/* Service Section */}
-      <section className="service">
-        <span className="section-label">( SERVICE )</span>
-        <div className="service-content">
-          <div className="service-text">
-            <h2>在るべき姿を形にする</h2>
-            <h3>トータルデザイン</h3>
-            <p>
-              Your Japanese descriptive text here. This text likely explains their total design approach and services.
-            </p>
-            <button className="view-more-btn">VIEW MORE &gt;</button>
-          </div>
-          <div className="service-diagram"></div>
-        </div>
-      </section>
-
-      {/* Footer / CTA Section */}
+      {/* Footer */}
       <footer className="footer">
         <nav className="footer-nav">
           <ul>
