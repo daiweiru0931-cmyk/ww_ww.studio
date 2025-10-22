@@ -1,56 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
 import './App.css'; 
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // 點擊空白處關閉側邊選單
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (!e.target.closest('.side-menu') && !e.target.closest('.menu-icon')) {
-        setMenuOpen(false);
-      }
-    };
-    if (menuOpen) document.addEventListener('click', handleOutsideClick);
-    else document.removeEventListener('click', handleOutsideClick);
-
-    return () => document.removeEventListener('click', handleOutsideClick);
-  }, [menuOpen]);
-
   return (
     <div className="App">
-      {/* Header Section */}
-      <header className="header">
-        <div className="logo">WW studio</div>
-
-        <div className="header-right">
-          {/* CONTACT 按鈕 */}
-          <button className="contact-btn">CONTACT</button>
-
-          {/* 漢堡按鈕 */}
-          <div
-            className={`menu-icon ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-
-        {/* 右側滑出選單 */}
-        <div className={`side-menu ${menuOpen ? 'open' : ''}`}>
-          <ul>
-            <li>About</li>
-            <li>Works</li>
-            <li>Service</li>
-            <li>Taste</li>
-          </ul>
-        </div>
-      </header>
+      {/* Header */}
+      <HeaderMenu />
 
       {/* Hero Section */}
       <section className="hero">
@@ -87,8 +46,8 @@ function App() {
         <span className="section-label">( About )</span>
         <div className="about-content">
           <div className="about-text">
-            <h2>visual & website creative developer</h2>
-            <p>視覺＆網站 開發設計師</p>
+            <h2>Creative Designer</h2>
+            <p>創意開發設計師</p>
           </div>
           <div className="about-description">
             <p>
@@ -109,7 +68,7 @@ function App() {
         <span className="section-label">( Service )</span>
         <div className="service-content">
           <div className="service-text">
-            <h2>視覺與網站 創意開發</h2>
+            <h2>Creative Development in Visual and Web Design</h2>
             <p>
               專注於品牌識別與網頁設計，<br/>
               以設計轉化為核心，探索主題與價值的細微之處，<br/>
@@ -119,40 +78,40 @@ function App() {
 
           {/* Service Layout */}
           <div className="service-wrapper">
-            {/* 左側 Web Design */}
+            {/* 左側 Graphic Design */}
             <div className="service-item left">
-              <h2>Web Design</h2>
+              <h2>Graphic Design</h2>
               <p>
-                WOSH designはノーコードWEBプラットフォーム「Studio」の「Gold Expert」です🏆
-                お客様自身でも管理しやすく、より効率的・効果的なサイト運用が可能です💻
+                From logo design, business cards, flyers, and brochures to event key visuals and product packaging. 
+                Creating cohesive and resonant visual designs that communicate your brand's essence.
               </p>
               <p>
-                WOSH design is one of the few nationwide "Studio Certified Experts SILVER Rank."
-                Leveraging our extensive experience, we will maximize the appeal of your services!
+                從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，<br/>
+                以一致的品牌語言打造能引起共鳴的視覺設計。
               </p>
 
               <div className="service-image">
-                <img src="web-design-sample.jpg" alt="Web Design Sample" />
+                <img src="graphic-design-sample.jpg" alt="Graphic Design Sample" />
               </div>
             </div>
 
             {/* 中間虛線分隔線 */}
             <div className="service-divider"></div>
 
-            {/* 右側 Graphic Design */}
+            {/* 右側 Web Design */}
             <div className="service-item right">
-              <h2>Graphic Design</h2>
+              <h2>Web Design</h2>
               <p>
-                あなたのサービスや商品の魅力を最大限に引き出し、クリエイティブなアイデアで
-                効率的且つ効果的に「伝わる」デザインを制作いたします🖋
+                Creating visually engaging websites that connect with users. 
+                Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
               </p>
               <p>
-                From logo design to business cards, flyers, brochures, and product packaging,
-                we create effective and efficient designs that truly resonate.
+                以設計思維與細節美感，打造兼具視覺吸引力與使用者體驗的網站。<br/>
+                目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
               </p>
 
               <div className="service-image">
-                <img src="graphic-design-sample.jpg" alt="Graphic Design Sample" />
+                <img src="web-design-sample.jpg" alt="Web Design Sample" />
               </div>
             </div>
           </div>
@@ -171,18 +130,43 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <nav className="footer-nav">
-          <ul>
-            <li>HOME</li>
-            <li>ABOUT</li>
-            <li>SERVICE</li>
-            <li>WORKS</li>
-            <li>COLUMN</li>
-            <li>GUIDE/TAG</li>
-          </ul>
-        </nav>
-        <button className="contact-btn">CONTACT</button>
+        <div className="footer-content">
+          {/* 左側 Logo */}
+          <div className="footer-logo">
+            <img src="ww-logo.svg" alt="WW Studio Logo" />
+            <p>WW Studio</p>
+          </div>
+
+          {/* 中間導覽 */}
+          <nav className="footer-nav">
+            <ul>
+              <li>About</li>
+              <li>Works</li>
+              <li>Service</li>
+              <li>Taste</li>
+              <li>Contact</li>
+            </ul>
+          </nav>
+
+          {/* 地址資訊 */}
+          <div className="footer-info">
+            <div className="footer-office">
+              <p>Oline Office</p>
+              <p>MAIL : daiweiru0931@gmail.com</p>
+            </div>
+            <p className="footer-phone">PHONE : +886 931-276270</p>
+          </div>
+        </div>
+
+        {/* 版權 */}
+        <div className="footer-bottom">
+          <p>Copyright © 2025 WW Studio</p>
+        </div>
+
+        {/* 背景裝飾 */}
+        <div className="footer-bg"></div>
       </footer>
+
     </div>
   );
 }
