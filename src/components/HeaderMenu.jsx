@@ -43,7 +43,7 @@ const HeaderMenu = () => {
       {/* Logo */}
       {!showBottomMenu && !atFooter && <div className="logo">WW Studio</div>}
 
-      {/* 右上角按鈕（初始畫面） */}
+      {/* 右上角按鈕 */}
       {!showBottomMenu && !atFooter && (
         <div className="header-right">
           <button className="contact-btn">CONTACT</button>
@@ -60,35 +60,32 @@ const HeaderMenu = () => {
       )}
 
       {/* 底部置中按鈕 */}
-      {showBottomMenu && !atFooter && (
-        <div className={`bottom-buttons ${showBottomMenu ? "visible" : ""}`}>
-          <button
-            className={`menu-btn ${menuOpen ? "open" : ""}`}
+      <div className={`bottom-buttons ${showBottomMenu ? "visible" : ""}`}>
+        <button
+          className={`menu-btn ${showBottomMenu ? "expanded" : ""}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuOpen(!menuOpen);
+          }}
+        >
+          <div className="menu-icon-small">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span className="menu-label">MENU</span>
+
+          <div
+            className="contact-inside-btn"
             onClick={(e) => {
               e.stopPropagation();
-              setMenuOpen(!menuOpen);
+              alert("CONTACT clicked!");
             }}
           >
-            <div className="menu-icon-small">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <span className="menu-label">MENU</span>
-
-            {/* CONTACT 子按鈕 */}
-            <button
-              className="contact-inside-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                alert("CONTACT clicked!（你可以改成打開 modal）");
-              }}
-            >
-              CONTACT
-            </button>
-          </button>
-        </div>
-      )}
+            CONTACT
+          </div>
+        </button>
+      </div>
 
       {/* 半屏下滑選單 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
