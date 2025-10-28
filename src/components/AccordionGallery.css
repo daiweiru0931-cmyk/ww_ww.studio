@@ -108,7 +108,7 @@
       flex-direction: column;       /* 上下堆疊 */
       height: 500px;                 /* 可以固定一個高度或 auto，視需求 */
       padding: 0 20px;
-      gap: 5px;
+      gap: 8px;
       align-items: center;
       justify-content: flex-start;
     }
@@ -143,8 +143,8 @@
   
   @media (max-width: 480px) {
     .accordion-gallery {
-      gap: 10px;
-      padding: 0 5px;
+      gap: 5px;
+      padding: 0 10px;
     }
   
     .item-content img {

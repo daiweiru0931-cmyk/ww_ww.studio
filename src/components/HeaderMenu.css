@@ -186,7 +186,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50%;
+  height: 60%;
   background-color: var(--secondary-color);
   box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
   padding: 0;
@@ -194,7 +194,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center; /* ✅ 讓選單垂直置中 */
-  gap: 2rem;
+  gap: 3.5rem;
   transform: translateY(100%);
   transition: transform 0.4s ease;
   z-index: 102;
@@ -211,7 +211,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.5rem;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -311,14 +311,14 @@
 
   .side-menu {
     height: 60%; /* 半屏置中 */
-    padding: 0 1.5rem;
+    padding: 0;
     justify-content: center; /* 垂直置中 */
     align-items: center;     /* 水平置中 */
-    gap: 1.5rem;
+    gap: 5rem;
   }
 
   .side-menu-list {
-    gap: 1.2rem;
+    gap: 2rem;
   }
 
   .side-menu-list li {
