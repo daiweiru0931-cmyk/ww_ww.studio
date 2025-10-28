@@ -16,6 +16,7 @@ const styles = {
 
 export default function DecryptedText({
   texts = [],
+  speed = 50,
   maxIterations = 10,
   characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
   encryptedClassName = '',
@@ -25,41 +26,38 @@ export default function DecryptedText({
   const [displayTextArr, setDisplayTextArr] = useState(texts.map(t => t.text));
   const [revealedIndicesArr, setRevealedIndicesArr] = useState(texts.map(() => new Set()));
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [fontSizes, setFontSizes] = useState([]);
-  const [speed, setSpeed] = useState(50);
+  const [fontSizes, setFontSizes] = useState(texts.map(t => (t.className.includes('h1-text') ? 36 : 24)));
 
-  // 計算響應式字體與動畫速度
+  // 依螢幕寬度設定字體，避免手機跳動
   useEffect(() => {
-    const updateResponsive = () => {
+    const updateFontSizes = () => {
       const width = window.innerWidth;
-      // 字體
       setFontSizes(
         texts.map(t => {
           if (t.className.includes('h1-text')) {
-            return Math.max(20, Math.min(48, Math.floor(width * 0.05))); // clamp 16~48px
+            // 桌機: max 48, 手機: min 24
+            return Math.max(24, Math.min(48, Math.floor(width * 0.04)));
           } else if (t.className.includes('p-text')) {
-            return Math.max(10, Math.min(24, Math.floor(width * 0.02))); // clamp 10~24px
+            return Math.max(12, Math.min(24, Math.floor(width * 0.02)));
           } else {
             return Math.max(12, Math.min(20, Math.floor(width * 0.025)));
           }
         })
       );
-      // 動畫速度 (ms)
-      if (width <= 480) setSpeed(30);       // 手機較快
-      else if (width <= 768) setSpeed(40);  // 平板中速
-      else setSpeed(50);                     // 桌機較慢
     };
-
-    updateResponsive();
-    window.addEventListener('resize', updateResponsive);
-    return () => window.removeEventListener('resize', updateResponsive);
+    updateFontSizes();
+    window.addEventListener('resize', updateFontSizes);
+    return () => window.removeEventListener('resize', updateFontSizes);
   }, [texts]);
 
   const shuffleText = (originalText, revealedSet) => {
     const availableChars = characters.split('');
     return originalText
       .split('')
-      .map((char, i) => (char === ' ' || revealedSet.has(i) ? char : availableChars[Math.floor(Math.random() * availableChars.length)]))
+      .map((char, i) => {
+        if (char === ' ' || revealedSet.has(i)) return char;
+        return availableChars[Math.floor(Math.random() * availableChars.length)];
+      })
       .join('');
   };
 
@@ -133,18 +131,25 @@ export default function DecryptedText({
     };
     playSequence();
     return () => clearTimeout(timeout);
-  }, [hasAnimated, texts, speed]);
+  }, [hasAnimated, texts]);
 
   return (
-    <motion.div className={parentClassName} ref={containerRef} style={{ display: 'inline-block' }}>
+    <motion.div
+      className={parentClassName}
+      ref={containerRef}
+      style={{
+        display: 'inline-block',
+        minHeight: '4rem', // 最小高度避免亂碼跳動
+      }}
+    >
       {texts.map((t, idx) => (
         <span
           key={idx}
           style={{
             display: 'block',
             fontSize: fontSizes[idx],
-            lineHeight: 1.2,
-            overflow: 'hidden',
+            lineHeight: 1.2, // 固定行高避免跳動
+            minHeight: fontSizes[idx] * 1.2, // 高度隨字體調整
           }}
         >
           <span style={styles.srOnly}>{displayTextArr[idx]}</span>
@@ -157,8 +162,9 @@ export default function DecryptedText({
                   className={revealed ? t.className : `${t.className} ${encryptedClassName}`}
                   style={{
                     display: 'inline-block',
-                    minWidth: '0.55ch',
-                    fontVariantNumeric: 'tabular-nums'
+                    minWidth: '0.5ch',
+                    fontVariantNumeric: 'tabular-nums',
+                    lineHeight: 1.2, // 固定行高
                   }}
                 >
                   {char === ' ' ? '\u00A0' : char}
