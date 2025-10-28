@@ -53,7 +53,7 @@
     display: inline-block;
   }
   
-  .h1-text {
+  /*.h1-text {
     font-weight: bold;
     color: var(--dark-gray);
     font-size: clamp(1.6rem, 4vw, 3rem);
@@ -67,7 +67,7 @@
     letter-spacing: -0.02em;
     white-space: pre-wrap;
   }
-  
+  */
   .encrypted {
     color: var(--gray);
   }

@@ -16,7 +16,6 @@ const styles = {
 
 export default function DecryptedText({
   texts = [],
-  speed = 50,
   maxIterations = 10,
   characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
   encryptedClassName = '',
@@ -26,43 +25,41 @@ export default function DecryptedText({
   const [displayTextArr, setDisplayTextArr] = useState(texts.map(t => t.text));
   const [revealedIndicesArr, setRevealedIndicesArr] = useState(texts.map(() => new Set()));
   const [hasAnimated, setHasAnimated] = useState(false);
-  const [fontSizes, setFontSizes] = useState(texts.map(t => (t.className.includes('h1-text') ? 48 : 24)));
+  const [fontSizes, setFontSizes] = useState([]);
+  const [speed, setSpeed] = useState(50);
 
-  // 依螢幕寬度設定字體
+  // 計算響應式字體與動畫速度
   useEffect(() => {
-    const updateFontSizes = () => {
+    const updateResponsive = () => {
       const width = window.innerWidth;
+      // 字體
       setFontSizes(
         texts.map(t => {
-          // 判斷 h1 或 p
           if (t.className.includes('h1-text')) {
-            if (width <= 480) return 24;
-            if (width <= 768) return 36;
-            return 48;
+            return Math.max(20, Math.min(48, Math.floor(width * 0.05))); // clamp 16~48px
           } else if (t.className.includes('p-text')) {
-            if (width <= 480) return 8;
-            if (width <= 768) return 16;
-            return 24;
+            return Math.max(10, Math.min(24, Math.floor(width * 0.02))); // clamp 10~24px
           } else {
-            // 預設值
-            return 16;
+            return Math.max(12, Math.min(20, Math.floor(width * 0.025)));
           }
         })
       );
+      // 動畫速度 (ms)
+      if (width <= 480) setSpeed(30);       // 手機較快
+      else if (width <= 768) setSpeed(40);  // 平板中速
+      else setSpeed(50);                     // 桌機較慢
     };
-    updateFontSizes();
-    window.addEventListener('resize', updateFontSizes);
-    return () => window.removeEventListener('resize', updateFontSizes);
-  }, [texts]);  
+
+    updateResponsive();
+    window.addEventListener('resize', updateResponsive);
+    return () => window.removeEventListener('resize', updateResponsive);
+  }, [texts]);
 
   const shuffleText = (originalText, revealedSet) => {
     const availableChars = characters.split('');
     return originalText
       .split('')
-      .map((char, i) => {
-        if (char === ' ' || revealedSet.has(i)) return char;
-        return availableChars[Math.floor(Math.random() * availableChars.length)];
-      })
+      .map((char, i) => (char === ' ' || revealedSet.has(i) ? char : availableChars[Math.floor(Math.random() * availableChars.length)]))
       .join('');
   };
 
@@ -136,12 +133,20 @@ export default function DecryptedText({
     };
     playSequence();
     return () => clearTimeout(timeout);
-  }, [hasAnimated, texts]);
+  }, [hasAnimated, texts, speed]);
 
   return (
     <motion.div className={parentClassName} ref={containerRef} style={{ display: 'inline-block' }}>
       {texts.map((t, idx) => (
-        <span key={idx} style={{ display: 'block', fontSize: fontSizes[idx], lineHeight: 1.2 }}>
+        <span
+          key={idx}
+          style={{
+            display: 'block',
+            fontSize: fontSizes[idx],
+            lineHeight: 1.2,
+            overflow: 'hidden',
+          }}
+        >
           <span style={styles.srOnly}>{displayTextArr[idx]}</span>
           <span aria-hidden="true">
             {displayTextArr[idx].split('').map((char, i) => {
@@ -152,7 +157,7 @@ export default function DecryptedText({
                   className={revealed ? t.className : `${t.className} ${encryptedClassName}`}
                   style={{
                     display: 'inline-block',
-                    minWidth: '0.5ch',
+                    minWidth: '0.55ch',
                     fontVariantNumeric: 'tabular-nums'
                   }}
                 >
