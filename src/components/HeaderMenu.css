@@ -25,66 +25,66 @@
   white-space: nowrap;
 }
 
-/* 右上角按鈕容器 */ 
-.header-right { 
-  display: flex; 
-  align-items: center; 
-  gap: 1rem; 
-} 
-  
-/* ============================== 
-漢堡按鈕（三條線） 
-============================== */ 
-.menu-icon { 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between; 
-  width: 30px; 
-  height: 22px; 
-  background: none; 
-  border: none; 
-  cursor: pointer; 
-  padding: 0; 
-  z-index: 101; 
-} 
-
-.menu-icon span { 
-  display: block; 
-  width: 100%; 
-  height: 2px; 
-  background: var(--dark-gray); 
-  transition: all 0.3s ease; 
-} 
-
-.menu-icon.open span:nth-child(1) { 
-  transform: rotate(45deg) translate(5px, 5px); 
-} 
-.menu-icon.open span:nth-child(2) { 
-  opacity: 0; 
-} 
-.menu-icon.open span:nth-child(3) { 
-  transform: rotate(-45deg) translate(5px, -5px); 
-} 
-
-/* CONTACT 按鈕 */ 
-.contact-btn { 
-  background-color: var(--gray); 
-  color: #fff; 
-  border: none; 
-  border-radius: 2.4rem; 
-  padding: 0.6rem 1rem; 
-  cursor: pointer; 
-  font-size: 0.8rem; 
-  font-family: 'Libre Baskerville', 'Noto Sans TC', serif; 
-  transition: background 0.3s ease; 
-} 
-
-.contact-btn:hover { 
-  background-color: #999; 
+/* 右上角按鈕 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* ==============================
-   底部置中大 MENU 按鈕（初始圓形 → 展開長方形）
+   漢堡按鈕
+============================== */
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+}
+
+.menu-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--dark-gray);
+  transition: all 0.3s ease;
+}
+
+.menu-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* CONTACT 按鈕 */
+.contact-btn {
+  background-color: var(--gray);
+  color: #fff;
+  border: none;
+  border-radius: 2.4rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+  transition: background 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #999;
+}
+
+/* ==============================
+   底部置中大 MENU 按鈕
 ============================== */
 .bottom-buttons {
   position: fixed;
@@ -94,20 +94,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   opacity: 0;
   pointer-events: none;
   z-index: 101;
   transition: opacity 0.4s ease;
 }
 
-/* 顯示時 */
 .bottom-buttons.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* 圓形 MENU 按鈕 */
 .menu-btn {
   position: relative;
   display: flex;
@@ -119,23 +116,20 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  padding: 0;
   cursor: pointer;
+  overflow: hidden;
   font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   font-weight: 500;
   font-size: 1.2rem;
-  overflow: hidden;
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-/* 展開成長方形 */
 .bottom-buttons.visible .menu-btn.expanded {
   width: auto;
   padding: 0.5rem 0.5rem 0.5rem 1.5rem;
   border-radius: 2rem;
 }
 
-/* MENU 文字淡入 */
 .menu-label {
   opacity: 0;
   margin-left: 0.5rem;
@@ -146,7 +140,6 @@
   opacity: 1;
 }
 
-/* 小漢堡圖示 */
 .menu-icon-small {
   display: flex;
   flex-direction: column;
@@ -159,10 +152,8 @@
   height: 2px;
   width: 100%;
   background: var(--dark-gray);
-  display: block;
 }
 
-/* CONTACT 子按鈕 */
 .contact-inside-btn {
   margin-left: 1rem;
   background-color: var(--gray);
@@ -173,9 +164,9 @@
   font-size: 0.8rem;
   font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   cursor: pointer;
-  transition: all 0.3s ease;
   opacity: 0;
   pointer-events: none;
+  transition: all 0.3s ease;
 }
 
 .bottom-buttons.visible .menu-btn.expanded .contact-inside-btn {
@@ -198,12 +189,12 @@
   height: 50%;
   background-color: var(--secondary-color);
   box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
-  padding: 2rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 5rem;
+  justify-content: center; /* ✅ 讓選單垂直置中 */
+  gap: 2rem;
   transform: translateY(100%);
   transition: transform 0.4s ease;
   z-index: 102;
@@ -220,7 +211,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.4rem;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
@@ -232,16 +223,18 @@
 }
 
 .side-menu-list li {
+  font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s ease;
-  font-size: 1.2rem;
 }
 
 .side-menu-list li:hover {
   color: var(--primary-color);
 }
 
-/* X 關閉按鈕 */
+/* ==============================
+   關閉按鈕
+============================== */
 .close-btn {
   display: flex;
   flex-direction: column;
@@ -273,19 +266,16 @@
 .close-btn.open span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
-
 .close-btn.open span:nth-child(2) {
   opacity: 0;
 }
-
 .close-btn.open span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
-
+/* Hover 微動畫 */
 .close-btn.open:hover span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px) rotate(15deg);
 }
-
 .close-btn.open:hover span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px) rotate(-15deg);
 }
@@ -298,7 +288,7 @@
 }
 
 /* ==============================
-   響應式
+   RWD
 ============================== */
 @media (max-width: 768px) {
   .header {
@@ -317,5 +307,43 @@
   .menu-icon-small {
     width: 16px;
     height: 10px;
+  }
+
+  .side-menu {
+    height: 60%; /* 半屏置中 */
+    padding: 0 1.5rem;
+    justify-content: center; /* 垂直置中 */
+    align-items: center;     /* 水平置中 */
+    gap: 1.5rem;
+  }
+
+  .side-menu-list {
+    gap: 1.2rem;
+  }
+
+  .side-menu-list li {
+    font-size: 1rem;
+    text-align: center; /* 文字置中 */
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-buttons {
+    bottom: 20px; /* 避免貼到底 */
+  }
+  .menu-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  .menu-label,
+  .contact-inside-btn {
+    font-size: 0.75rem;
+  }
+  .side-menu {
+    height: 70%; /* 手機完全置中顯示 */
+  }
+  .side-menu-list li {
+    font-size: 0.9rem;
   }
 }
