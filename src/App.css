@@ -470,6 +470,9 @@
     flex-direction: column;
     align-items: center; /* 區塊水平置中 */
   }
+  .hero-left p-text {
+    letter-spacing: 0.5px;
+  }
 
   .hero-right {
     align-items: center; /* 按鈕與 info-box 水平置中 */
@@ -483,7 +486,7 @@
     transform: translateX(-50%); /* 向左移動自身寬度的一半 */
 }
   .info-box {
-    width: 320px; /* 縮小寬度，讓手機版面更舒適 */
+    width: 350px; /* 縮小寬度，讓手機版面更舒適 */
     height: 30px; /* 略微縮小高度 */
     padding: 0.4rem 0.8rem; /* 縮小內邊距 */
   }
@@ -491,7 +494,7 @@
     gap: 0.6rem; /* 縮小圖示和文字間距 */
   }
   .dropdown-intro-modal {
-    width: 320px; /* 保持與 info-box 相同的寬度 */
+    width: 350px; /* 保持與 info-box 相同的寬度 */
     max-height: 300px; /* 限制高度，避免過長 */
     padding: 0.8rem; /* 略微縮小內邊距 */
   }
@@ -553,6 +556,9 @@
   .hero {
     padding: 10rem 1rem 1rem 1rem;
   }
+  .hero-left p-text {
+    letter-spacing: 0.3px;
+  }
   .hero-right {
     min-width: auto;
   }
@@ -566,12 +572,12 @@
   }
   /* InfoBox 本體 */
   .info-box {
-    width: 280px; /* 進一步縮小寬度，適合更窄的螢幕 */
+    width: 350px; /* 進一步縮小寬度，適合更窄的螢幕 */
     padding: 0.3rem 0.7rem; /* 再次縮小內邊距 */
   }
   /* 懸浮視窗本體 */
   .dropdown-intro-modal {
-    width: 280px; /* 保持與 info-box 相同的寬度 */
+    width: 350px; /* 保持與 info-box 相同的寬度 */
     max-height: 250px; /* 進一步限制高度 */
     padding: 0.7rem; /* 再次縮小內邊距 */
   }
