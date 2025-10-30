@@ -475,17 +475,35 @@
     align-items: center; /* 按鈕與 info-box 水平置中 */
   }
 
+  /* InfoBox 容器 */
+  .info-box-container {
+    /* 讓它更靠近邊緣，與其他區塊 padding: 1.5rem 一致 */
+    bottom: 1.5rem; 
+    right: 1.5rem; 
+  }
+  .info-box {
+    width: 320px; /* 縮小寬度，讓手機版面更舒適 */
+    height: 30px; /* 略微縮小高度 */
+    padding: 0.4rem 0.8rem; /* 縮小內邊距 */
+  }
+  .info-left {
+    gap: 0.6rem; /* 縮小圖示和文字間距 */
+  }
+  .dropdown-intro-modal {
+    width: 320px; /* 保持與 info-box 相同的寬度 */
+    max-height: 300px; /* 限制高度，避免過長 */
+    padding: 0.8rem; /* 略微縮小內邊距 */
+  }
+
   /* About / Service */
   .about, .service {
     padding: 3rem 1.5rem;
   }
-
   .about-content,
   .service-wrapper {
     flex-direction: column;
     align-items: center; /* 區塊水平置中 */
   }
-
   .about-text,
   .about-description,
   .service-item {
