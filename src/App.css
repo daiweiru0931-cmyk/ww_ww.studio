@@ -470,10 +470,10 @@
     flex-direction: column;
     align-items: center; /* 區塊水平置中 */
   }
-  .hero-left p-text {
-    letter-spacing: 0.5px;
+  .h1-text,
+  .p-text { 
+    letter-spacing: -0.2px;   /* 調整字距 */
   }
-
   .hero-right {
     align-items: center; /* 按鈕與 info-box 水平置中 */
   }
@@ -555,9 +555,12 @@
   /* Hero */
   .hero {
     padding: 10rem 1rem 1rem 1rem;
+    flex-direction: column;
+    align-items: center; /* 區塊水平置中 */
   }
-  .hero-left p-text {
-    letter-spacing: 0.3px;
+  .h1-text,
+  .p-text {
+    letter-spacing: -0.2px;
   }
   .hero-right {
     min-width: auto;

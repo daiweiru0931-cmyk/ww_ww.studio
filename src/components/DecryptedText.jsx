@@ -21,6 +21,8 @@ export default function DecryptedText({
   characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
   encryptedClassName = '',
   parentClassName = '',
+  // 用於控制亂碼文字的大小，預設繼承最終字體大小
+  encryptedFontSize = '0.7em', 
 }) {
   const containerRef = useRef(null);
   const [displayTextArr, setDisplayTextArr] = useState(texts.map(t => t.text));
@@ -38,9 +40,9 @@ export default function DecryptedText({
             // 桌機: max 48, 手機: min 24
             return Math.max(30, Math.min(48, Math.floor(width * 0.04)));
           } else if (t.className.includes('p-text')) {
-            return Math.max(14, Math.min(22, Math.floor(width * 0.02)));
+            return Math.max(12, Math.min(20, Math.floor(width * 0.02)));
           } else {
-            return Math.max(12, Math.min(20, Math.floor(width * 0.015)));
+            return Math.max(10, Math.min(18, Math.floor(width * 0.015)));
           }
         })
       );
@@ -165,6 +167,8 @@ export default function DecryptedText({
                     minWidth: '0.5ch',
                     fontVariantNumeric: 'tabular-nums',
                     lineHeight: 1.2, // 固定行高
+                    // ✨ 關鍵：如果尚未揭露 (亂碼狀態)，則使用傳入的 encryptedFontSize 屬性
+                    fontSize: revealed ? 'inherit' : encryptedFontSize,
                   }}
                 >
                   {char === ' ' ? '\u00A0' : char}
