@@ -53,21 +53,6 @@
     display: inline-block;
   }
   
-  /*.h1-text {
-    font-weight: bold;
-    color: var(--dark-gray);
-    font-size: clamp(1.6rem, 4vw, 3rem);
-    white-space: pre-wrap;
-  }
-  
-  .p-text {
-    color: var(--gray);
-    margin-top: 10px;
-    font-size: clamp(0.75rem, 1vw, 1.2rem);
-    letter-spacing: -0.02em;
-    white-space: pre-wrap;
-  }
-  */
   .encrypted {
     color: var(--gray);
   }
@@ -83,12 +68,12 @@
   .hero-right h3 {
     margin-top: 12px;
     margin-bottom: 3px;
-    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
     color: var(--dark-gray);
   }
   
   .hero-right p {
-    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    font-size: clamp(0.8rem, 0.9vw, 0.9rem);
     color: var(--gray);
   }
   
@@ -102,9 +87,15 @@
   /* ==============================
      InfoBox
      ============================== */
+  .info-box-container {
+    position: fixed;
+    bottom: 20px; /* 距離底部邊緣 */
+    z-index: 99; /* 確保它浮在其他內容之上 */
+    position: relative; /* 讓懸浮視窗可以相對於它定位 */
+  }  
+
   .info-box {
-    width: 100%;
-    max-width: 450px;
+    width: 400px;
     height: 35px;
     border: 1px solid #999;
     border-radius: 5px;
@@ -114,6 +105,7 @@
     padding: 0.5rem 1rem;
     background: #fff;
     box-sizing: border-box;
+    z-index: 10;
   }
   
   .info-left {
@@ -124,13 +116,8 @@
     overflow: hidden;
   }
   
-  .info-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
   .info-text {
-    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    font-size: clamp(0.8rem, 0.9vw, 0.9rem);
     font-weight: 500;
     color: var(--dark-gray);
   }
@@ -149,12 +136,47 @@
     transform: rotate(90deg);
     color: #999;
   }
+
+  /* 懸浮視窗本體 */
+  .dropdown-intro-modal {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 400px; /* 保持與 info-box 相同的寬度 */
+    box-sizing: border-box;
+    max-height: 400px; /* 限制高度，避免過長 */
+    overflow-y: auto; /* 內容過多時允許滾動 */
+    background-color: #fff; 
+    color: var(--gray);
+    border-top: none; /* 讓它看起來是從 info-box 下延伸 */
+    border-radius: 0 0 5px 5px; /* 只有底部圓角 */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    z-index: 9; /* 確保在底部黑條之下 */
+    /* 增加動畫效果 */
+    transform-origin: top;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* 視窗頂部控制區 */
+  .modal-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+  }
+
+  /* 視窗內容樣式 */
+  .modal-body-content .intro-text-item {
+    line-height: 1.4;
+    font-size: 0.9rem;
+  }
   
   /* ==============================
      About Section
      ============================== */
   .section-label {
-    font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+    font-size: clamp(0.8rem, 0.95vw, 1rem);
     color: #555;
     margin-bottom: 1rem;
     display: block;
@@ -186,14 +208,14 @@
   }
   
   .about-text h2 {
-    font-size: clamp(1rem, 2.5vw, 2rem);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: bold;
     margin-bottom: 1rem;
     color: var(--dark-gray);
   }
   
   .about-text p {
-    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
     color: #555;
     line-height: 1.8;
   }
@@ -205,7 +227,7 @@
   }
   
   .about-description p {
-    font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
     color: #666;
     line-height: 1.8;
     margin-bottom: 1.5rem;
@@ -220,7 +242,7 @@
     padding: 0.5rem 1rem;
     cursor: pointer;
     color: #666;
-    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
     transition: all 0.3s ease;
 
@@ -239,16 +261,16 @@
   }
 
   .service-text h2 {
-    font-size: clamp(1rem, 2.5vw, 2rem);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: bold;
     color: var(--dark-gray);
   }
 
   .service-text p {
-    font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
     color: #666;
     line-height: 1.8;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   
   .service-wrapper {
@@ -266,29 +288,30 @@
     gap: 1rem;
   }
   
-  .service-item h2 {
-    font-size: clamp(1rem, 2.5vw, 2rem);
+  .service-item-left h3, .service-item-right h3 {
+    font-size: clamp(1rem, 2vw, 1.5rem);
     font-weight: bold;
     color: var(--dark-gray);
+    padding-top: 1.5rem;
   }
   
-  .service-item p {
-    font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+  .service-item-left p, .service-item-right p {
+    font-size: clamp(0.85rem, 0.95vw, 1rem);
     color: #666;
     line-height: 1.8;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
   
   /* 內容圖片 */
   .service-image {
-    margin-top: 1.5rem;
+    
     border-radius: 16px;
     overflow: hidden;
   }
   
   .service-image img {
-    width: 100%;
-    height: auto;
+    width: 350px;
+    height: 350px;
     display: block;
     border-radius: 12px;
     transition: transform 0.4s ease;
@@ -365,7 +388,7 @@
     }
     
     .footer-logo p {
-      font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
       font-weight: 600;
       color: #fff;
     }
@@ -380,7 +403,7 @@
     
     .footer-nav li {
       font-weight: 600;
-      font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+      font-size: clamp(0.85rem, 0.95vw, 1rem);
       color: #fff;
       cursor: pointer;
       transition: color 0.3s ease;
@@ -395,7 +418,7 @@
       justify-content: center;
       gap: 60px;
       flex-wrap: wrap;
-      font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+      font-size: clamp(0.85rem, 0.95vw, 1rem);
       line-height: 1.6;
       margin-bottom: 40px;
       color: #999;
@@ -411,13 +434,13 @@
       width: 100%;
       text-align: center;
       margin-top: 10px;
-      font-size: clamp(0.6rem, 0.95vw, 0.9rem);
+      font-size: clamp(0.85rem, 0.95vw, 1rem);
       color: #888;
     }
     
     .footer-bottom {
       text-align: center;
-      font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+      font-size: clamp(0.85rem, 0.95vw, 1rem);
       color: #666;
       position: relative;
       z-index: 2;
@@ -437,7 +460,7 @@
       transform: rotate(15deg);
     }    
   
-  /* ==============================
+/* ==============================
    RWD
 ============================== */
 @media (max-width: 768px) {  

@@ -3,7 +3,10 @@ import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
-import './App.css'; 
+import './App.css';
+
+import serviceGpImg from './assets/service/servicegp-img01.jpg';
+import serviceWbImg from './assets/service/servicewb-img01.jpg';
 
 function App() {
   return (
@@ -79,8 +82,8 @@ function App() {
           {/* Service Layout */}
           <div className="service-wrapper">
             {/* 左側 Graphic Design */}
-            <div className="service-item left">
-              <h2>Graphic Design</h2>
+            <div className="service-item-left">
+              <h3>Graphic Design</h3>
               <p>
                 From logo design, business cards, flyers, and brochures to event key visuals and product packaging. 
                 Creating cohesive and resonant visual designs that communicate your brand's essence.
@@ -91,7 +94,7 @@ function App() {
               </p>
 
               <div className="service-image">
-                <img src="graphic-design-sample.jpg" alt="Graphic Design Sample" />
+                <img src={serviceGpImg} alt="Graphic Design Sample" />
               </div>
             </div>
 
@@ -99,8 +102,8 @@ function App() {
             <div className="service-divider"></div>
 
             {/* 右側 Web Design */}
-            <div className="service-item right">
-              <h2>Web Design</h2>
+            <div className="service-item-right">
+              <h3>Web Design</h3>
               <p>
                 Creating visually engaging websites that connect with users. 
                 Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
@@ -111,7 +114,7 @@ function App() {
               </p>
 
               <div className="service-image">
-                <img src="web-design-sample.jpg" alt="Web Design Sample" />
+                <img src={serviceWbImg} alt="Web Design Sample" />
               </div>
             </div>
           </div>
@@ -122,9 +125,9 @@ function App() {
       <section className="taste">
         <span className="section-label">( Taste )</span>
         <div className="taste-images">
-          <img src="placeholder.jpg" alt="Team member" />
-          <img src="placeholder.jpg" alt="Team member" />
-          <img src="placeholder.jpg" alt="Team member" />
+          <img src="taste01.jpg" alt="Taste" />
+          <img src="taste02.jpg" alt="Taste" />
+          <img src="taste03.jpg" alt="Taste" />
         </div>
       </section>
 
