@@ -477,10 +477,11 @@
 
   /* InfoBox 容器 */
   .info-box-container {
-    /* 讓它更靠近邊緣，與其他區塊 padding: 1.5rem 一致 */
     bottom: 1.5rem; 
-    right: 1.5rem; 
-  }
+    right: auto;
+    left: 50%; /* 置中步驟： */
+    transform: translateX(-50%); /* 向左移動自身寬度的一半 */
+}
   .info-box {
     width: 320px; /* 縮小寬度，讓手機版面更舒適 */
     height: 30px; /* 略微縮小高度 */
@@ -552,9 +553,35 @@
   .hero {
     padding: 10rem 1rem 1rem 1rem;
   }
-
   .hero-right {
     min-width: auto;
+  }
+
+  /* InfoBox*/
+  .info-box-container {
+    bottom: 1rem; 
+    right: auto;
+    left: 50%; /* 置中步驟： */
+    transform: translateX(-50%); /* 向左移動自身寬度的一半 */
+  }
+  /* InfoBox 本體 */
+  .info-box {
+    width: 280px; /* 進一步縮小寬度，適合更窄的螢幕 */
+    padding: 0.3rem 0.7rem; /* 再次縮小內邊距 */
+  }
+  /* 懸浮視窗本體 */
+  .dropdown-intro-modal {
+    width: 280px; /* 保持與 info-box 相同的寬度 */
+    max-height: 250px; /* 進一步限制高度 */
+    padding: 0.7rem; /* 再次縮小內邊距 */
+  }
+  /* 視窗頂部控制區 */
+  .modal-header-controls {
+    padding-bottom: 0.4rem;
+  }
+  /* 視窗內容樣式 */
+  .modal-body-content .intro-text-item {
+    font-size: 0.85rem; /* 略微縮小字體 */
   }
 
   /* About / Service */

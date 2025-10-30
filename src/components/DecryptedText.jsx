@@ -38,9 +38,9 @@ export default function DecryptedText({
             // 桌機: max 48, 手機: min 24
             return Math.max(30, Math.min(48, Math.floor(width * 0.04)));
           } else if (t.className.includes('p-text')) {
-            return Math.max(16, Math.min(24, Math.floor(width * 0.02)));
+            return Math.max(14, Math.min(22, Math.floor(width * 0.02)));
           } else {
-            return Math.max(12, Math.min(20, Math.floor(width * 0.025)));
+            return Math.max(12, Math.min(20, Math.floor(width * 0.015)));
           }
         })
       );
