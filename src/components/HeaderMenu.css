@@ -5,7 +5,6 @@
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
-  position: fixed;
   top: 0;
   left: 0;
   padding: 1rem 2%;
@@ -15,13 +14,13 @@
   align-items: center;
   background-color: var(--background-color);
   transition: all 0.4s ease;
-}
+} 
 
 .logo {
   font-family: 'Libre Baskerville', serif;
   font-weight: bold;
   font-size: 1.4rem;
-  color: var(--dark-gray);
+  color: var(--text-color);
   white-space: nowrap;
 }
 
@@ -52,7 +51,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--dark-gray);
+  background: var(--link-color);
   transition: all 0.3s ease;
 }
 
@@ -68,8 +67,8 @@
 
 /* CONTACT 按鈕 */
 .contact-btn {
-  background-color: var(--gray);
-  color: #fff;
+  background-color: var(--link-color);
+  color: var(--secondary-color);
   border: none;
   border-radius: 2.4rem;
   padding: 0.6rem 1rem;
@@ -80,7 +79,7 @@
 }
 
 .contact-btn:hover {
-  background-color: #999;
+  background-color: var(--light-gray);
 }
 
 /* ==============================
@@ -110,8 +109,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  color: var(--dark-gray);
+  background-color: var(--secondary-color);
+  color: var(--link-color);
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -151,13 +150,13 @@
 .menu-icon-small span {
   height: 2px;
   width: 100%;
-  background: var(--dark-gray);
+  background: var(--link-color);
 }
 
 .contact-inside-btn {
   margin-left: 1rem;
-  background-color: var(--gray);
-  color: #fff;
+  background-color: var(--link-color);
+  color: var(--secondary-color);
   border: none;
   border-radius: 2rem;
   padding: 0.8rem 1.5rem;
@@ -175,7 +174,7 @@
 }
 
 .contact-inside-btn:hover {
-  background-color: var(--dark-gray);
+  background-color: var(--link-color);
 }
 
 /* ==============================
@@ -226,10 +225,11 @@
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  color: var(--text-color);
 }
 
 .side-menu-list li:hover {
-  color: var(--primary-color);
+  color: var(--light-gray);
 }
 
 /* ==============================
@@ -254,7 +254,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--dark-gray);
+  background: var(--link-color);
   transition: all 0.3s ease;
 }
 

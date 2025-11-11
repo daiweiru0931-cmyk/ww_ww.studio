@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
@@ -9,6 +9,29 @@ import serviceGpImg from './assets/service/servicegp-img01.jpg';
 import serviceWbImg from './assets/service/servicewb-img01.jpg';
 
 function App() {
+  const serviceRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = serviceRef.current;
+      if (!section) return;
+
+      const rect = section.getBoundingClientRect();
+      const triggerPoint = window.innerHeight / 2;
+
+      if (rect.top < triggerPoint && rect.bottom > 0) {
+        document.body.classList.add("dark-mode"); // 整個頁面變黑
+      } else {
+        document.body.classList.remove("dark-mode");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // 初始化檢查一次
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="App">
       {/* Header */}
@@ -49,7 +72,7 @@ function App() {
         <span className="section-label">( About )</span>
         <div className="about-content">
           <div className="about-text">
-            <h2>Creative Designer</h2>
+            <h3>Creative Designer</h3>
             <p>創意開發設計師</p>
           </div>
           <div className="about-description">
@@ -67,7 +90,7 @@ function App() {
       </section>
 
       {/* Service Section */}
-      <section className="service">
+      <section className="service" ref={serviceRef}>
         <span className="section-label">( Service )</span>
         <div className="service-content">
           <div className="service-text">
@@ -83,14 +106,14 @@ function App() {
           <div className="service-wrapper">
             {/* 左側 Graphic Design */}
             <div className="service-item-left">
-              <h3>Graphic Design</h3>
+              <h2>Graphic Design</h2>
+              <p>
+                從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，
+                以一致的品牌語言打造能引起共鳴的視覺設計。
+              </p>
               <p>
                 From logo design, business cards, flyers, and brochures to event key visuals and product packaging. 
                 Creating cohesive and resonant visual designs that communicate your brand's essence.
-              </p>
-              <p>
-                從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，<br/>
-                以一致的品牌語言打造能引起共鳴的視覺設計。
               </p>
 
               <div className="service-image">
@@ -103,14 +126,14 @@ function App() {
 
             {/* 右側 Web Design */}
             <div className="service-item-right">
-              <h3>Web Design</h3>
+              <h2>Web Design</h2>
+              <p>
+                以設計思維與細節美感，打造兼具視覺吸引力與使用者體驗的網站。
+                目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
+              </p>
               <p>
                 Creating visually engaging websites that connect with users. 
                 Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
-              </p>
-              <p>
-                以設計思維與細節美感，打造兼具視覺吸引力與使用者體驗的網站。<br/>
-                目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
               </p>
 
               <div className="service-image">
@@ -157,7 +180,16 @@ function App() {
               <p>Oline Office</p>
               <p>MAIL : daiweiru0931@gmail.com</p>
             </div>
-            <p className="footer-phone">PHONE : +886 931-276270</p>
+            <p className="footer-instagram">
+              Instagram :&nbsp;
+              <a
+                href="https://www.instagram.com/ww__ww.studio/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ww__ww.studio
+              </a>
+            </p>
           </div>
         </div>
 
@@ -169,7 +201,6 @@ function App() {
         {/* 背景裝飾 */}
         <div className="footer-bg"></div>
       </footer>
-
     </div>
   );
 }
