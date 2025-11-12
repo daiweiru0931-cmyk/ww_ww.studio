@@ -6,11 +6,11 @@
   --background-color: #f6f3ef;
   --text-color: #333;
   --link-color: #333;
-  --gray-color: #555;
+  --gray-color: #666;
   --secondary-color: #fff;
   --light-gray: #999;
-  --divider-color: #333;
-  --footer-bg: #111;
+  --divider-color: #777;
+  --footer-bg: #222;
   --footer-text: #ccc;
   --footer-link: #fff;
 }
@@ -86,16 +86,16 @@ body.dark-mode {
   min-width: 250px;
 }
 
-.hero-right h3 {
+.hero-right h5 {
   margin-top: 12px;
   margin-bottom: 3px;
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   color: var(--text-color);
 }
 
 .hero-right p {
-  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
-  color: var(--gray-color);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); /* 約13–15px */
+  color: var(--text-color);
 }
 
 .hero-right .info-box-container {
@@ -138,13 +138,13 @@ body.dark-mode {
 }
 
 .info-text {
-  font-size: clamp(0.8rem, 0.9vw, 0.9rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); /* 約13–15px */
   font-weight: 500;
   color: var(--text-color);
 }
 
 .info-btn {
-  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem); /* 手機約15px，桌機約18px */
   font-weight: bold;
   background: transparent;
   border: none;
@@ -181,7 +181,7 @@ body.dark-mode {
    About Section
 ============================== */
 .section-label {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.625rem); /* 約 24px ~ 42px */
   color: var(--gray-color);
   margin-bottom: 1rem;
   display: block;
@@ -213,15 +213,15 @@ body.dark-mode {
 }
 
 .about-text h3 {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   color: var(--text-color);
-  margin-top: 50px;
+  margin: 50px 0 0 0;
 }
 
 .about-text p {
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
-  color: var(--gray-color);
+  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -232,7 +232,7 @@ body.dark-mode {
 }
 
 .about-description p {
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--gray-color);
   line-height: 1.8;
   margin-bottom: 1.5rem;
@@ -247,7 +247,7 @@ body.dark-mode {
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: var(--gray-color);
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
   transition: all 0.3s ease;
 }
@@ -265,15 +265,15 @@ body.dark-mode {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.service-text h2 {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+.service-text h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   color: var(--text-color);
   transition: color 0.5s ease;
 }
 
 .service-text p {
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--gray-color);
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -295,16 +295,16 @@ body.dark-mode {
   gap: 1rem;
 }
 
-.service-item-left h2, .service-item-right h2 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+.service-item-left h3, .service-item-right h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   color: var(--text-color);
-  margin-top: 100px;
+  margin-top: 5rem;
   transition: color 0.5s ease;
 }
 
 .service-item-left p, .service-item-right p {
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--gray-color);
   line-height: 1.8;
   margin-bottom: 1rem;
@@ -334,6 +334,7 @@ body.dark-mode {
 
 /* 中間虛線分隔線 */
 .service-divider {
+  margin-top: 5rem;
   width: 3.5px;
   align-self: stretch;
   background: repeating-linear-gradient(
@@ -376,7 +377,7 @@ body.dark-mode {
   color: var(--footer-text);
   padding: 80px 10%;
   overflow: hidden;
-  font-family: "Inter", "Noto Sans TC", sans-serif;
+  font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
 }
 
 .footer-content {
@@ -401,22 +402,21 @@ body.dark-mode {
 }
 
 .footer-logo p {
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
   font-weight: 600;
   color: var(--footer-link);
 }
 
 .footer-nav ul {
   display: flex;
-  gap: 40px;
+  gap: 50px;
   list-style: none;
   padding: 0;
   margin: 0 0 50px;
 }
 
 .footer-nav li {
-  font-weight: 600;
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
   color: var(--footer-link);
   cursor: pointer;
   transition: color 0.3s ease;
@@ -429,16 +429,20 @@ body.dark-mode {
 .footer-info {
   display: flex;
   justify-content: center;
-  gap: 60px;
+  gap: 1rem;
   flex-wrap: wrap;
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   line-height: 1.6;
   margin-bottom: 40px;
   color: var(--footer-text);
 }
 
+.footer-office h5 {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  border-bottom: var(--footer-text) solid 0.5px;
+}
+
 .footer-office p:first-child {
-  font-weight: 600;
   color: var(--footer-text);
   margin-bottom: 4px;
 }
@@ -447,7 +451,7 @@ body.dark-mode {
   width: 100%;
   text-align: center;
   margin-top: 10px;
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--footer-text);
 }
 .footer-instagram a {
@@ -462,7 +466,7 @@ body.dark-mode {
 
 .footer-bottom {
   text-align: center;
-  font-size: clamp(0.85rem, 0.95vw, 1rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--footer-text);
   position: relative;
   z-index: 2;
@@ -475,7 +479,7 @@ body.dark-mode {
   left: -10%;
   width: 150%;
   height: 200%;
-  background: radial-gradient(circle at 60% 40%, #1a1a1a 0%, #111 70%);
+  background: var(--footer-bg);
   opacity: 0.3;
   z-index: 1;
   transform: rotate(15deg);

@@ -19,9 +19,9 @@ function App() {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
   
-      // --- 新邏輯：service 區塊至少出現在畫面 50% 才進入 dark ---
+      // --- 新邏輯：service 區塊至少出現在畫面 60% 才進入 dark ---
       const isVisibleEnough =
-        rect.top < viewportHeight * 0.5 && rect.bottom > viewportHeight * 0.5;
+        rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.6;
   
       if (isVisibleEnough) {
         document.body.classList.add("dark-mode"); // 進入反黑
@@ -58,7 +58,7 @@ function App() {
         </div>
 
         <div className="hero-right">
-          <h3>視覺與網站 創意開發</h3>
+          <h5>視覺與網站 創意開發</h5>
           <p>A portfolio website</p>
           <div className="info-box-container">
             <InfoBox />
@@ -81,7 +81,7 @@ function App() {
           </div>
           <div className="about-description">
             <p>
-              A visual designer specializing in brand identity and web design, <br/>
+              A visual designer specializing in brand identity and web design, 
               with a deep interest in translating visuals into digital logic.
             </p>
             <p>
@@ -98,7 +98,7 @@ function App() {
         <span className="section-label">( Service )</span>
         <div className="service-content">
           <div className="service-text">
-            <h2>Creative Development in Visual and Web Design</h2>
+            <h3>Creative Development in Visual and Web Design</h3>
             <p>
               專注於品牌識別與網頁設計，<br/>
               以設計轉化為核心，探索主題與價值的細微之處，<br/>
@@ -110,7 +110,7 @@ function App() {
           <div className="service-wrapper">
             {/* 左側 Graphic Design */}
             <div className="service-item-left">
-              <h2>Graphic Design</h2>
+              <h3>Graphic Design</h3>
               <p>
                 從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，
                 以一致的品牌語言打造能引起共鳴的視覺設計。
@@ -130,7 +130,7 @@ function App() {
 
             {/* 右側 Web Design */}
             <div className="service-item-right">
-              <h2>Web Design</h2>
+              <h3>Web Design</h3>
               <p>
                 以設計思維與細節美感，打造兼具視覺吸引力與使用者體驗的網站。
                 目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
@@ -181,8 +181,8 @@ function App() {
           {/* 地址資訊 */}
           <div className="footer-info">
             <div className="footer-office">
-              <p>Oline Office</p>
-              <p>MAIL : daiweiru0931@gmail.com</p>
+              <h5>Online Office</h5>
+              <p>Mail : daiweiru0931@gmail.com</p>
             </div>
             <p className="footer-instagram">
               Instagram :&nbsp;
