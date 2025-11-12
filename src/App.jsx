@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react'; // ✨ 新增 useState
 import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
@@ -7,10 +7,48 @@ import './App.css';
 
 import serviceGpImg from './assets/service/servicegp-img01.jpg';
 import serviceWbImg from './assets/service/servicewb-img01.jpg';
+// ✨ 假設有多張圖片用於輪播
+import tasteBranding01 from './assets/taste/taste-branding-01.jpg'; 
+import tasteBranding02 from './assets/taste/taste-branding-02.jpg'; 
+import tasteBranding03 from './assets/taste/taste-branding-03.jpg'; 
+
+// ✨ 將輪播圖片定義為一個陣列
+const tasteImages = [
+  { src: tasteBranding01, alt: "Branding Sample 1 - Puddings" },
+  { src: tasteBranding02, alt: "Branding Sample 2 - Coffee" },
+  { src: tasteBranding03, alt: "Branding Sample 3 - Bakery" },
+];
 
 function App() {
   const serviceRef = useRef(null);
+  // ✨ 新增狀態：追蹤目前顯示的圖片索引
+  const [currentTasteImgIndex, setCurrentTasteImgIndex] = useState(0);
 
+  // ✨ 自動輪播效果
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTasteImgIndex((prevIndex) => 
+        (prevIndex + 1) % tasteImages.length // 循環到下一張
+      );
+    }, 5000); // 每 5 秒切換一次圖片
+
+    return () => clearInterval(interval); // 清除計時器以避免記憶體洩漏
+  }, []); // 空陣列表示只在元件掛載時執行一次
+
+  // ✨ 手動切換圖片的函式
+  const goToNextTasteImg = () => {
+    setCurrentTasteImgIndex((prevIndex) => 
+      (prevIndex + 1) % tasteImages.length
+    );
+  };
+
+  const goToPrevTasteImg = () => {
+    setCurrentTasteImgIndex((prevIndex) => 
+      (prevIndex - 1 + tasteImages.length) % tasteImages.length // 處理負數索引
+    );
+  };
+
+  // --- 其他 useEffect (處理 dark-mode) 保持不變 ---
   useEffect(() => {
     const handleScroll = () => {
       const section = serviceRef.current;
@@ -19,9 +57,9 @@ function App() {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
   
-      // --- 新邏輯：service 區塊至少出現在畫面 60% 才進入 dark ---
+      // --- 新邏輯：service 區塊至少出現在畫面 70% 才進入 dark ---
       const isVisibleEnough =
-        rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.6;
+        rect.top < viewportHeight * 0.3 && rect.bottom > viewportHeight * 0.3;
   
       if (isVisibleEnough) {
         document.body.classList.add("dark-mode"); // 進入反黑
@@ -148,13 +186,51 @@ function App() {
         </div>
       </section>
 
-      {/* Taste Section */}
+      {/* Taste Section (已修改為圖片輪播) */}
       <section className="taste">
         <span className="section-label">( Taste )</span>
-        <div className="taste-images">
-          <img src="taste01.jpg" alt="Taste" />
-          <img src="taste02.jpg" alt="Taste" />
-          <img src="taste03.jpg" alt="Taste" />
+        <div className="taste-content">
+            <div className="taste-text-block">
+                <h3 className="taste-title">Branding</h3>
+                
+                <p className="taste-description-jp">
+                  「これからお店をオープンするけど何からしていい やら」、「企業イメージを根本から刷新したい！」な 
+                  どなど、あなたのターゲットに刺さるブランディン グをご提案いたします✨
+                </p>
+                
+                <p className="taste-description-en">
+                  Whether you're opening a new store or looking to refresh your company's
+                  image, we offer branding solutions that will resonate with your target audience.
+                </p>
+            </div>
+            
+            <div className="taste-carousel-wrapper"> {/* ✨ 輪播圖容器 */}
+                {/* 輪播圖片 */}
+                <img 
+                    src={tasteImages[currentTasteImgIndex].src} 
+                    alt={tasteImages[currentTasteImgIndex].alt} 
+                    className="taste-main-img" 
+                />
+
+                {/* ✨ 導航按鈕 (左右箭頭) */}
+                <button className="carousel-nav-btn prev" onClick={goToPrevTasteImg}>
+                  &lt;
+                </button>
+                <button className="carousel-nav-btn next" onClick={goToNextTasteImg}>
+                  &gt;
+                </button>
+
+                {/* ✨ 底部指示點 */}
+                <div className="carousel-dots">
+                  {tasteImages.map((_, index) => (
+                    <span 
+                      key={index} 
+                      className={`carousel-dot ${index === currentTasteImgIndex ? 'active' : ''}`}
+                      onClick={() => setCurrentTasteImgIndex(index)}
+                    ></span>
+                  ))}
+                </div>
+            </div>
         </div>
       </section>
 
