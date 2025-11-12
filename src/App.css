@@ -45,12 +45,13 @@ ul {
    Dark Mode 全頁黑底白字
 ============================== */
 body.dark-mode {
-  --background-color: #111;
+  --background-color: #222;
   --text-color: #ccc;
-  --link-color: #ccc;
+  --link-color: #333;
   --gray-color: #fff;
-  --divider-color: #fff;
-  --footer-bg: #111;
+  --secondary-color: #999;
+  --divider-color: #999;
+  --footer-bg: #222;
   --footer-text: #fff;
   --footer-link: #fff;
 }
@@ -298,7 +299,7 @@ body.dark-mode {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: bold;
   color: var(--text-color);
-  padding-top: 1.5rem;
+  margin-top: 100px;
   transition: color 0.5s ease;
 }
 
@@ -339,8 +340,8 @@ body.dark-mode {
     to bottom,
     transparent 0,
     transparent 5px,
-    #333 5px,
-    #333 10px
+    var( --divider-color) 5px,
+    var( --divider-color) 10px
   );
   opacity: 0.2;
   transition: background 0.5s ease, opacity 0.5s ease;
@@ -351,7 +352,7 @@ body.dark-mode {
 ============================== */
 .taste {
   padding: 5rem 2rem;
-  background-color: var(--light-gray);
+  background-color: var(--background-color);
 }
 
 .taste-images {
@@ -448,6 +449,15 @@ body.dark-mode {
   margin-top: 10px;
   font-size: clamp(0.85rem, 0.95vw, 1rem);
   color: var(--footer-text);
+}
+.footer-instagram a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-instagram a:hover {
+  color: var(--footer-link);
 }
 
 .footer-bottom {

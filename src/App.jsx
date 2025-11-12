@@ -15,20 +15,24 @@ function App() {
     const handleScroll = () => {
       const section = serviceRef.current;
       if (!section) return;
-
+  
       const rect = section.getBoundingClientRect();
-      const triggerPoint = window.innerHeight / 2;
-
-      if (rect.top < triggerPoint && rect.bottom > 0) {
-        document.body.classList.add("dark-mode"); // 整個頁面變黑
+      const viewportHeight = window.innerHeight;
+  
+      // --- 新邏輯：service 區塊至少出現在畫面 50% 才進入 dark ---
+      const isVisibleEnough =
+        rect.top < viewportHeight * 0.5 && rect.bottom > viewportHeight * 0.5;
+  
+      if (isVisibleEnough) {
+        document.body.classList.add("dark-mode"); // 進入反黑
       } else {
-        document.body.classList.remove("dark-mode");
+        document.body.classList.remove("dark-mode"); // 恢復原色
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     handleScroll(); // 初始化檢查一次
-
+  
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
