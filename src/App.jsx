@@ -1,18 +1,32 @@
-import React, { useRef, useEffect, useState } from 'react'; // ✨ 新增 useState
+import React, { useRef, useEffect, useState } from 'react';
 import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
 import './App.css';
 
-import serviceGpImg from './assets/service/servicegp-img01.jpg';
-import serviceWbImg from './assets/service/servicewb-img01.jpg';
-// ✨ 假設有多張圖片用於輪播
+// 假設服務圖片有多張，用於輪播
+import serviceGp01 from './assets/service/servicegp-img01.jpg';
+import serviceGp02 from './assets/service/servicegp-img02.jpg'; 
+import serviceWb01 from './assets/service/servicewb-img01.jpg';
+import serviceWb02 from './assets/service/servicewb-img02.jpg'; 
+
+// 服務圖片集定義
+const serviceGpImages = [
+    { src: serviceGp01, alt: "Graphic Design Sample 1" },
+    { src: serviceGp02, alt: "Graphic Design Sample 2" },
+];
+
+const serviceWbImages = [
+    { src: serviceWb01, alt: "Web Design Sample 1" },
+    { src: serviceWb02, alt: "Web Design Sample 2" },
+];
+
+// Taste Section 圖片 (保持不變)
 import tasteBranding01 from './assets/taste/taste-branding-01.jpg'; 
 import tasteBranding02 from './assets/taste/taste-branding-02.jpg'; 
 import tasteBranding03 from './assets/taste/taste-branding-03.jpg'; 
 
-// ✨ 將輪播圖片定義為一個陣列
 const tasteImages = [
   { src: tasteBranding01, alt: "Branding Sample 1 - Puddings" },
   { src: tasteBranding02, alt: "Branding Sample 2 - Coffee" },
@@ -21,21 +35,69 @@ const tasteImages = [
 
 function App() {
   const serviceRef = useRef(null);
-  // ✨ 新增狀態：追蹤目前顯示的圖片索引
+  
+  // Service 圖片索引狀態
+  const [currentGpImgIndex, setCurrentGpImgIndex] = useState(0);
+  const [currentWbImgIndex, setCurrentWbImgIndex] = useState(0);
+
+  // Taste 圖片狀態
   const [currentTasteImgIndex, setCurrentTasteImgIndex] = useState(0);
+  
+  // === Service Section 輪播控制函式 (點擊下一張) ===
+  const goToNextGpImg = () => {
+    setCurrentGpImgIndex((prevIndex) => 
+      (prevIndex + 1) % serviceGpImages.length
+    );
+  };
+  // goToPrevGpImg 函式雖然不需要，但保留以防未來需要
+  const goToPrevGpImg = () => {
+    setCurrentGpImgIndex((prevIndex) => 
+      (prevIndex - 1 + serviceGpImages.length) % serviceGpImages.length
+    );
+  };
+  const goToNextWbImg = () => {
+    setCurrentWbImgIndex((prevIndex) => 
+      (prevIndex + 1) % serviceWbImages.length
+    );
+  };
+  // goToPrevWbImg 函式雖然不需要，但保留以防未來需要
+  const goToPrevWbImg = () => {
+    setCurrentWbImgIndex((prevIndex) => 
+      (prevIndex - 1 + serviceWbImages.length) % serviceWbImages.length
+    );
+  };
 
-  // ✨ 自動輪播效果
+
+  // === 自動輪播效果 ===
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTasteImgIndex((prevIndex) => 
-        (prevIndex + 1) % tasteImages.length // 循環到下一張
+    // Service 圖片自動輪播 (與手動點擊邏輯相同)
+    const gpInterval = setInterval(() => {
+      setCurrentGpImgIndex((prevIndex) => 
+        (prevIndex + 1) % serviceGpImages.length
       );
-    }, 5000); // 每 5 秒切換一次圖片
+    }, 5000); 
 
-    return () => clearInterval(interval); // 清除計時器以避免記憶體洩漏
-  }, []); // 空陣列表示只在元件掛載時執行一次
+    const wbInterval = setInterval(() => {
+      setCurrentWbImgIndex((prevIndex) => 
+        (prevIndex + 1) % serviceWbImages.length
+      );
+    }, 5000);
 
-  // ✨ 手動切換圖片的函式
+    // Taste 圖片自動輪播 (保持原樣)
+    const tasteInterval = setInterval(() => {
+      setCurrentTasteImgIndex((prevIndex) => 
+        (prevIndex + 1) % tasteImages.length
+      );
+    }, 5000);
+
+    return () => {
+      clearInterval(gpInterval);
+      clearInterval(wbInterval);
+      clearInterval(tasteInterval);
+    };
+  }, []);
+
+  // Taste Section 手動切換函式 (保持不變)
   const goToNextTasteImg = () => {
     setCurrentTasteImgIndex((prevIndex) => 
       (prevIndex + 1) % tasteImages.length
@@ -44,11 +106,11 @@ function App() {
 
   const goToPrevTasteImg = () => {
     setCurrentTasteImgIndex((prevIndex) => 
-      (prevIndex - 1 + tasteImages.length) % tasteImages.length // 處理負數索引
+      (prevIndex - 1 + tasteImages.length) % tasteImages.length
     );
   };
-
-  // --- 其他 useEffect (處理 dark-mode) 保持不變 ---
+  
+  // Dark Mode 滾動效果 (保持不變)
   useEffect(() => {
     const handleScroll = () => {
       const section = serviceRef.current;
@@ -57,22 +119,23 @@ function App() {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
   
-      // --- 新邏輯：service 區塊至少出現在畫面 70% 才進入 dark ---
       const isVisibleEnough =
         rect.top < viewportHeight * 0.3 && rect.bottom > viewportHeight * 0.3;
   
       if (isVisibleEnough) {
-        document.body.classList.add("dark-mode"); // 進入反黑
+        document.body.classList.add("dark-mode");
       } else {
-        document.body.classList.remove("dark-mode"); // 恢復原色
+        document.body.classList.remove("dark-mode");
       }
     };
   
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // 初始化檢查一次
+    handleScroll();
   
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // --- JSX 渲染部分 ---
 
   return (
     <div className="App">
@@ -109,7 +172,7 @@ function App() {
         <AccordionGallery />
       </section>
 
-      {/* About Section */}
+      {/* About Section (修正按鈕結構) */}
       <section className="about">
         <span className="section-label">( About )</span>
         <div className="about-content">
@@ -125,13 +188,17 @@ function App() {
             <p>
               專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。
             </p>
-            <button className="view-more-btn">VIEW MORE &nbsp; &gt;</button>
+            {/* 修正後的按鈕結構 */}
+            <button className="view-more-btn">
+                <span className="btn-text">VIEW MORE</span>
+                <span className="btn-icon"></span> 
+            </button>
           </div>
           <div className="service-diagram"></div>
         </div>
       </section>
 
-      {/* Service Section */}
+      {/* Service Section (已修改為圖片輪播及絕對定位) */}
       <section className="service" ref={serviceRef}>
         <span className="section-label">( Service )</span>
         <div className="service-content">
@@ -153,14 +220,38 @@ function App() {
                 從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，
                 以一致的品牌語言打造能引起共鳴的視覺設計。
               </p>
-              <p>
+              <p className="gd-service-p">
                 From logo design, business cards, flyers, and brochures to event key visuals and product packaging. 
                 Creating cohesive and resonant visual designs that communicate your brand's essence.
               </p>
 
-              <div className="service-image">
-                <img src={serviceGpImg} alt="Graphic Design Sample" />
-              </div>
+             {/* 輪播結構 - Graphic Design */}
+             <div className="service-image service-carousel">
+                  <div 
+                      className="carousel-track" 
+                      style={{ 
+                          width: `${serviceGpImages.length * 100}%`,
+                          transform: `translateX(-${(100 / serviceGpImages.length) * currentGpImgIndex}%)` 
+                      }}
+                  >
+                      {serviceGpImages.map((image, index) => (
+                          <img 
+                              key={index} 
+                              src={image.src} 
+                              alt={image.alt} 
+                              className="service-carousel-img"
+                              style={{ width: `${100 / serviceGpImages.length}%` }}
+                          />
+                      ))}
+                  </div>
+                  <a 
+                    href="/graphicdesign" 
+                    className="link-arrow-btn" 
+                    aria-label="Go to Graphic Design page"
+                  >
+                    ›
+                  </a>
+                </div>
             </div>
 
             {/* 中間虛線分隔線 */}
@@ -168,30 +259,54 @@ function App() {
 
             {/* 右側 Web Design */}
             <div className="service-item-right">
-              <h3>Web Design</h3>
-              <p>
-                以設計思維與細節美感，打造兼具視覺吸引力與使用者體驗的網站。
-                目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
-              </p>
-              <p>
-                Creating visually engaging websites that connect with users. 
-                Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
-              </p>
+                <h3>Web Design</h3>
+                <p>
+                  打造兼具視覺吸引力與使用者體驗的網站。
+                  目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
+                </p>
+                <p className="wb-service-p">
+                  Creating visually engaging websites that connect with users. 
+                  Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
+                </p>
 
-              <div className="service-image">
-                <img src={serviceWbImg} alt="Web Design Sample" />
-              </div>
+                {/* 輪播結構 - Web Design */}
+                <div className="service-image service-carousel">
+                  <div 
+                      className="carousel-track" 
+                      style={{ 
+                          width: `${serviceWbImages.length * 100}%`,
+                          transform: `translateX(-${(100 / serviceWbImages.length) * currentWbImgIndex}%)` 
+                      }}
+                  >
+                      {serviceWbImages.map((image, index) => (
+                          <img 
+                              key={index} 
+                              src={image.src} 
+                              alt={image.alt} 
+                              className="service-carousel-img"
+                              style={{ width: `${100 / serviceWbImages.length}%` }}
+                          />
+                      ))}
+                  </div>
+                  <a 
+                    href="/webdesign" 
+                    className="link-arrow-btn" 
+                    aria-label="Go to Web Design page"
+                  >
+                    ›
+                  </a>
+                </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Taste Section (已修改為圖片輪播) */}
+      {/* Taste Section (輪播結構) */}
       <section className="taste">
         <span className="section-label">( Taste )</span>
         <div className="taste-content">
             <div className="taste-text-block">
-                <h3 className="taste-title">Branding</h3>
+                <h1 className="taste-title">Branding</h1>
                 
                 <p className="taste-description-jp">
                   「これからお店をオープンするけど何からしていい やら」、「企業イメージを根本から刷新したい！」な 
@@ -204,7 +319,7 @@ function App() {
                 </p>
             </div>
             
-            <div className="taste-carousel-wrapper"> {/* ✨ 輪播圖容器 */}
+            <div className="taste-carousel-wrapper">
                 {/* 輪播圖片 */}
                 <img 
                     src={tasteImages[currentTasteImgIndex].src} 
@@ -212,7 +327,7 @@ function App() {
                     className="taste-main-img" 
                 />
 
-                {/* ✨ 導航按鈕 (左右箭頭) */}
+                {/* 導航按鈕 (左右箭頭) - Taste Section 保留按鈕 */}
                 <button className="carousel-nav-btn prev" onClick={goToPrevTasteImg}>
                   &lt;
                 </button>
@@ -220,7 +335,7 @@ function App() {
                   &gt;
                 </button>
 
-                {/* ✨ 底部指示點 */}
+                {/* 底部指示點 */}
                 <div className="carousel-dots">
                   {tasteImages.map((_, index) => (
                     <span 
@@ -233,6 +348,7 @@ function App() {
             </div>
         </div>
       </section>
+
 
       {/* Footer */}
       <footer className="footer">
