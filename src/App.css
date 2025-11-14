@@ -1,8 +1,6 @@
-/* ==============================
-   General Styles & Utilities
-============================== */
+/* General Styles & Utilities */
 :root {
-  /* ===== 顏色變數 ===== */
+  /*  顏色變數  */
   --background-color: #f6f3ef;
   --text-color: #333;
   --link-color: #333;
@@ -41,9 +39,7 @@ ul {
   margin: 0;
 }
 
-/* ==============================
-   Dark Mode 全頁黑底白字
-============================== */
+/*  Dark Mode 全頁黑底白字 */
 body.dark-mode {
   --background-color: #222;
   --text-color: #ccc;
@@ -56,9 +52,7 @@ body.dark-mode {
   --footer-link: #fff;
 }
 
-/* ==============================
-   Hero Section
-============================== */
+/* Hero Section */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -105,9 +99,7 @@ body.dark-mode {
   margin-top: 1.5rem;
 }
 
-/* ==============================
-   InfoBox
-============================== */
+/*  InfoBox */
 .info-box-container {
   position: fixed;
   bottom: 20px;
@@ -138,7 +130,7 @@ body.dark-mode {
 }
 
 .info-text {
-  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); /* 約13–15px */
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); 
   font-weight: 500;
   color: var(--text-color);
 }
@@ -177,9 +169,7 @@ body.dark-mode {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* ==============================
-   About Section
-============================== */
+/* About Section */
 .section-label {
   font-size: clamp(1.5rem, 2.5vw, 2.625rem); /* 約 24px ~ 42px */
   color: var(--gray-color);
@@ -250,14 +240,14 @@ body.dark-mode {
 }
 .view-more-btn {
   display: flex;
-  align-items: center; /* 垂直置中 */
-  gap: 15px; /* 文字和圖標之間的間距 */
+  align-items: center; 
+  gap: 15px; 
   padding: 0;
   background: none;
   border: none;
   cursor: pointer;
   font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
-  color: var(--gray-color); /* 文字顏色 */
+  color: var(--gray-color); 
   transition: all 0.3s ease; /* 平滑過渡效果 */
   width: fit-content;
 }
@@ -269,9 +259,9 @@ body.dark-mode {
 /* 按鈕右側的圓形圖標 */
 .btn-icon {
   position: relative;
-  width: 25px; /* 圖標寬度 */
-  height: 25px; /* 圖標高度 */
-  border-radius: 50%; /* 變成圓形 */
+  width: 25px; 
+  height: 25px; 
+  border-radius: 50%; 
   border: #666 solid 1px;
   background-color: var(--secondary-color);
   display: flex;
@@ -308,9 +298,7 @@ body.dark-mode {
   background-color: var(--secondary-color); /* Hover 時加號顏色變淡 */
 }
 
-/* ==============================
-   Service Section
-============================== */
+/* Service Section */
 .service {
   padding: 10rem 10%;
   transition: background-color 0.5s ease, color 0.5s ease;
@@ -343,8 +331,7 @@ body.dark-mode {
 .service-item-right {
   flex: 1 1 45%; 
   position: relative;
-  /* 必須給予足夠的底部間距 (圖片高度 300px + 間距 40px) */
-  padding-bottom: 340px; 
+  padding-bottom: 340px;  /* 必須給予足夠的底部間距 (圖片高度 300px + 間距 40px) */
 }
 
 .service-item-left h3, .service-item-right h3 {
@@ -366,13 +353,13 @@ body.dark-mode {
 }
 
 /* 較小的 P 文字 */
-.service-item-left .gd-service-p,
-.service-item-right .wb-service-p {
+.service-item-left .gp-description-en,
+.service-item-right .wb-description-en {
   font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
   font-family: 'Noto Sans TC', serif;
   color: var(--gray-color);
-  line-height: 1.8;
-  letter-spacing: 0.5px;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
   margin: 0 0 2rem 0; 
   transition: color 0.5s ease;
 }
@@ -406,14 +393,15 @@ body.dark-mode {
   flex-shrink: 0;
 }
 
-/* 🔽 調整箭頭按鈕位置 */
+/* 箭頭按鈕位置 */
 .service-image .link-arrow-btn {
   position: absolute;
   z-index: 10;
   bottom: 20px; /* 距離底部一點空間 */
   right: 20px;  /* 距離右邊一點空間 */
   color: var(--link-color);
-  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: #333 solid 1px;
   border-radius: 50%;
   width: 40px; 
   height: 40px;
@@ -463,248 +451,237 @@ body.dark-mode {
   transition: background 0.5s ease, opacity 0.5s ease;
 }
 
-/* ==============================
-     Taste Section 樣式
-     ============================== */
+/* Taste Section */
 
-  .taste {
-    padding: 10rem 10%;
-    display: flex;
-    flex-direction: column;
-  }
+.taste {
+  padding: 10rem 10%;
+  display: flex;
+  flex-direction: column;
+}
   
-  .taste-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center; /* 垂直置中對齊 */
-      width: 100%;
-      max-width: 1200px;
-      gap: 5rem;
-  }
+.taste-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 垂直置中對齊 */
+  width: 100%;
+  max-width: 1200px;
+  gap: 5rem;
+}
   
-  /* 左側文字區塊 */
-  .taste-text-block {
-      flex: 1;
-      min-width: 350px;
-  }
-  
-  .taste-title h3{
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
-    font-weight: bold;
-    margin-bottom: 2rem;
-    color: var(--dark-gray);
-  }
-  
-  .taste-description-jp {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      color: var(--dark-gray);
-  }
-  
-  .taste-description-en {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: var(--gray);
-  }
-  
-  /* 右側輪播圖容器 */
-  .taste-carousel-wrapper {
-      flex: 1.2;
-      position: relative; /* 用於定位按鈕和指示點 */
-      max-width: 550px;
-      min-height: 350px; /* 確保容器有高度 */
-      border-radius: 6px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 模擬圖片陰影 */
-      overflow: hidden;
-  }
-  
-  .taste-main-img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    display: block;
-    border-radius: 6px;
-    /* 圖片切換動畫效果 */
-    transition: opacity 0.5s ease-in-out; 
-  }
-  
-  
-  /* --- 輪播導航按鈕樣式 --- */
-  
-  .carousel-nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255, 255, 255, 0.7);
-      color: var(--dark-gray);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      z-index: 20;
-      font-size: 1.5rem;
-      line-height: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background-color 0.3s ease;
-  }
-  
-  .carousel-nav-btn:hover {
-      background-color: rgba(255, 255, 255, 0.9);
-  }
-  
-  .carousel-nav-btn.prev {
-      left: 15px;
-  }
-  
-  .carousel-nav-btn.next {
-      right: 15px;
-  }
-  
-  /* --- 底部指示點樣式 --- */
-  
-  .carousel-dots {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 20;
-  }
-  
-  .carousel-dot {
-      width: 10px;
-      height: 10px;
-      background-color: rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .carousel-dot.active {
-      background-color: var(--dark-gray); /* 活躍點使用主題色 */
-      transform: scale(1.2);
-  }
+/* 左側文字區塊 */
+.taste-text-block {
+  flex: 1;
+  min-width: 350px;
+}
 
-/* ==============================
-   Footer
-============================== */
+.taste-text-block h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: bold;
+  color: var(--text-color);
+}
+  
+.taste-text-block p {
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  color: var(--gray-color);
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+  
+.taste-description-en {
+  font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+  font-family: 'Noto Sans TC', serif;
+  color: var(--gray-color);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+  
+ /* 右側輪播圖容器 */
+.taste-carousel-wrapper {
+  flex: 1.2;
+  position: relative; /* 用於定位按鈕和指示點 */
+  max-width: 550px;
+  min-height: 350px; /* 確保容器有高度 */
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 模擬圖片陰影 */
+  overflow: hidden;
+}
+  
+.taste-main-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  /* 圖片切換動畫效果 */
+  transition: opacity 0.5s ease-in-out; 
+}
+  
+  
+/* 輪播導航按鈕 */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--dark-gray);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 20;
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+  
+.carousel-nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+  
+.carousel-nav-btn.prev {
+  left: 15px;
+}
+  
+.carousel-nav-btn.next {
+  right: 15px;
+}
+  
+/* 底部指示點 */
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+  
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+  
+.carousel-dot.active {
+  background-color: var(--dark-gray); /* 活躍點使用主題色 */
+  transform: scale(1.2);
+}
+
+/*  Footer */
+.split-text{
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: var(--gray-color);
+  margin: 0 0 6rem 0;
+}
+
 .footer {
   position: relative;
-  background-color: var(--footer-bg);
-  color: var(--footer-text);
-  padding: 80px 10%;
+  background-color: var(--footer-bg); 
+  color: var(--footer-text); 
+  padding: 5rem 10%; 
   overflow: hidden;
-  font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
 }
 
 .footer-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  flex-direction: column; 
+  align-items: flex-start; /* 確保所有子元素靠左對齊 */
   position: relative;
-  z-index: 2;
+  z-index: 10;
 }
 
 .footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
-
 .footer-logo img {
-  width: 36px;
-  height: 36px;
+  display: none; 
+}
+.footer-logo h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: bold;
+  margin: 0;
 }
 
-.footer-logo p {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 600;
-  color: var(--footer-link);
-}
-
+/* 導航列樣式 */
 .footer-nav ul {
-  display: flex;
-  gap: 50px;
   list-style: none;
   padding: 0;
-  margin: 0 0 50px;
+  margin: 0 0 50px 0;
+  display: flex; /* 確保水平排列 */
+  gap: 30px; 
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  text-transform: uppercase;
+  flex-wrap: wrap; /* 確保導航欄在小螢幕時也能水平顯示，即使會換行 */
 }
 
 .footer-nav li {
-  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
-  color: var(--footer-link);
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
+  padding-right: 5px; 
 }
 
 .footer-nav li:hover {
-  color: #aaa;
+  color: var(--footer-link);
 }
 
+/* 地址/資訊區塊樣式 */
 .footer-info {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  line-height: 1.6;
-  margin-bottom: 40px;
-  color: var(--footer-text);
+  flex-direction: column; 
+  align-items: flex-start;
+  margin-bottom: 50px;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  font-family: 'Noto Sans TC', serif;
 }
 
-.footer-office h5 {
+.footer-info h5 {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
-  border-bottom: var(--footer-text) solid 0.5px;
+  border-bottom: var(--footer-text) solid 0.8px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
-.footer-office p:first-child {
-  color: var(--footer-text);
-  margin-bottom: 4px;
-}
-
-.footer-instagram {
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
+.footer-office {
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  color: var(--footer-text);
+  margin-bottom: 50px;
 }
+
+.footer-info p {
+  margin: 0;
+}
+
 .footer-instagram a {
   color: var(--footer-text);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .footer-instagram a:hover {
   color: var(--footer-link);
 }
 
+/* 底部版權 */
 .footer-bottom {
-  text-align: center;
-  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  color: var(--footer-text);
+  padding-top: 20px;
+  text-align: left;
   position: relative;
-  z-index: 2;
+  z-index: 10;
 }
 
-.footer-bg {
-  content: "";
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 150%;
-  height: 200%;
-  background: var(--footer-bg);
-  opacity: 0.3;
-  z-index: 1;
-  transform: rotate(15deg);
+.footer-bottom p {
+  font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+  color: var(--footer-text);
+  margin: 0;
 }
 
 /* ==============================
@@ -810,24 +787,6 @@ body.dark-mode {
 }
 }
 
-  .footer {
-    padding: 2rem 1.5rem;
-  }
-
-  .footer-content {
-    align-items: center;
-  }
-
-  .footer-nav ul {
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 30px;
-  }
-
-  .footer-info {
-    flex-direction: column;
-    gap: 1rem;
-  }
 
 @media (max-width: 480px) {
   .hero {

@@ -3,6 +3,7 @@ import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from './components/DecryptedText';
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
+import SplitText from './components/SplitText';
 import './App.css';
 
 // 假設服務圖片有多張，用於輪播
@@ -32,6 +33,10 @@ const tasteImages = [
   { src: tasteBranding02, alt: "Branding Sample 2 - Coffee" },
   { src: tasteBranding03, alt: "Branding Sample 3 - Bakery" },
 ];
+
+const handleAnimationComplete = () => {
+  console.log('All letters have animated!');
+};
 
 function App() {
   const serviceRef = useRef(null);
@@ -220,7 +225,7 @@ function App() {
                 從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，
                 以一致的品牌語言打造能引起共鳴的視覺設計。
               </p>
-              <p className="gd-service-p">
+              <p className="gp-description-en">
                 From logo design, business cards, flyers, and brochures to event key visuals and product packaging. 
                 Creating cohesive and resonant visual designs that communicate your brand's essence.
               </p>
@@ -264,7 +269,7 @@ function App() {
                   打造兼具視覺吸引力與使用者體驗的網站。
                   目前持續擴展作品案例，期待與品牌一同開創更多獨特的線上呈現。
                 </p>
-                <p className="wb-service-p">
+                <p className="wb-description-en">
                   Creating visually engaging websites that connect with users. 
                   Currently expanding the portfolio and looking forward to collaborating with brands to craft unique online experiences.
                 </p>
@@ -306,16 +311,14 @@ function App() {
         <span className="section-label">( Taste )</span>
         <div className="taste-content">
             <div className="taste-text-block">
-                <h1 className="taste-title">Branding</h1>
-                
-                <p className="taste-description-jp">
-                  「これからお店をオープンするけど何からしていい やら」、「企業イメージを根本から刷新したい！」な 
-                  どなど、あなたのターゲットに刺さるブランディン グをご提案いたします✨
+                <h3>Wendy's Kitchen</h3>
+                <p>
+                一個介於味道與情感之間的柔和空間。
+                在這裡，食物本身也成為了一種設計。
                 </p>
-                
                 <p className="taste-description-en">
-                  Whether you're opening a new store or looking to refresh your company's
-                  image, we offer branding solutions that will resonate with your target audience.
+                It's a gentle space between flavor and feeling, 
+                where food becomes another form of design.
                 </p>
             </div>
             
@@ -352,14 +355,26 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
+        <SplitText
+            text="CONTACT ME."
+            className="split-text"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+            onLetterAnimationComplete={handleAnimationComplete}
+        />
+
         <div className="footer-content">
-          {/* 左側 Logo */}
           <div className="footer-logo">
             <img src="ww-logo.svg" alt="WW Studio Logo" />
-            <p>WW Studio</p>
+            <h3>WW Studio</h3>
           </div>
-
-          {/* 中間導覽 */}
           <nav className="footer-nav">
             <ul>
               <li>About</li>
@@ -375,17 +390,17 @@ function App() {
             <div className="footer-office">
               <h5>Online Office</h5>
               <p>Mail : daiweiru0931@gmail.com</p>
+              <p className="footer-instagram">
+                Instagram :&nbsp;
+                <a
+                  href="https://www.instagram.com/ww__ww.studio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  ww_ww.studio
+                </a>
+              </p>
             </div>
-            <p className="footer-instagram">
-              Instagram :&nbsp;
-              <a
-                href="https://www.instagram.com/ww__ww.studio/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                ww__ww.studio
-              </a>
-            </p>
           </div>
         </div>
 
@@ -393,9 +408,6 @@ function App() {
         <div className="footer-bottom">
           <p>Copyright © 2025 WW Studio</p>
         </div>
-
-        {/* 背景裝飾 */}
-        <div className="footer-bg"></div>
       </footer>
     </div>
   );
