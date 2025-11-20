@@ -708,10 +708,13 @@ body.dark-mode {
     padding: 10rem 1.5rem 1.5rem 1.5rem;
     flex-direction: column;
     align-items: center;
+    gap: 2rem;
   }
 
+  .hero-left,
   .hero-right {
-    align-items: center;
+    width: 100%;
+    text-align: center;
   }
 
   .info-box-container {
@@ -738,7 +741,8 @@ body.dark-mode {
   }
 
   .about-content,
-  .service-wrapper {
+  .service-wrapper,
+  .taste-content {
     flex-direction: column;
     align-items: center;
   }
@@ -746,6 +750,7 @@ body.dark-mode {
   .about-text,
   .about-description,
   .service-item {
+    width: 100%;
     justify-content: center;
   }
 
@@ -753,38 +758,62 @@ body.dark-mode {
     display: none;
   }
 
-.taste-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-}
+  .service-item {
+    gap: 1.5rem;
+  }
 
-.taste-text-block {
-    order: 2; /* 讓文字在圖片下方 */
-    text-align: center; /* 文字置中 */
-    max-width: 100%;
-}
+  .service-text {
+    text-align: center;
+  }
 
-.taste-title {
-    margin-bottom: 1rem;
-}
-
-.taste-description-jp {
-    margin-bottom: 1rem;
-}
-
-.taste-carousel-wrapper {
-    order: 1; /* 讓圖片在文字上方 */
+  .service-image img {
     width: 100%;
-    max-width: 450px; /* 限制最大寬度 */
-    min-height: 280px;
-}
+    height: auto;
+    border-radius: 10px;
+  }
 
-.carousel-nav-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1.2rem;
-}
+  .taste-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+  }
+
+  .taste-text-block {
+      order: 2; /* 讓文字在圖片下方 */
+      max-width: 100%;
+  }
+
+  .taste-title {
+      margin-bottom: 1rem;
+  }
+
+  .taste-text-block p {
+      margin-bottom: 1rem;
+  }
+
+  .taste-carousel-wrapper {
+      order: 1; /* 讓圖片在文字上方 */
+      width: 100%;
+      max-width: 450px; /* 限制最大寬度 */
+      min-height: 280px;
+  }
+
+  .carousel-nav-btn {
+      width: 35px;
+      height: 35px;
+      font-size: 1.2rem;
+  }
+
+  .taste-carousel img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  footer {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
 }
 
 
@@ -817,8 +846,8 @@ body.dark-mode {
   }
 
   .about, .service, .taste {
-    padding: 3rem 1rem;
-}
+    padding: 3rem 1rem; 
+  }
   .about-text,
   .about-description,
   .service-item {
@@ -831,15 +860,13 @@ body.dark-mode {
     height: auto;
   }
 
-.taste-title {
-    font-size: 2.2rem;
-}
+  .taste-carousel-wrapper {
+    max-width: 100%;
+    min-height: 220px;
+  }
 
-.taste-description-jp {
-    font-size: 1rem;
-}
-
-.taste-description-en {
-    font-size: 0.85rem;
-}
+  .carousel-nav-btn {
+    width: 32px;
+    height: 32px;
+  }
 }

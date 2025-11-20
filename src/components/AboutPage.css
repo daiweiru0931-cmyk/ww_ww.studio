@@ -1,0 +1,243 @@
+:root {
+    /*  顏色變數  */
+    --background-color: #f6f3ef;
+    --text-color: #333;
+    --link-color: #333;
+    --gray-color: #666;
+    --secondary-color: #fff;
+    --light-gray: #999;
+    --divider-color: #777;
+    --footer-bg: #222;
+    --footer-text: #ccc;
+    --footer-link: #fff;
+  }
+  
+  body {
+    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+  }
+
+/* --- 頁面容器和佈局 --- */
+.about-page-container {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    padding:0;
+    position: relative; /* 確保 spacer 能正常工作 */
+}
+
+/* --- 頂部標題區域 (非堆疊部分) --- */
+.about-header {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    padding-bottom: 200px; /* 給 Scroll Down 留出空間 */
+    box-sizing: border-box;
+}
+
+.about-title {
+    font-size: 4rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.about-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+.scroll-hint {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text-color);
+    opacity: 0.5;
+    /* 簡單的向下動畫 */
+    animation: bounce 2s infinite; 
+    position: absolute;
+    left: 50%;
+    bottom: 50px; /* 相對於 about-header 底部定位，或者您可能需要相對於視窗定位 */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+
+/* --- 滾動時固定並重疊的內容區域 --- */
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh; /* 佔滿視口高度 */
+    width: 100%;
+    overflow: hidden; /* 確保面板不會超出 */
+}
+
+/* --- 單一重疊分頁面板 --- */
+.stacked-panel {
+    position: absolute; /* 相對於 sticky-wrapper 定位 */
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-panel-color); /* 截圖中的深色背景 */
+    color: var(--light-text-color);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transition: transform 0.8s ease-out, background-color 0.5s;
+    overflow: hidden;
+    z-index: 10; /* 基礎 z-index */
+}
+
+/* Panel 1 (About) 疊在上面 */
+.panel-1 {
+    z-index: 30;
+    transform: translateY(0); /* 初始位置 */
+    /* 這裡需要 GSAP/ScrollTrigger 來控制它在滾動時向上/向下移動 */
+}
+
+/* Panel 2 (Experiences) 疊在 Panel 1 下方 */
+.panel-2 {
+    z-index: 20;
+    /* 初始位置向下偏移，模擬堆疊感 */
+    /* 在 GSAP 動畫開始前，您可以給它一個初始的向下平移 */
+    transform: translateY(50px); 
+    background-color: #262626; /* 比 Panel 1 稍微淺一點的深色 */
+    
+    /* 這裡需要 GSAP/ScrollTrigger 來控制它在 Panel 1 滾出後上移到中央 */
+}
+
+/* --- 面板內容排版 --- */
+.panel-content {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 100px 40px;
+    display: flex;
+    gap: 80px;
+}
+
+/* About 頁面的左右內容區塊 */
+.content-left {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.content-right {
+    flex: 1;
+    background-color: #333; /* 截圖中的右側灰色區塊 */
+    min-height: 300px;
+}
+
+.divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 40px 0;
+}
+
+.en-text {
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* --- Panel 2 (Experiences) 內容和導航 --- */
+.panel-tabs {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: var(--dark-panel-color);
+    padding: 10px 20px;
+    border-radius: 0 0 10px 10px;
+    z-index: 50; /* 確保導航在最上層 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--light-text-color);
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 下方突出的黑三角 (需要使用偽元素和 CSS transform) */
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* 從按鈕底部突出 */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background-color: #262626; /* 與 Panel 2 背景色一致 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 60;
+}
+
+.experiences-content {
+    /* 確保經驗內容在導航下方 */
+    padding-top: 150px; 
+}
+
+.experience-list {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--light-text-color);
+}
+
+.experience-header, .experience-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-header {
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+.col-year {
+    flex: 1;
+}
+.col-company {
+    flex: 2;
+}
+.col-position {
+    flex: 1;
+    text-align: right;
+}

@@ -5,6 +5,7 @@ import InfoBox from "./components/InfoBox";
 import AccordionGallery from './components/AccordionGallery';
 import SplitText from './components/SplitText';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 // 假設服務圖片有多張，用於輪播
 import serviceGp01 from './assets/service/servicegp-img01.jpg';
@@ -194,10 +195,10 @@ function App() {
               專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。
             </p>
             {/* 修正後的按鈕結構 */}
-            <button className="view-more-btn">
+            <Link to="/about" className="view-more-btn">
                 <span className="btn-text">VIEW MORE</span>
                 <span className="btn-icon"></span> 
-            </button>
+            </Link>
           </div>
           <div className="service-diagram"></div>
         </div>

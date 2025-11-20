@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./HeaderMenu.css";
+import { Link } from 'react-router-dom';
 
 const HeaderMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -41,7 +42,7 @@ const HeaderMenu = () => {
   return (
     <header className={`header ${atFooter ? "at-footer" : ""}`}>
       {/* Logo */}
-      {!showBottomMenu && !atFooter && <div className="logo">WW Studio</div>}
+      {!showBottomMenu && !atFooter && <Link to="/" className="logo">WW Studio</Link>}
 
       {/* 右上角按鈕 */}
       {!showBottomMenu && !atFooter && (
@@ -90,10 +91,10 @@ const HeaderMenu = () => {
       {/* 半屏下滑選單 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <ul className="side-menu-list">
-          <li>About</li>
-          <li>Works</li>
-          <li>Service</li>
-          <li>Taste</li>
+          <Link to="/about" className="menu-about">About</Link>
+          <Link to="/works" className="menu-works">Works</Link>
+          <Link to="/service" className="menu-service">Service</Link>
+          <Link to="/taste" className="menu-taste">Taste</Link>
         </ul>
 
         {/* X 關閉按鈕 */}

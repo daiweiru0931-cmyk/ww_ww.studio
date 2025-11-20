@@ -221,7 +221,7 @@
   transform: translateY(0);
 }
 
-.side-menu-list li {
+.menu-about .menu-works .menu-service .menu-taste {
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s ease;
