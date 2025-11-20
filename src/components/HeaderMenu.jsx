@@ -91,10 +91,10 @@ const HeaderMenu = () => {
       {/* 半屏下滑選單 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <ul className="side-menu-list">
-          <Link to="/about" className="menu-about">About</Link>
-          <Link to="/works" className="menu-works">Works</Link>
-          <Link to="/service" className="menu-service">Service</Link>
-          <Link to="/taste" className="menu-taste">Taste</Link>
+          <Link to="/about" className="menu-about-li">About</Link>
+          <Link to="/works" className="menu-works-li">Works</Link>
+          <Link to="/service" className="menu-service-li">Service</Link>
+          <Link to="/taste" className="menu-taste-li">Taste</Link>
         </ul>
 
         {/* X 關閉按鈕 */}

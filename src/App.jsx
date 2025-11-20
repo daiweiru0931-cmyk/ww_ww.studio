@@ -188,11 +188,11 @@ function App() {
           </div>
           <div className="about-description">
             <p>
-              A visual designer specializing in brand identity and web design, 
-              with a deep interest in translating visuals into digital logic.
+              專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。
             </p>
             <p>
-              專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。
+              A visual designer specializing in brand identity and web design, 
+              with a deep interest in translating visuals into digital logic.
             </p>
             {/* 修正後的按鈕結構 */}
             <Link to="/about" className="view-more-btn">
@@ -200,19 +200,17 @@ function App() {
                 <span className="btn-icon"></span> 
             </Link>
           </div>
-          <div className="service-diagram"></div>
         </div>
       </section>
 
-      {/* Service Section (已修改為圖片輪播及絕對定位) */}
+      {/* Service Section */}
       <section className="service" ref={serviceRef}>
         <span className="section-label">( Service )</span>
         <div className="service-content">
           <div className="service-text">
             <h3>Creative Development in Visual and Web Design</h3>
             <p>
-              專注於品牌識別與網頁設計，<br/>
-              以設計轉化為核心，探索主題與價值的細微之處，<br/>
+              專注於品牌識別與網頁設計，以設計轉化為核心，探索主題與價值的細微之處，
               提供具深度與創意的視覺解決方案，將品牌的理想形態具體化。
             </p>
           </div>
@@ -311,7 +309,7 @@ function App() {
       <section className="taste">
         <span className="section-label">( Taste )</span>
         <div className="taste-content">
-            <div className="taste-text-block">
+            <div className="taste-text">
                 <h3>Wendy's Kitchen</h3>
                 <p>
                 一個介於味道與情感之間的柔和空間。
@@ -378,11 +376,11 @@ function App() {
           </div>
           <nav className="footer-nav">
             <ul>
-              <li>About</li>
-              <li>Works</li>
-              <li>Service</li>
-              <li>Taste</li>
-              <li>Contact</li>
+              <Link to="/about" className="footer-about-li">About</Link>
+              <Link to="/works" className="footer-works-li">Works</Link>
+              <Link to="/service" className="footer-service-li">Service</Link>
+              <Link to="/taste" className="footer-taste-li">Taste</Link>
+              <Link to="/contact" className="footer-contact-li">Contact</Link>
             </ul>
           </nav>
 

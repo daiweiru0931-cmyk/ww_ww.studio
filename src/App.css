@@ -469,18 +469,18 @@ body.dark-mode {
 }
   
 /* 左側文字區塊 */
-.taste-text-block {
+.taste-text {
   flex: 1;
   min-width: 350px;
 }
 
-.taste-text-block h3 {
+.taste-text h3 {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   color: var(--text-color);
 }
   
-.taste-text-block p {
+.taste-text p {
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--gray-color);
   line-height: 1.8;
@@ -623,13 +623,16 @@ body.dark-mode {
   flex-wrap: wrap; /* 確保導航欄在小螢幕時也能水平顯示，即使會換行 */
 }
 
-.footer-nav li {
+.footer-about-li,.footer-works-li,
+.footer-service-li, .footer-taste-li, .footer-contact-li {
   cursor: pointer;
   transition: color 0.3s;
   padding-right: 5px; 
+  color: var(--footer-text);
 }
 
-.footer-nav li:hover {
+.footer-about-li:hover,.footer-works-li:hover,
+.footer-service-li:hover, .footer-taste-li:hover, .footer-contact-li:hover {
   color: var(--footer-link);
 }
 
@@ -708,12 +711,14 @@ body.dark-mode {
     padding: 10rem 1.5rem 1.5rem 1.5rem;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
   }
 
   .hero-left,
   .hero-right {
     width: 100%;
+    min-width: auto;
+    flex-direction: column;
+    align-items:center;
     text-align: center;
   }
 
@@ -758,14 +763,6 @@ body.dark-mode {
     display: none;
   }
 
-  .service-item {
-    gap: 1.5rem;
-  }
-
-  .service-text {
-    text-align: center;
-  }
-
   .service-image img {
     width: 100%;
     height: auto;
@@ -778,8 +775,7 @@ body.dark-mode {
       gap: 2.5rem;
   }
 
-  .taste-text-block {
-      order: 2; /* 讓文字在圖片下方 */
+  .taste-text {
       max-width: 100%;
   }
 
@@ -787,7 +783,7 @@ body.dark-mode {
       margin-bottom: 1rem;
   }
 
-  .taste-text-block p {
+  .taste-text p {
       margin-bottom: 1rem;
   }
 
@@ -812,7 +808,7 @@ body.dark-mode {
 
   footer {
     padding: 2.5rem 1.5rem;
-    text-align: center;
+    
   }
 }
 
@@ -824,8 +820,13 @@ body.dark-mode {
     align-items: center;
   }
 
+  .hero-left,
   .hero-right {
+    width: 100%;
     min-width: auto;
+    flex-direction: column;
+    align-items:center;
+    text-align: center;
   }
 
   .info-box-container {
@@ -845,19 +846,56 @@ body.dark-mode {
     padding: 0.7rem;
   }
 
-  .about, .service, .taste {
+  .about, .service {
     padding: 3rem 1rem; 
   }
+  .taste {
+    padding: 5rem 1rem; 
+  }
+
   .about-text,
   .about-description,
-  .service-item {
+  .service-content,
+  .service-text {
     width: 100%;
     min-width: auto;
+  }
+
+  .about-text h3 {
+    margin: 2rem 0 0 0;
+  }
+  
+  .about-text p {
+    letter-spacing: 0.5px;
+    margin: 0 0 2.5rem 0;
+  }
+  
+  .about-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .about-description p {
+    margin: 0 0 2srem 0;
+  }
+
+  .service-text h3 {
+    margin: 3rem 0 0 0;
+  }
+  
+  .service-text p {
+    letter-spacing: 0.5px;
+    
   }
 
   .service-image img {
     width: 100%;
     height: auto;
+  }
+
+  .taste-text h3 {
+    margin: 2rem 0 0 0;
   }
 
   .taste-carousel-wrapper {
@@ -868,5 +906,25 @@ body.dark-mode {
   .carousel-nav-btn {
     width: 32px;
     height: 32px;
+  }
+
+  .footer-content{
+    width: 100%;
+    min-width: auto;
+    flex-direction: column;
+    align-items:center;
+  }
+
+  .footer-nav ul{
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-office h5{
+    text-align: center;
+  }
+
+  .footer-bottom {
+    text-align: center;
   }
 }
