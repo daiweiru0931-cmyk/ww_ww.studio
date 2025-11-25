@@ -304,14 +304,14 @@ body.dark-mode {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.service-text h3 {
+.service-contenth3 {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   color: var(--text-color);
   transition: color 0.5s ease;
 }
 
-.service-text p {
+.service-content p {
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   color: var(--gray-color);
   line-height: 1.8;
@@ -695,7 +695,7 @@ body.dark-mode {
 .hero-right p,
 .about-text p,
 .about-description p,
-.service-text p,
+.service-content p,
 .service-item-left p,
 .service-item-right p,
 .view-more-btn {
@@ -855,8 +855,8 @@ body.dark-mode {
 
   .about-text,
   .about-description,
-  .service-content,
-  .service-text {
+  .service-container,
+  .service-content {
     width: 100%;
     min-width: auto;
   }
@@ -880,11 +880,11 @@ body.dark-mode {
     margin: 0 0 2srem 0;
   }
 
-  .service-text h3 {
+  .service-content h3 {
     margin: 3rem 0 0 0;
   }
   
-  .service-text p {
+  .service-content p {
     letter-spacing: 0.5px;
     
   }

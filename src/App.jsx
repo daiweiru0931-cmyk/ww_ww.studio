@@ -206,8 +206,8 @@ function App() {
       {/* Service Section */}
       <section className="service" ref={serviceRef}>
         <span className="section-label">( Service )</span>
-        <div className="service-content">
-          <div className="service-text">
+        <div className="service-container">
+          <div className="service-content">
             <h3>Creative Development in Visual and Web Design</h3>
             <p>
               專注於品牌識別與網頁設計，以設計轉化為核心，探索主題與價值的細微之處，
