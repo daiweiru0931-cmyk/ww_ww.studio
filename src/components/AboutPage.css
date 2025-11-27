@@ -1,23 +1,18 @@
-/* AboutPage.css - 整合您的變數和修正 */
-
 :root {
-    /* 您的顏色變數 */
+    --header-height: 80px; /* 預設值，會被 JS 覆蓋 */
+    --folder-tab-height: 50px;
+    --folder-content-height: 450px; /* 資料夾內容區塊的高度 */
+    /* 滾動距離 = 資料夾內容高度 + 一點緩衝區 */
+    --folder-section-scroll-buffer: 100px;
+    --folder-section-total-height: calc(var(--folder-content-height) + var(--folder-section-scroll-buffer) + var(--folder-tab-height));
+
     --background-color: #f6f3ef;
     --text-color: #333;
-    --link-color: #333;
     --gray-color: #666;
-    --secondary-color: #fff;
     --light-gray: #999;
-    --divider-color: #777;
-    --footer-bg: #222;
-    --footer-text: #ccc;
-    --footer-link: #fff;
-
-    /* ⭐️ JS 注入 Header 高度 ⭐️ */
-    --header-height: 0px; 
+    --border-dark: #333;     
 }
 
-/* 基礎設定 */
 body {
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
     background-color: var(--background-color);
@@ -25,34 +20,37 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     transition: background-color 0.5s ease, color 0.5s ease;
-    box-sizing: border-box; /* 確保 padding/margin 不導致 100% 溢出 */
 }
-*, *::before, *::after {
-    box-sizing: inherit;
-}
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
 
-/* --- 頁面容器和佈局 --- */
-.about-page {
-    width: 100%;
-    min-height: 200dvh; 
+/* ============================
+   Header (滾動移除 Padding) 
+============================ */
+.header-wrapper .header {
+    transition: padding 0.25s ease;
 }
 
+.header-wrapper.header-scrolled .header {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* ============================
+   About Page Layout
+============================ */
+/* --- First Page (Scroll Down zone) --- */
 .about-page-container {
-    background-color: var(--background-color);
+    min-height: 100vh; 
+    padding-top: calc(var(--header-height) + 50px);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
-    /* 扣除 Header 高度 */
-    height: calc(100vh - var(--header-height));
-    height: calc(100dvh - var(--header-height)); 
-    /* 將容器推到 Header 下方 */
-    margin-top: var(--header-height); 
-    position: relative; /* 為了讓 scroll-hint 定位 */
+    background-color: var(--background-color);
 }
 
 .about-title {
@@ -62,160 +60,160 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-subtitle {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); 
     letter-spacing: 0.5px;
     color: var(--gray-color);
     margin: 0 10%;
 }
-
-.scroll-hint {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    color: var(--text-color);
-    opacity: 0.5;
-    animation: bounce 2s infinite; 
-    position: absolute;
+  
+/* --- 滾動指示器 (Scroll Down) --- */
+.scroll-indicator {
+    position: fixed;
     left: 10%;
-    bottom: 30px; 
+    bottom: 0;
+    z-index: 50;
 }
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-5px);
-    }
-    60% {
-        transform: translateY(-2px);
-    }
+  
+.scroll-text {
+    display: inline-block;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: #222;
+    color: var(--light-gray);
+}
+  
+.scroll-text.fade-in {
+    opacity: 1;
+}
+
+.scroll-text.fade-out {
+    opacity: 0;
+}
+
+/* ============================
+   Folder Stacking Core Logic
+============================ */
+/* 整個資料夾堆疊的容器 */
+.folder-stack-container {
+    background-color: #eee; /* 容器背景，可選 */
+}
+
+/* 每個資料夾區塊 */
+.folder-section {
+    /* 關鍵：設定區塊總高度，為下一區塊覆蓋預留滾動空間 */
+    height: var(--folder-section-total-height);
+    background-color: transparent; /* 內容由 .folder 呈現，此處透明 */
+    position: relative; /* 確保 z-index 生效 */
+    padding: 0;
+    margin: 0;
+}
+
+/* 讓內容在滾動到頂部時定住的容器 */
+.sticky-wrapper {
+    /* 關鍵：使用 position: sticky 定位 */
+    position: sticky;
+    /* 關鍵：設定定住的位置為 Header 高度 (使用 CSS 變量) */
+    top: var(--header-height); 
+    /* 讓 sticky-wrapper 的高度恰好等於資料夾內容和標籤的高度，避免區塊內容撐開 */
+    height: calc(var(--folder-content-height) + var(--folder-tab-height)); 
+    width: 100%;
+    /* 讓內容定位在資料夾區塊的開頭 */
+    padding-top: 0; 
 }
 
 
-/* --- 主要內容區 (黑色資料夾) --- */
-.main-content-section {
-    position: relative;
-    z-index: 10; 
+/* -----------------------------------
+ * 4. 資料夾外觀樣式
+ * ----------------------------------- */
+
+/* 資料夾內容容器 */
+.folder-content-container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 1px; /* 防止外邊距塌陷 */
 }
 
-.black-folder-container {
-  display: flex;
-  background-color: #000;
-  padding: 80px 10%;
-  min-height: 100vh;
-  box-sizing: border-box;
-  transition: padding 0.5s ease;
-  color: var(--secondary-color); /* 黑色背景區塊使用白色文字 */
+.folder {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0 10px 10px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: var(--folder-content-height); /* 固定資料夾高度 */
+    overflow: hidden; /* 防止內容溢出 */
+    padding: 30px;
 }
 
-.black-folder-left,
-.black-folder-right {
-  flex: 1;
-  padding: 0 20px;
-}
-.black-folder-left {
-    padding-right: 40px;
-}
-.black-folder-right {
-    background-color: #1a1a1a; 
-    min-height: 400px;
+.folder-content {
+    /* 資料夾內容樣式，可自行調整 */
+    padding: 20px;
+    color: #333;
 }
 
-/* --- 底部導覽/資料夾分頁 --- */
-.bottom-folder-tabs-wrapper {
-  position: sticky; 
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start; 
-  pointer-events: none; 
-  z-index: 50; 
-}
+/* -----------------------------------
+ * 5. 資料夾標籤樣式
+ * ----------------------------------- */
 
-/* 資料夾標籤基底樣式 */
-.folder-tab-base {
-  position: absolute;
-  height: 60px;
-  bottom: 0;
-  transition: all 0.5s ease;
-  padding: 0 30px 0 20px; 
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  pointer-events: auto; 
+.folder-tab-group {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* 向上移動標籤，讓它覆蓋在 .folder 的頂部邊框上 */
+    margin-bottom: -1px; 
 }
 
 .tab-label {
-    font-size: 1rem;
+    height: var(--folder-tab-height);
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     font-weight: bold;
-    position: relative;
-    z-index: 5;
-    white-space: nowrap;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* 1. Profile / Scroll Down Tab (黑色底/灰色字) */
-.folder-tab-base.folder-profile {
-    background-color: #000;
-    left: 0;
-    padding: 0 3% 0 10%;
-    z-index: 30; 
-    /* ⭐️ 修正為右上角斜切 (與 Experiences 和 Skills 協調) ⭐️ */
-    clip-path: polygon(0 100%, 0 0, calc(100% - 20px) 0, 100% 60px, 100% 100%);
+.inactive-tab {
+    background-color: #e0e0e0;
+    color: #888;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    margin-right: 5px; /* 標籤間距 */
 }
 
-.folder-profile .tab-label {
-    color: var(--light-gray); /* 初始 Scroll Down 的灰色字 */
+.active-tab {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
 }
 
-/* 滾動後的 Profile 狀態 */
-.folder-tab-base.folder-profile.folder-experiences {
-    width: 100px; /* 滾動後 Profile 標籤可以縮小一點 */
-}
-.folder-experiences .tab-label {
-    color: var(--secondary-color); /* Profile 字變白色 */
-}
-
-
-/* 2. Experiences Tab (灰色底) */
-.experiences-tab {
-    background-color: #444; 
-    color: var(--secondary-color);
-    left: 0; 
-    width: 180px;
-    z-index: 20; 
-    transform: translateX(-100%); 
-    /* ⭐️ 修正為右上角斜切 (為了與 Profile 疊合一致) ⭐️ */
-    clip-path: polygon(0 100%, 0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%);
+.active-tab.active {
+    /* 標記當前活動區塊的樣式，可加強視覺效果 */
+    background-color: #fff;
+    color: #007bff; /* 例如藍色高亮 */
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
 }
 
-.experiences-tab.active {
-    /* 移動到 Profile 標籤右邊 (Profile 寬度約 100px) */
-    transform: translateX(100px); 
-    z-index: 30; 
-}
-
-/* 3. Skills Tab (白色底) */
-.skills-tab {
-    background-color: var(--secondary-color); 
-    color: var(--text-color);
-    left: 0;
-    width: 120px;
-    z-index: 10;
-    transform: translateX(-100%); 
-    /* 保持右側直角 */
-    clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
-}
-
-.skills-tab.active {
-    /* 移動到 Experiences 標籤右邊 (100px + 180px = 280px) */
-    transform: translateX(280px); 
-    z-index: 20; 
-}
-
-
-/* --- 滾動測試區 --- */
-.test-spacer {
-  min-height: 100vh;
-  background-color: #333;
-  color: #fff;
-  padding: 50px 10%;
+/* 響應式設計調整 (略) */
+@media (max-width: 768px) {
+    .folder-tab-group {
+      width: 95%; 
+    }
+    .active-tab, .inactive-tab {
+      width: 130px;
+      padding: 0 10px;
+    }
+    .active-tab {
+      left: 120px;
+    }
+    .folder-content {
+      padding: 20px;
+    }
 }
