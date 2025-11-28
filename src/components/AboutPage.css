@@ -1,16 +1,11 @@
 :root {
-    --header-height: 80px; /* 預設值，會被 JS 覆蓋 */
-    --folder-tab-height: 50px;
-    --folder-content-height: 450px; /* 資料夾內容區塊的高度 */
-    /* 滾動距離 = 資料夾內容高度 + 一點緩衝區 */
-    --folder-section-scroll-buffer: 100px;
-    --folder-section-total-height: calc(var(--folder-content-height) + var(--folder-section-scroll-buffer) + var(--folder-tab-height));
-
     --background-color: #f6f3ef;
     --text-color: #333;
     --gray-color: #666;
     --light-gray: #999;
-    --border-dark: #333;     
+    --border-dark: #333;   
+    --folder-content-height: 70vh;
+    --folder-tab-height: 35px;
 }
 
 body {
@@ -29,28 +24,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================
-   Header (滾動移除 Padding) 
+   Header（正常滾動）
 ============================ */
-.header-wrapper .header {
-    transition: padding 0.25s ease;
+.header-wrapper {
+    position: relative; 
+    z-index: 100; 
 }
-
 .header-wrapper.header-scrolled .header {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding-top: initial !important; 
+    padding-bottom: initial !important;
 }
 
 /* ============================
-   About Page Layout
+   First Screen
 ============================ */
-/* --- First Page (Scroll Down zone) --- */
 .about-page-container {
-    min-height: 100vh; 
-    padding-top: calc(var(--header-height) + 50px);
+    min-height: 100vh;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: var(--background-color);
 }
 
 .about-title {
@@ -60,160 +53,133 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-subtitle {
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); 
-    letter-spacing: 0.5px;
+    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
     color: var(--gray-color);
     margin: 0 10%;
 }
-  
-/* --- 滾動指示器 (Scroll Down) --- */
+
+/* ============================
+   Scroll Indicator
+============================ */
 .scroll-indicator {
     position: fixed;
     left: 10%;
     bottom: 0;
     z-index: 50;
 }
-  
 .scroll-text {
-    display: inline-block;
-    font-size: 1rem;
     opacity: 0;
     transition: opacity 0.5s ease;
     padding: 10px 20px;
-    border-radius: 10px 10px 0 0;
     background-color: #222;
     color: var(--light-gray);
+    border-radius: 10px 10px 0 0;
 }
-  
-.scroll-text.fade-in {
-    opacity: 1;
+.scroll-text.fade-in { opacity: 1; }
+
+/* ============================
+   Folder Stack
+============================ */
+.folder-stack-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 300px;
 }
 
-.scroll-text.fade-out {
-    opacity: 0;
+.folder-section {
+    position: relative;
+    width: 100%;
+    min-height: 120vh; /* ⭐關鍵：確保每一區要滑過足夠距離，下一區才會覆蓋 */
+}
+
+/* Sticky：固定在視窗 20vh */
+.sticky-wrapper {
+    position: sticky;
+    top: 15vh; /* ⭐你的需求：固定位置 */
+    width: 100%;
+    z-index: inherit;
 }
 
 /* ============================
-   Folder Stacking Core Logic
+   Tabs
 ============================ */
-/* 整個資料夾堆疊的容器 */
-.folder-stack-container {
-    background-color: #eee; /* 容器背景，可選 */
-}
-
-/* 每個資料夾區塊 */
-.folder-section {
-    /* 關鍵：設定區塊總高度，為下一區塊覆蓋預留滾動空間 */
-    height: var(--folder-section-total-height);
-    background-color: transparent; /* 內容由 .folder 呈現，此處透明 */
-    position: relative; /* 確保 z-index 生效 */
-    padding: 0;
-    margin: 0;
-}
-
-/* 讓內容在滾動到頂部時定住的容器 */
-.sticky-wrapper {
-    /* 關鍵：使用 position: sticky 定位 */
-    position: sticky;
-    /* 關鍵：設定定住的位置為 Header 高度 (使用 CSS 變量) */
-    top: var(--header-height); 
-    /* 讓 sticky-wrapper 的高度恰好等於資料夾內容和標籤的高度，避免區塊內容撐開 */
-    height: calc(var(--folder-content-height) + var(--folder-tab-height)); 
-    width: 100%;
-    /* 讓內容定位在資料夾區塊的開頭 */
-    padding-top: 0; 
-}
-
-
-/* -----------------------------------
- * 4. 資料夾外觀樣式
- * ----------------------------------- */
-
-/* 資料夾內容容器 */
-.folder-content-container {
-    width: 80%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding-top: 1px; /* 防止外邊距塌陷 */
-}
-
-.folder {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 0 10px 10px 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    height: var(--folder-content-height); /* 固定資料夾高度 */
-    overflow: hidden; /* 防止內容溢出 */
-    padding: 30px;
-}
-
-.folder-content {
-    /* 資料夾內容樣式，可自行調整 */
-    padding: 20px;
-    color: #333;
-}
-
-/* -----------------------------------
- * 5. 資料夾標籤樣式
- * ----------------------------------- */
-
 .folder-tab-group {
+    width: 100%;
+    margin: 0 auto -1px auto;
     display: flex;
-    width: 80%;
-    max-width: 1000px;
-    margin: 0 auto;
-    /* 向上移動標籤，讓它覆蓋在 .folder 的頂部邊框上 */
-    margin-bottom: -1px; 
 }
 
 .tab-label {
     height: var(--folder-tab-height);
-    padding: 0 25px;
+    padding: 0 50px;
     display: flex;
     align-items: center;
+    font-size: 0.9rem;
     cursor: pointer;
     font-weight: bold;
-    font-size: 0.9rem;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .inactive-tab {
-    background-color: #e0e0e0;
-    color: #888;
-    border: 1px solid #ccc;
+    background-color: #555;
+    color: var(--light-gray);
+    border: none;
     border-bottom: none;
     border-radius: 10px 10px 0 0;
-    margin-right: 5px; /* 標籤間距 */
+    margin-right: 5px;
 }
 
 .active-tab {
-    background-color: white;
-    color: #333;
-    border: 1px solid #ccc;
+    background-color: #222;
+    color: var(--light-gray);
+    border: none;
     border-bottom: none;
     border-radius: 10px 10px 0 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
 }
 
-.active-tab.active {
-    /* 標記當前活動區塊的樣式，可加強視覺效果 */
-    background-color: #fff;
-    color: #007bff; /* 例如藍色高亮 */
-    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+/* Folder Content */
+.folder-content-container {
+    width: 100%;
+    margin: 0 auto;
 }
 
-/* 響應式設計調整 (略) */
+.folder {
+    background-color: #222;
+    color: var(--light-gray);
+    border: none;
+    border-radius: 0 10px 10px 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    height: var(--folder-content-height);
+    padding: 30px;
+    overflow: auto;
+}
+
+/* 讓未到達的 folder 完全隱藏 */
+.hidden-section {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 不能被點到 */
+    transform: translateY(50px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 滑到時才顯示 */
+.visible-section {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ============================
+   RWD
+============================ */
 @media (max-width: 768px) {
-    .folder-tab-group {
-      width: 95%; 
+    .folder-tab-group,
+    .folder-content-container {
+        width: 92%;
     }
-    .active-tab, .inactive-tab {
-      width: 130px;
-      padding: 0 10px;
-    }
-    .active-tab {
-      left: 120px;
-    }
-    .folder-content {
-      padding: 20px;
-    }
+    .tab-label { padding: 0 12px; }
+    .folder { height: 380px; }
 }
