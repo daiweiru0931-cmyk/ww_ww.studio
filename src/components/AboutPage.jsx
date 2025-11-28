@@ -116,9 +116,9 @@ const AboutPage = () => {
     <div className="about-page">
       
       {/* Header */}
-      <div className={`header-wrapper ${headerScrolled ? "header-scrolled" : ""}`}>
-        <HeaderMenu ref={headerRef} />
-      </div>
+      <>
+        <HeaderMenu />
+      </>
 
       {/* 第一屏 */}
       <section className="about-page-container">

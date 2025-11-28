@@ -1,11 +1,10 @@
-// HeaderMenu.jsx - 完整且可接收 Ref 的版本
-
 import React, { useState, useEffect, forwardRef } from "react";
 import "./HeaderMenu.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
-// 使用 forwardRef 讓 HeaderMenu 可以接收來自父組件的 ref
+// 使用 forwardRef 讓 HeaderMenu 可以接收父組件傳入的 ref
 const HeaderMenu = forwardRef((props, ref) => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBottomMenu, setShowBottomMenu] = useState(false);
   const [atFooter, setAtFooter] = useState(false);
@@ -13,13 +12,13 @@ const HeaderMenu = forwardRef((props, ref) => {
   // 點擊空白區關閉選單
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      // 確保點擊事件發生在這些元素之外時才關閉選單
       if (
         !e.target.closest(".side-menu") &&
         !e.target.closest(".menu-icon") &&
         !e.target.closest(".menu-btn") &&
         !e.target.closest(".contact-inside-btn") &&
-        !e.target.closest(".close-btn")
+        !e.target.closest(".close-btn") &&
+        !e.target.closest(".logo")
       ) {
         setMenuOpen(false);
       }
@@ -34,12 +33,10 @@ const HeaderMenu = forwardRef((props, ref) => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
       const docHeight = document.body.offsetHeight;
-      
-      // 判斷是否接近頁面底部 (例如底部 150px)
+
       const isAtFooter = scrollY + windowHeight >= docHeight - 150;
-      
+
       setAtFooter(isAtFooter);
-      // 滾動超過 100px 且不在底部時，顯示底部選單
       setShowBottomMenu(scrollY > 100 && !isAtFooter);
     };
     window.addEventListener("scroll", handleScroll);
@@ -47,11 +44,20 @@ const HeaderMenu = forwardRef((props, ref) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Logo 點擊回首頁
+  const handleLogoClick = () => {
+    navigate("/"); // 導向首頁
+  };
+
   return (
-    // ⭐️ 將 ref 綁定到最外層的 header 元素上 ⭐️
     <header className={`header ${atFooter ? "at-footer" : ""}`} ref={ref}>
+      
       {/* Logo */}
-      {!showBottomMenu && !atFooter && <Link to="/" className="logo">WW Studio</Link>}
+      {!showBottomMenu && !atFooter && (
+        <div className="logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+          WW Studio
+        </div>
+      )}
 
       {/* 右上角按鈕 */}
       {!showBottomMenu && !atFooter && (
@@ -112,7 +118,6 @@ const HeaderMenu = forwardRef((props, ref) => {
           onClick={() => setMenuOpen(false)}
           aria-label="Close menu"
         >
-          {/* 替換為 X 符號的 Span */}
           <span></span>
           <span></span>
           <span></span>
