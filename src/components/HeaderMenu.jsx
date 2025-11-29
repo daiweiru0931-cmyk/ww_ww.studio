@@ -1,10 +1,8 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./HeaderMenu.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-// 使用 forwardRef 讓 HeaderMenu 可以接收父組件傳入的 ref
-const HeaderMenu = forwardRef((props, ref) => {
-  const navigate = useNavigate();
+const HeaderMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBottomMenu, setShowBottomMenu] = useState(false);
   const [atFooter, setAtFooter] = useState(false);
@@ -12,17 +10,17 @@ const HeaderMenu = forwardRef((props, ref) => {
   // 點擊空白區關閉選單
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (
-        !e.target.closest(".side-menu") &&
-        !e.target.closest(".menu-icon") &&
-        !e.target.closest(".menu-btn") &&
-        !e.target.closest(".contact-inside-btn") &&
-        !e.target.closest(".close-btn") &&
-        !e.target.closest(".logo")
-      ) {
-        setMenuOpen(false);
-      }
+      const clickedMenuItems =
+        e.target.closest(".side-menu") ||
+        e.target.closest(".menu-icon") ||
+        e.target.closest(".menu-btn") ||
+        e.target.closest(".contact-inside-btn") ||
+        e.target.closest(".close-btn");
+
+      // 點擊 menu 外且不是 menu item，就關閉
+      if (!clickedMenuItems) setMenuOpen(false);
     };
+
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
   }, []);
@@ -35,28 +33,28 @@ const HeaderMenu = forwardRef((props, ref) => {
       const docHeight = document.body.offsetHeight;
 
       const isAtFooter = scrollY + windowHeight >= docHeight - 150;
-
       setAtFooter(isAtFooter);
       setShowBottomMenu(scrollY > 100 && !isAtFooter);
     };
+
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Logo 點擊回首頁
-  const handleLogoClick = () => {
-    navigate("/"); // 導向首頁
-  };
-
   return (
-    <header className={`header ${atFooter ? "at-footer" : ""}`} ref={ref}>
-      
+    <header className={`header ${atFooter ? "at-footer" : ""}`}>
+
       {/* Logo */}
       {!showBottomMenu && !atFooter && (
-        <div className="logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
+        <Link
+          to="/"
+          className="logo"
+          style={{ cursor: "pointer", textDecoration: "none", color: "inherit" }}
+          onClick={() => setMenuOpen(false)}
+        >
           WW Studio
-        </div>
+        </Link>
       )}
 
       {/* 右上角按鈕 */}
@@ -65,7 +63,10 @@ const HeaderMenu = forwardRef((props, ref) => {
           <button className="contact-btn">CONTACT</button>
           <button
             className={`menu-icon ${menuOpen ? "open" : ""}`}
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuOpen(!menuOpen);
+            }}
             aria-label="Open menu"
           >
             <span></span>
@@ -75,7 +76,7 @@ const HeaderMenu = forwardRef((props, ref) => {
         </div>
       )}
 
-      {/* 底部置中按鈕 (滾動後出現) */}
+      {/* 底部置中按鈕 */}
       <div className={`bottom-buttons ${showBottomMenu ? "visible" : ""}`}>
         <button
           className={`menu-btn ${showBottomMenu ? "expanded" : ""}`}
@@ -115,7 +116,10 @@ const HeaderMenu = forwardRef((props, ref) => {
         {/* X 關閉按鈕 */}
         <button
           className={`close-btn ${menuOpen ? "open" : ""}`}
-          onClick={() => setMenuOpen(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuOpen(false);
+          }}
           aria-label="Close menu"
         >
           <span></span>
@@ -125,6 +129,6 @@ const HeaderMenu = forwardRef((props, ref) => {
       </div>
     </header>
   );
-});
+};
 
 export default HeaderMenu;

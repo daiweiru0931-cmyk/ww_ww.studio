@@ -123,10 +123,10 @@ function App() {
             <div className="about-description">
               <p>專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。</p>
               <p>A visual designer specializing in brand identity and web design, with a deep interest in translating visuals into digital logic.</p>
-              <button className="view-more-btn" onClick={() => navigate("/about")}>
+              <Link to="/about" className="view-more-btn">
                 <span className="btn-text">VIEW MORE</span>
                 <span className="btn-icon"></span>
-              </button>
+              </Link>
             </div>
           </div>
         </section>

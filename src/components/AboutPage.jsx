@@ -3,20 +3,21 @@ import './AboutPage.css';
 import HeaderMenu from "./HeaderMenu"; 
 
 const AboutPage = () => {
-  const [headerScrolled, setHeaderScrolled] = useState(false);
   const [scrollState, setScrollState] = useState('initial'); 
-
   const [visibleSections, setVisibleSections] = useState([false, false, false]); 
   const sectionRefs = useRef([]);
   const headerRef = useRef(null);
+
+  /* ---------- 進入頁面時滾動到最上方 ---------- */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   /* ---------- Header 滾動效果 ---------- */
   useEffect(() => {
     const onScroll = () => {
       const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-      setHeaderScrolled(window.scrollY > headerHeight);
     };
-
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -32,31 +33,22 @@ const AboutPage = () => {
   /* ---------- 控制每個 section 何時進場 ---------- */
   useEffect(() => {
     const handleVisibility = () => {
-      const newVisible = [...visibleSections];
-
-      sectionRefs.current.forEach((el, i) => {
-        if (!el) return;
-
-        const rect = el.getBoundingClientRect();
-
-        // ----- 觸發點：進入畫面的 60% 以下才出現 -----
-        const triggerPoint = window.innerHeight * 0.6;
-
-        if (rect.top < triggerPoint) {
-          newVisible[i] = true;
-        }
-      });
-
-      setVisibleSections(newVisible);
+      setVisibleSections((prev) =>
+        sectionRefs.current.map((el, i) => {
+          if (!el) return prev[i];
+          const rect = el.getBoundingClientRect();
+          const triggerPoint = window.innerHeight * 0.6;
+          return rect.top < triggerPoint ? true : prev[i];
+        })
+      );
     };
 
     window.addEventListener("scroll", handleVisibility);
     handleVisibility();
-
     return () => window.removeEventListener("scroll", handleVisibility);
-  }, [visibleSections]);
+  }, []); // <-- 修正這裡：空陣列，避免無限迴圈
 
-  /* ---------- Scroll State 原邏輯不變 ---------- */
+  /* ---------- Scroll State 原邏輯 ---------- */
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -91,34 +83,20 @@ const AboutPage = () => {
   const sectionTitles = ['Profile', 'Experiences', 'Skills'];
   const folderKeys = ['profile', 'experiences', 'skills'];
 
-  /* ---------- 點擊 tab 滾動 ---------- */
   const scrollToSection = (index) => {
     const offset = headerRef.current ? headerRef.current.offsetHeight : 0;
     const element = sectionRefs.current[index];
-
     if (element) {
-      const elementPosition =
-        element.getBoundingClientRect().top + window.scrollY;
-
-      window.scrollTo({
-        top: elementPosition - offset,
-        behavior: 'smooth'
-      });
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
     }
   };
 
-  /* ---------- Tabs 累積顯示 ---------- */
-  const getTabsForSection = (index) => {
-    return sectionTitles.slice(0, index + 1);
-  };
+  const getTabsForSection = (index) => sectionTitles.slice(0, index + 1);
 
   return (
     <div className="about-page">
-      
-      {/* Header */}
-      <>
-        <HeaderMenu />
-      </>
+      <HeaderMenu />
 
       {/* 第一屏 */}
       <section className="about-page-container">
@@ -144,50 +122,40 @@ const AboutPage = () => {
       <div className="folder-stack-container">
         {folderKeys.map((key, idx) => (
           <section
-          key={key}
-          ref={(el) => (sectionRefs.current[idx] = el)}
-          className={`folder-section folder-key-${key} 
-            ${scrollState === key ? "visible-section" : "hidden-section"}`}
-          style={{ zIndex: idx + 10 }}
+            key={key}
+            ref={(el) => (sectionRefs.current[idx] = el)}
+            className={`folder-section folder-key-${key} ${scrollState === key ? "visible-section" : "hidden-section"}`}
+            style={{ zIndex: idx + 10 }}
           >
             <div
               className="sticky-wrapper"
               style={{
                 opacity: visibleSections[idx] ? 1 : 0,
-                transform: visibleSections[idx]
-                  ? "translateY(0)"
-                  : "translateY(120px)",
+                transform: visibleSections[idx] ? "translateY(0)" : "translateY(120px)",
                 transition: "all 0.6s ease"
               }}
             >
-
               {/* Tab group */}
               <div className="folder-tab-group">
-
-                {getTabsForSection(idx).map((title, tabIndex) => {
-                  const isActive = sectionTitles.indexOf(title) === idx;
+                {getTabsForSection(idx).map((title) => {
                   const sectionIndex = sectionTitles.indexOf(title);
-
+                  const isActive = sectionIndex === idx;
                   return (
                     <div
                       key={title}
-                      className={`tab-label ${isActive ? 'active-tab' : 'inactive-tab'} 
-                        ${scrollState === folderKeys[sectionIndex] ? 'active' : ''}`}
+                      className={`tab-label ${isActive ? 'active-tab' : 'inactive-tab'} ${scrollState === folderKeys[sectionIndex] ? 'active' : ''}`}
                       onClick={() => scrollToSection(sectionIndex)}
                     >
                       <span className="label-text">{title}</span>
                     </div>
                   );
                 })}
-
               </div>
 
               {/* Folder Content */}
               <div className="folder-content-container">
                 <div className="folder">
                   <div className="folder-content">
-
-                    {/* 各區塊內容 */}
                     {key === 'profile' && (
                       <>
                         <div className="chinese-bio">
@@ -230,7 +198,6 @@ const AboutPage = () => {
                   </div>
                 </div>
               </div>
-
             </div>
           </section>
         ))}

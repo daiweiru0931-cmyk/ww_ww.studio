@@ -89,13 +89,13 @@ h1, h2, h3, h4, h5, h6 {
 .folder-section {
     position: relative;
     width: 100%;
-    min-height: 120vh; /* ⭐關鍵：確保每一區要滑過足夠距離，下一區才會覆蓋 */
+    min-height: 120vh; /* 確保每一區要滑過足夠距離，下一區才會覆蓋 */
 }
 
-/* Sticky：固定在視窗 20vh */
+/* Sticky：固定在視窗 */
 .sticky-wrapper {
     position: sticky;
-    top: 15vh; /* ⭐你的需求：固定位置 */
+    top: 5vh; 
     width: 100%;
     z-index: inherit;
 }
@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0 10px 10px 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.12);
     height: var(--folder-content-height);
-    padding: 30px;
+    padding: 55px;
     overflow: auto;
 }
 
