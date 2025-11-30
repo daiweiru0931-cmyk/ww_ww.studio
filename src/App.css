@@ -3,7 +3,9 @@
   /*  顏色變數  */
   --background-color: #f6f3ef;
   --text-color: #28140a;
+  --title-color: #28140a;
   --link-btn: #553728;
+  --label-color: #553728;
   --gray-color: #666;
   --btn-hover: #a57864;
   --light-gray: #999;
@@ -84,12 +86,12 @@ body.dark-mode {
   margin-top: 12px;
   margin-bottom: 3px;
   font-size: clamp(1rem, 1.5vw, 1.25rem);
-  color: var(--text-color);
+  color: var( --title-color);
 }
 
 .hero-right p {
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); /* 約13–15px */
-  color: var(--text-color);
+  color: var(--title-color);
 }
 
 .hero-right .info-box-container {
@@ -172,7 +174,7 @@ body.dark-mode {
 /* About Section */
 .section-label {
   font-size: clamp(1.5rem, 2.5vw, 2.625rem); /* 約 24px ~ 42px */
-  color: var(--gray-color);
+  color: var(--label-color);
   margin-bottom: 1rem;
   display: block;
 }
@@ -205,7 +207,7 @@ body.dark-mode {
 .about-text h3 {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--title-color);
   margin: 50px 0 0 0;
 }
 
@@ -304,10 +306,10 @@ body.dark-mode {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-.service-contenth3 {
+.service-content h3 {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--title-color);
   transition: color 0.5s ease;
 }
 
@@ -338,7 +340,7 @@ body.dark-mode {
   display: inline-block;
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--title-color);
   margin-top: 5rem;
   transition: color 0.5s ease;
 }
@@ -477,7 +479,7 @@ body.dark-mode {
 .taste-text h3 {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
-  color: var(--text-color);
+  color: var(--title-color);
 }
   
 .taste-text p {
@@ -579,15 +581,15 @@ body.dark-mode {
 /*  Footer */
 .split-text{
   font-size: clamp(3rem, 8vw, 6rem);
-  color: var(--gray-color);
-  margin: 0 0 6rem 0;
+  color: #a57864;
+  margin: 0 0 5rem 0;
 }
 
 .footer {
   position: relative;
   background-color: var(--footer-bg); 
   color: var(--footer-text); 
-  padding: 5rem 10%; 
+  padding: 3rem 10%; 
   overflow: hidden;
 }
 
@@ -600,7 +602,7 @@ body.dark-mode {
 }
 
 .footer-logo {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .footer-logo img {
   display: none; 
@@ -618,7 +620,7 @@ body.dark-mode {
   padding: 0;
   margin: 0 0 50px 0;
   display: flex; /* 確保水平排列 */
-  gap: 30px; 
+  gap: 50px; 
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   text-transform: uppercase;
   flex-wrap: wrap; 
@@ -640,7 +642,7 @@ body.dark-mode {
   display: flex;
   flex-direction: column; 
   align-items: flex-start;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   line-height: 1.8;
   letter-spacing: 0.5px;
   font-family: 'Noto Sans TC', serif;

@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Experiences folder 的 active Tab */
 .tab-experiences {
     background-color: var(--off-white);
-    color: var(--text-color);
+    color: var(--title-color);
     border: none;
     border-bottom: none;
     border-radius: 10px 10px 0 0;

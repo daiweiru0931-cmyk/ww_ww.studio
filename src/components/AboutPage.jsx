@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './AboutPage.css';
 import HeaderMenu from "./HeaderMenu"; 
+import Footer from "./Footer";
 
 const AboutPage = () => {
   const [scrollState, setScrollState] = useState('initial'); 
@@ -96,7 +97,7 @@ const AboutPage = () => {
 
   return (
     <div className="about-page">
-      <HeaderMenu />
+      <HeaderMenu ref={headerRef} />
 
       {/* 第一屏 */}
       <section className="about-page-container">
@@ -212,6 +213,9 @@ const AboutPage = () => {
           </section>
         ))}
       </div>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

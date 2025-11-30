@@ -31,7 +31,7 @@
   font-family: 'Libre Baskerville', serif;
   font-weight: bold;
   font-size: 1.4rem;
-  color: var(--text-color);
+  color: var(--title-color);
   white-space: nowrap;
   z-index: 2000;
 }
@@ -235,7 +235,7 @@
 
 .side-menu-list li a {
   font-size: 1.2rem;
-  color: var(--text-color);
+  color: var(--title-color);
   transition: color 0.3s ease;
 }
 
