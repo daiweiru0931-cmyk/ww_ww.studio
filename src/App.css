@@ -2,20 +2,20 @@
 :root {
   /*  顏色變數  */
   --background-color: #f6f3ef;
-  --text-color: #333;
-  --link-color: #333;
+  --text-color: #28140a;
+  --link-btn: #553728;
   --gray-color: #666;
-  --secondary-color: #fff;
+  --btn-hover: #a57864;
   --light-gray: #999;
   --divider-color: #777;
   --footer-bg: #222;
   --footer-text: #ccc;
-  --footer-link: #fff;
+  --footer-btn: #cda596;
 }
 
 body {
   font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
-  background-color: var(--background-color);
+  background-color: var(--body-color);
   color: var(--text-color);
   line-height: 1.6;
   margin: 0;
@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   text-decoration: none;
-  color: var(--link-color);
+  color: var(--link-btn);
   transition: color 0.5s ease;
 }
 
@@ -43,13 +43,13 @@ ul {
 body.dark-mode {
   --background-color: #222;
   --text-color: #ccc;
-  --link-color: #333;
+  --link-btn: #333;
   --gray-color: #fff;
-  --secondary-color: #999;
+  --btn-hover: #553728;
   --divider-color: #999;
   --footer-bg: #222;
   --footer-text: #fff;
-  --footer-link: #fff;
+  --footer-btn: #fff;
 }
 
 /* Hero Section */
@@ -116,7 +116,7 @@ body.dark-mode {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  background: var(--secondary-color);
+  background: #fff;
   box-sizing: border-box;
   z-index: 10;
 }
@@ -159,7 +159,7 @@ body.dark-mode {
   box-sizing: border-box;
   max-height: 400px;
   overflow-y: auto;
-  background-color: var(--secondary-color);
+  background-color: #fff;
   color: var(--gray-color);
   border-radius: 0 0 5px 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -263,7 +263,7 @@ body.dark-mode {
   height: 25px; 
   border-radius: 50%; 
   border: #666 solid 1px;
-  background-color: var(--secondary-color);
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -295,7 +295,7 @@ body.dark-mode {
 
 .view-more-btn:hover .btn-icon::before,
 .view-more-btn:hover .btn-icon::after {
-  background-color: var(--secondary-color); /* Hover 時加號顏色變淡 */
+  background-color: #fff; /* Hover 時加號顏色變淡 */
 }
 
 /* Service Section */
@@ -399,7 +399,7 @@ body.dark-mode {
   z-index: 10;
   bottom: 20px; /* 距離底部一點空間 */
   right: 20px;  /* 距離右邊一點空間 */
-  color: var(--link-color);
+  color: var(--link-btn);
   background-color: rgba(255, 255, 255, 0.8);
   border: #333 solid 1px;
   border-radius: 50%;
@@ -430,7 +430,7 @@ body.dark-mode {
 
 /* hover 效果 */
 .service-image .link-arrow-btn:hover {
-  color: var(--link-color);
+  color: var(--link-btn);
   background-color: rgba(255, 255, 255, 0.8);
   border: #333 solid 1px;
 }
@@ -609,6 +609,7 @@ body.dark-mode {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   margin: 0;
+  color: var(--footer-text);
 }
 
 /* 導航列樣式 */
@@ -620,21 +621,19 @@ body.dark-mode {
   gap: 30px; 
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   text-transform: uppercase;
-  flex-wrap: wrap; /* 確保導航欄在小螢幕時也能水平顯示，即使會換行 */
+  flex-wrap: wrap; 
 }
 
-.footer-about-li,.footer-works-li,
-.footer-service-li, .footer-taste-li, .footer-contact-li {
-  cursor: pointer;
-  transition: color 0.3s;
-  padding-right: 5px; 
+.footer-nav ul li a {
   color: var(--footer-text);
+  transition: color 0.3s;
+  text-transform: uppercase;
 }
 
-.footer-about-li:hover,.footer-works-li:hover,
-.footer-service-li:hover, .footer-taste-li:hover, .footer-contact-li:hover {
-  color: var(--footer-link);
+.footer-nav ul li a:hover {
+  color: var(--footer-btn);
 }
+
 
 /* 地址/資訊區塊樣式 */
 .footer-info {
@@ -670,7 +669,7 @@ body.dark-mode {
 }
 
 .footer-instagram a:hover {
-  color: var(--footer-link);
+  color: var(--footer-btn);
 }
 
 /* 底部版權 */

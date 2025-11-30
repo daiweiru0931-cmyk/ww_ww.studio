@@ -107,10 +107,10 @@ const HeaderMenu = () => {
       {/* 半屏下滑選單 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <ul className="side-menu-list">
-          <Link to="/about" className="menu-about-li" onClick={() => setMenuOpen(false)}>About</Link>
-          <Link to="/works" className="menu-works-li" onClick={() => setMenuOpen(false)}>Works</Link>
-          <Link to="/service" className="menu-service-li" onClick={() => setMenuOpen(false)}>Service</Link>
-          <Link to="/taste" className="menu-taste-li" onClick={() => setMenuOpen(false)}>Taste</Link>
+          <li><Link to="/about" className="menu-about-li" onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/works" className="menu-works-li" onClick={() => setMenuOpen(false)}>Works</Link></li>
+          <li><Link to="/service" className="menu-service-li" onClick={() => setMenuOpen(false)}>Service</Link></li>
+          <li><Link to="/taste" className="menu-taste-li" onClick={() => setMenuOpen(false)}>Taste</Link></li>
         </ul>
 
         {/* X 關閉按鈕 */}

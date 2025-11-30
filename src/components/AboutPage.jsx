@@ -57,17 +57,17 @@ const AboutPage = () => {
 
       if (!sectionRefs.current[0]) return;
 
-      const experiencesOffset = sectionRefs.current[1].offsetTop;
-      const skillsOffset = sectionRefs.current[2].offsetTop;
+      const skillsOffset = sectionRefs.current[1].offsetTop;
+      const experiencesOffset = sectionRefs.current[2].offsetTop;
 
       if (scrollY < 10) {
         setScrollState('initial');
-      } else if (scrollY < experiencesOffset - stickyThreshold) {
-        setScrollState('profile');
       } else if (scrollY < skillsOffset - stickyThreshold) {
-        setScrollState('experiences');
-      } else {
+        setScrollState('profile');
+      } else if (scrollY < experiencesOffset - stickyThreshold) {
         setScrollState('skills');
+      } else {
+        setScrollState('experiences');
       }
     };
 
@@ -80,8 +80,8 @@ const AboutPage = () => {
     initial: 'Scroll Down'
   };
 
-  const sectionTitles = ['Profile', 'Experiences', 'Skills'];
-  const folderKeys = ['profile', 'experiences', 'skills'];
+  const sectionTitles = ['Profile', 'Skills', 'Experiences'];
+  const folderKeys = ['profile', 'skills', 'experiences'];
 
   const scrollToSection = (index) => {
     const offset = headerRef.current ? headerRef.current.offsetHeight : 0;
@@ -137,13 +137,12 @@ const AboutPage = () => {
             >
               {/* Tab group */}
               <div className="folder-tab-group">
-                {getTabsForSection(idx).map((title) => {
+                {getTabsForSection(idx).map((title, tabIdx) => {
                   const sectionIndex = sectionTitles.indexOf(title);
-                  const isActive = sectionIndex === idx;
                   return (
                     <div
                       key={title}
-                      className={`tab-label ${isActive ? 'active-tab' : 'inactive-tab'} ${scrollState === folderKeys[sectionIndex] ? 'active' : ''}`}
+                      className={`tab-label tab-${folderKeys[sectionIndex]}`} // 用 CSS 控制顏色
                       onClick={() => scrollToSection(sectionIndex)}
                     >
                       <span className="label-text">{title}</span>
@@ -155,17 +154,40 @@ const AboutPage = () => {
               {/* Folder Content */}
               <div className="folder-content-container">
                 <div className="folder">
-                  <div className="folder-content">
+                  <div className="profile-folder">
                     {key === 'profile' && (
                       <>
-                        <div className="chinese-bio">
-                          <p>我是來自台灣的視覺&網站設計師 瑋儒。</p>
-                          <p>畢業於朝陽科技大學工業設計系，取得學士學位，並於 Greystone College 進修前端開發課程。</p>
+                        <div className="profile-description">
+                          <p className="pro-des-zh">
+                          來自台灣的視覺&網站設計師 瑋儒。
+                          <br/><br/>畢業於朝陽科技大學工業設計系，取得學士學位。加拿大 Greystone College 進修前端開發課程，取得結業證書。
+                          <br/><br/>專注於平面設計、網站設計與數位媒體領域，累積了豐富的實務經驗。
+                          熱愛視覺敘事，擅長融合多種媒材與技能，持續突破創意邊界，致力於打造兼具美感與功能性的品牌體驗。
+                          </p>
+                        
+                          <p className="pro-des-en">
+                          WeiRu is a Visual and Web Designer from Taiwan.
+                          <br/><br/>Holding a Bachelor's degree in Industrial Design from Chaoyang University of Technology 
+                          and a certificate in Front-End Development from Greystone College, Canada.
+                          <br/><br/>Specializes in graphic design, web design, and digital media. 
+                          Passionate about visual storytelling, expertly blends diverse media 
+                          and skills to create brand experiences that are both beautiful and highly functional.
+                          </p>
                         </div>
-                        <div className="english-bio">
-                          <p>I'm Weiru, a visual and web designer from Taiwan.</p>
-                          <p>I focus on graphic design, web design, and digital media.</p>
+                        <div className="profile-photo">
+                        <img src="/src/assets/profile/profile-photo-wei.jpg" alt="profile photo" />
                         </div>
+                      </>
+                    )}
+
+                    {key === 'skills' && (
+                      <>
+                        <h2>專業技能 (Skills)</h2>
+                        <ul>
+                          <li>設計：Figma, Adobe Suite</li>
+                          <li>前端：HTML, CSS, JavaScript(React)</li>
+                          <li>品牌、UX Research</li>
+                        </ul>
                       </>
                     )}
 
@@ -183,18 +205,6 @@ const AboutPage = () => {
                         </ul>
                       </>
                     )}
-
-                    {key === 'skills' && (
-                      <>
-                        <h2>專業技能 (Skills)</h2>
-                        <ul>
-                          <li>設計：Figma, Adobe Suite</li>
-                          <li>前端：HTML, CSS, JavaScript(React)</li>
-                          <li>品牌、UX Research</li>
-                        </ul>
-                      </>
-                    )}
-
                   </div>
                 </div>
               </div>

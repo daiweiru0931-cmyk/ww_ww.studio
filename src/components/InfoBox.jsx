@@ -68,7 +68,7 @@ const InfoBox = () => {
             </div>
             {/* 點擊按鈕時切換狀態 */}
             <button className="info-btn" onClick={handleToggleIntro}>
-                {isIntroOpen ? "－" : "＋"}
+                {isIntroOpen ? "-" : "+"}
             </button>
         </div>
 

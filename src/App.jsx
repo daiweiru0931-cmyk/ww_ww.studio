@@ -147,7 +147,7 @@ function App() {
               {/* Graphic Design */}
               <div className="service-item-left">
                 <h3>Graphic Design</h3>
-                <p>從標誌設計、名片、傳單、小冊子到活動主視覺與產品包裝，以一致的品牌語言打造能引起共鳴的視覺設計。</p>
+                <p>從標誌設計、名片、傳單、手冊到活動主視覺與產品包裝，以一致的品牌語言打造能引起共鳴的視覺設計。</p>
                 <p className="gp-description-en">From logo design, business cards, flyers, and brochures to event key visuals and product packaging. Creating cohesive and resonant visual designs that communicate your brand's essence.</p>
                 <div className="service-image service-carousel">
                   <div className="carousel-track" style={{ width: `${serviceGpImages.length*100}%`, transform: `translateX(-${(100/serviceGpImages.length)*currentGpImgIndex}%)` }}>

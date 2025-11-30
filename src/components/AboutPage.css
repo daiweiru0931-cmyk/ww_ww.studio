@@ -1,11 +1,17 @@
 :root {
-    --background-color: #f6f3ef;
+    --body-color: #f6f3ef;
     --text-color: #333;
     --gray-color: #666;
-    --light-gray: #999;
-    --border-dark: #333;   
-    --folder-content-height: 70vh;
+    --light-gray: #ccc;
+    --off-white: #fcfaf2;   
+    --header-height: 60px; /* ← 你 header 的真實高度 */
+    --about-top-padding: 50px;
     --folder-tab-height: 35px;
+
+    /* folder 高度 = 100vh - header - top padding - tabs */
+    --folder-content-height: calc(
+        100vh - var(--header-height) - var(--about-top-padding) - var(--folder-tab-height)
+    );
 }
 
 body {
@@ -107,34 +113,18 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     margin: 0 auto -1px auto;
     display: flex;
+    gap: 5px;
 }
 
 .tab-label {
     height: var(--folder-tab-height);
-    padding: 0 50px;
+    padding: 5px 50px 0 50px;
     display: flex;
     align-items: center;
     font-size: 0.9rem;
     cursor: pointer;
     font-weight: bold;
-}
-
-.inactive-tab {
-    background-color: #555;
-    color: var(--light-gray);
-    border: none;
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    margin-right: 5px;
-}
-
-.active-tab {
-    background-color: #222;
-    color: var(--light-gray);
-    border: none;
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.12);
 }
 
 /* Folder Content */
@@ -144,14 +134,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .folder {
-    background-color: #222;
-    color: var(--light-gray);
     border: none;
     border-radius: 0 10px 10px 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    height: var(--folder-content-height);
-    padding: 55px;
+
+    /* 讓高度自動撐到 folder-content-height */
+    min-height: var(--folder-content-height);
+    padding: 3% 6%;
     overflow: auto;
+    display: flex;
+    align-items: center;
 }
 
 /* 讓未到達的 folder 完全隱藏 */
@@ -173,6 +165,108 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================
+   Profile容器
+============================ */
+/* Profile Folder 背景色 */
+.folder-key-profile .folder {
+    background-color: #222;
+}
+/* Profile folder 的 Tab */
+.tab-profile {
+    background-color: #222;
+    color: var(--off-white);
+    border: none;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+.profile-folder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3%;
+    box-sizing: border-box; /* 防止 padding 撐大高度產生捲軸 */
+    overflow: hidden; 
+}
+  
+/* 左邊文字區域 */
+.profile-description {
+    flex: 1;
+}
+  
+/* 中文段落 */
+.pro-des-zh {
+    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+    font-family: 'Noto Sans TC', serif;
+    color: var(--off-white);
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    margin: 0 0 5rem 0;
+    transition: color 0.5s ease;
+}
+  
+/* 英文段落 */
+.pro-des-en {
+    font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+    font-family: 'Noto Sans TC', serif;
+    color: var(--off-white);
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    transition: color 0.5s ease;
+}
+  
+/* 右邊圖片區域 */
+.profile-photo {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+}
+  
+.profile-photo img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* ============================
+   Skills容器
+============================ */
+/* Skills Folder 背景色 */
+.folder-key-skills .folder {
+    background-color: #d6cfc4;
+}
+/* Skills folder 的 Tab */
+.tab-skills {
+    background-color: #d6cfc4;
+    color: #3d3422;
+    border: none;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+
+/* ============================
+   Experiences容器
+============================ */
+/* Experiences Folder 背景色 */
+.folder-key-experiences .folder {
+    background-color: var(--off-white);
+}
+/* Experiences folder 的 active Tab */
+.tab-experiences {
+    background-color: var(--off-white);
+    color: var(--text-color);
+    border: none;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+
+/* ============================
    RWD
 ============================ */
 @media (max-width: 768px) {
@@ -182,4 +276,16 @@ h1, h2, h3, h4, h5, h6 {
     }
     .tab-label { padding: 0 12px; }
     .folder { height: 380px; }
+    .profile-folder {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-description {
+        flex: none;
+    }
+    
+    .profile-photo {
+        width: 100%;
+    }
 }

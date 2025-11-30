@@ -63,7 +63,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--link-color);
+  background: var(--link-btn);
   transition: all 0.3s ease;
 }
 
@@ -79,19 +79,19 @@
 
 /* CONTACT 按鈕 */
 .contact-btn {
-  background-color: var(--link-color);
-  color: var(--secondary-color);
+  background-color: var(--link-btn);
+  color: #fff;
   border: none;
   border-radius: 2.4rem;
   padding: 0.6rem 1rem;
   cursor: pointer;
   font-size: 0.8rem;
   font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .contact-btn:hover {
-  background-color: var(--light-gray);
+  background-color: var(--btn-hover);
 }
 
 /* ==============================
@@ -121,8 +121,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--secondary-color);
-  color: var(--link-color);
+  background-color: #fff;
+  color: var(--link-btn);
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -162,13 +162,13 @@
 .menu-icon-small span {
   height: 2px;
   width: 100%;
-  background: var(--link-color);
+  background: var(--link-btn);
 }
 
 .contact-inside-btn {
   margin-left: 1rem;
-  background-color: var(--link-color);
-  color: var(--secondary-color);
+  background-color: var(--link-btn);
+  color: #fff;
   border: none;
   border-radius: 2rem;
   padding: 0.8rem 1.5rem;
@@ -186,7 +186,7 @@
 }
 
 .contact-inside-btn:hover {
-  background-color: var(--link-color);
+  background-color: var(--link-btn);
 }
 
 /* ==============================
@@ -198,7 +198,7 @@
   left: 0;
   width: 100%;
   height: 60%;
-  background-color: var(--secondary-color);
+  background-color: #fff;
   box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
   padding: 0;
   display: flex;
@@ -233,17 +233,16 @@
   transform: translateY(0);
 }
 
-.menu-about-li,.menu-works-li,
-.menu-service-li, .menu-taste-li {
+.side-menu-list li a {
   font-size: 1.2rem;
-  cursor: pointer;
-  transition: color 0.3s ease;
   color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
-.side-menu-list li:hover {
-  color: var(--light-gray);
+.side-menu-list li a:hover {
+  color: var(--btn-hover);
 }
+
 
 /* ==============================
    關閉按鈕
@@ -267,7 +266,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background: var(--link-color);
+  background: var(--link-btn);
   transition: all 0.3s ease;
 }
 
