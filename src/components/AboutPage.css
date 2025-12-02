@@ -1,7 +1,17 @@
 :root {
-    --body-color: #f6f3ef;
-    --text-color: #333;
+    --background-color: #f6f3ef;
+    --title-color: #28140a;
+    --text-color: #28140a;
+    --link-btn: #553728;
+    --btn-hover: #a57864;
+    --label-color: #553728;
     --gray-color: #666;
+    --light-gray: #999;
+    --menu-btn: #fff;
+
+    --divider-color: #777; /* 虛線分隔線 */
+    --text-color: #333;
+
     --light-gray: #ccc;
     --off-white: #fcfaf2;   
     --header-height: 60px; /* ← 你 header 的真實高度 */
@@ -52,15 +62,15 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
 }
 
-.about-title {
+.about-page-label {
     font-size: clamp(3rem, 5vw, 4.5rem);
-    color: var(--gray-color);
+    color: var(--title-color);
     margin: 0 10%;
 }
 
-.about-subtitle {
+.about-page-subtitle {
     font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-    color: var(--gray-color);
+    color: var(--title-color);
     margin: 0 10%;
 }
 
@@ -78,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: opacity 0.5s ease;
     padding: 10px 20px;
     background-color: #222;
-    color: var(--light-gray);
+    color: #fff;
     border-radius: 10px 10px 0 0;
 }
 .scroll-text.fade-in { opacity: 1; }
@@ -95,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
 .folder-section {
     position: relative;
     width: 100%;
-    min-height: 120vh; /* 確保每一區要滑過足夠距離，下一區才會覆蓋 */
+    min-height: 150vh; /* 確保每一區要滑過足夠距離，下一區才會覆蓋 */
 }
 
 /* Sticky：固定在視窗 */
@@ -129,8 +139,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Folder Content */
 .folder-content-container {
-    width: 100%;
-    margin: 0 auto;
+    width: 97%;
+    margin: 0;
+    left: 0;
 }
 
 .folder {
@@ -169,12 +180,12 @@ h1, h2, h3, h4, h5, h6 {
 ============================ */
 /* Profile Folder 背景色 */
 .folder-key-profile .folder {
-    background-color: #222;
+    background-color: #6a5650;
 }
 /* Profile folder 的 Tab */
 .tab-profile {
-    background-color: #222;
-    color: var(--off-white);
+    background-color: #6a5650;
+    color: #fff;
     border: none;
     border-bottom: none;
     border-radius: 10px 10px 0 0;
@@ -237,12 +248,12 @@ h1, h2, h3, h4, h5, h6 {
 ============================ */
 /* Skills Folder 背景色 */
 .folder-key-skills .folder {
-    background-color: #d6cfc4;
+    background-color: #b09382;
 }
 /* Skills folder 的 Tab */
 .tab-skills {
-    background-color: #d6cfc4;
-    color: #3d3422;
+    background-color: #b09382;
+    color: #fff;
     border: none;
     border-bottom: none;
     border-radius: 10px 10px 0 0;
@@ -254,11 +265,11 @@ h1, h2, h3, h4, h5, h6 {
 ============================ */
 /* Experiences Folder 背景色 */
 .folder-key-experiences .folder {
-    background-color: var(--off-white);
+    background-color: #cbc4b9;
 }
 /* Experiences folder 的 active Tab */
 .tab-experiences {
-    background-color: var(--off-white);
+    background-color: #cbc4b9;
     color: var(--title-color);
     border: none;
     border-bottom: none;

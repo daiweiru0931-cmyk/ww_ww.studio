@@ -50,7 +50,7 @@ const HeaderMenu = () => {
         <Link
           to="/"
           className="logo"
-          style={{ cursor: "pointer", textDecoration: "none", color: "inherit" }}
+          style={{ cursor: "pointer", textDecoration: "none" }}
           onClick={() => setMenuOpen(false)}
         >
           WW Studio

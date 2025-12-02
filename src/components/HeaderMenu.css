@@ -121,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--menu-btn);
   color: var(--link-btn);
   border: none;
   border-radius: 50%;
@@ -235,7 +235,7 @@
 
 .side-menu-list li a {
   font-size: 1.2rem;
-  color: var(--title-color);
+  color: var(--link-btn);
   transition: color 0.3s ease;
 }
 

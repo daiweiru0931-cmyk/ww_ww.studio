@@ -101,8 +101,8 @@ const AboutPage = () => {
 
       {/* 第一屏 */}
       <section className="about-page-container">
-        <h1 className="about-title">( About ) me</h1>
-        <p className="about-subtitle">
+        <h1 className="about-page-label">( About ) me</h1>
+        <p className="about-page-subtitle">
           專注於品牌設計和網頁設計的細節設計師，對跨領域元素轉化為數位體驗有著濃厚的興趣。
         </p>
       </section>

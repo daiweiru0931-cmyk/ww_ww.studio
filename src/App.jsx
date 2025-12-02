@@ -3,7 +3,6 @@ import HeaderMenu from "./components/HeaderMenu";
 import DecryptedText from "./components/DecryptedText";
 import InfoBox from "./components/InfoBox";
 import AccordionGallery from "./components/AccordionGallery";
-import SplitText from "./components/SplitText";
 import DarkModeMulti from "./components/DarkModeMulti";
 import Footer from "./components/Footer";
 import './App.css';
@@ -122,8 +121,8 @@ function App() {
               <p>創意開發設計師</p>
             </div>
             <div className="about-description">
-              <p>專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。</p>
-              <p>A visual designer specializing in brand identity and web design, with a deep interest in translating visuals into digital logic.</p>
+              <p className="des-zh">專注於品牌識別和網頁設計的視覺設計師，對將視覺元素轉化為數位邏輯有著濃厚的興趣。</p>
+              <p className="des-en">A visual designer specializing in brand identity and web design, with a deep interest in translating visuals into digital logic.</p>
               <Link to="/about" className="view-more-btn">
                 <span className="btn-text">VIEW MORE</span>
                 <span className="btn-icon"></span>
@@ -204,7 +203,7 @@ function App() {
 
         {/* Footer */}
         <Footer />
-        
+
       </div>
     </>
   );
