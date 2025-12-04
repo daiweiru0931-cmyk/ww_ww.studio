@@ -95,6 +95,28 @@ const AboutPage = () => {
 
   const getTabsForSection = (index) => sectionTitles.slice(0, index + 1);
 
+// Skills 表格數據整理  
+  const skillsData = {
+    skillests: [
+      ["01", "Graphic Design"],
+      ["02", "Branding"],
+      ["03", "Illustration"],
+      ["04", "Web Design"],
+      ["05", "Visual Content Planning"],
+      ["06", "Taste Profiling"],
+    ],
+    softwares: [
+      ["Adobe Photoshop", "Adobe Illustrator", "Adobe Indesign"],
+      ["Adobe After Effects", "Adobe Premiere Pro", "Procreate"],
+      ["Lightroom", "Figma", "Procreate"], // 第三行數據
+      ["HTML5 / CSS3 / JavaScript", "TypeScript", "React.js"],
+      ["Vite", "VS Code", "GitHub"],
+    ],
+    languages: [
+     "Mandarin Chinese / English",
+    ],
+  };
+
   return (
     <div className="about-page">
       <HeaderMenu ref={headerRef} />
@@ -155,24 +177,23 @@ const AboutPage = () => {
               {/* Folder Content */}
               <div className="folder-content-container">
                 <div className="folder">
-                  <div className="profile-folder">
+                  <div className="folder-threeParts">
                     {key === 'profile' && (
                       <>
                         <div className="profile-description">
                           <p className="pro-des-zh">
                           來自台灣的視覺&網站設計師 瑋儒。
-                          <br/><br/>畢業於朝陽科技大學工業設計系，取得學士學位。加拿大 Greystone College 進修前端開發課程，取得結業證書。
+                          <br/><br/>台灣 朝陽科技大學工業設計系，學士學位。加拿大 Greystone College前端開發專業，結業證書。
                           <br/><br/>專注於平面設計、網站設計與數位媒體領域，累積了豐富的實務經驗。
-                          熱愛視覺敘事，擅長融合多種媒材與技能，持續突破創意邊界，致力於打造兼具美感與功能性的品牌體驗。
+                          熱愛視覺敘事，擅長融合多種媒材與技能，持續突破創意邊界，致力打造兼具美感與功能性的品牌體驗。
                           </p>
                         
                           <p className="pro-des-en">
                           WeiRu is a Visual and Web Designer from Taiwan.
-                          <br/><br/>Holding a Bachelor's degree in Industrial Design from Chaoyang University of Technology 
+                          <br/><br/>Holds a Bachelor's degree in Industrial Design from Chaoyang University of Technology 
                           and a certificate in Front-End Development from Greystone College, Canada.
-                          <br/><br/>Specializes in graphic design, web design, and digital media. 
-                          Passionate about visual storytelling, expertly blends diverse media 
-                          and skills to create brand experiences that are both beautiful and highly functional.
+                          <br/><br/>Specializing in graphic design, web design, and digital media, I leverage extensive 
+                          experience and a passion for visual storytelling to craft brand experiences that are both beautiful and highly functional.
                           </p>
                         </div>
                         <div className="profile-photo">
@@ -182,14 +203,55 @@ const AboutPage = () => {
                     )}
 
                     {key === 'skills' && (
-                      <>
-                        <h2>專業技能 (Skills)</h2>
-                        <ul>
-                          <li>設計：Figma, Adobe Suite</li>
-                          <li>前端：HTML, CSS, JavaScript(React)</li>
-                          <li>品牌、UX Research</li>
-                        </ul>
-                      </>
+                      <div className="skills-grid-container">
+                        
+                        {/* SKILLESTS 表頭 */}
+                        <div className="skills-header skillests-header">SKILLESTS</div>
+                        
+                        {/* SOFTWARES 表頭 */}
+                        <div className="skills-header softwares-header">SOFTWARES</div>
+                        
+                        {/* ========================================================== */}
+                        {/* 關鍵修正: SKILLESTS 集中區塊 (單一單元格) */}
+                        {/* ========================================================== */}
+                        <div className="grid-row-item skillests-single-cell">
+                          {skillsData.skillests.map((itemPair, index) => (
+                            <React.Fragment key={`sks-frag-${index}`}>
+                              {/* 渲染數字、空格、描述 */}
+                              <span className="skill-number">{itemPair[0]}</span>
+                              &nbsp;&nbsp;&nbsp; 
+                              <span className="skill-description">{itemPair[1]}</span>
+                              
+                              {/* 除了最後一項，都添加換行 */}
+                              {index < skillsData.skillests.length - 1 && <br />}
+                            </React.Fragment>
+                          ))}
+                        </div>
+
+                        {/* SOFTWARES/LANGUAGES 內容 (需跨行/跨列渲染) */}
+                        <div className="softwares-languages-area">
+                          {/* SOFTWARES 內容 */}
+                          {skillsData.softwares.map((row, rowIndex) => (
+                            <React.Fragment key={`swr-${rowIndex}`}>
+                              {row.map((cell, cellIndex) => (
+                                <div className="software-cell" key={`swc-${rowIndex}-${cellIndex}`}>
+                                  {cell}
+                                </div>
+                              ))}
+                            </React.Fragment>
+                          ))}
+
+                          {/* LANGUAGES 表頭 */}
+                          <div className="languages-header">LANGUAGES</div>
+
+                          {/* LANGUAGES 內容 */}
+                          <div className="languages-cell">
+                            {skillsData.languages[0]}
+                          </div>
+
+                        </div>
+                        
+                      </div>
                     )}
 
                     {key === 'experiences' && (
