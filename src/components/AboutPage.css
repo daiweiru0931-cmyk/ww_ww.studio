@@ -1,531 +1,313 @@
 :root {
     --background-color: #f6f3ef;
-    --title-color: #28140a;
     --text-color: #28140a;
-    --link-btn: #553728;
-    --btn-hover: #a57864;
-    --label-color: #553728;
-    --gray-color: #666;
-    --light-gray: #999;
-    --menu-btn: #fff;
-
-
-    --light-gray: #ccc;
-    --off-white: #fcfaf2;   
-    --header-height: 60px; /* ← 你 header 的真實高度 */
-    --about-top-padding: 50px;
-    --folder-tab-height: 35px;
-
-    /* folder 高度 = 100vh - header - top padding - tabs */
-    --folder-content-height: calc(
-        100vh - var(--header-height) - var(--about-top-padding) - var(--folder-tab-height)
-    );
-}
-
-body {
+    --off-white: #fcfaf2;
+  }
+  
+  body {
+    margin: 0;
     font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
     background-color: var(--background-color);
     color: var(--text-color);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-}
-
-/* ============================
-   Header（正常滾動）
-============================ */
-.header-wrapper {
-    position: relative; 
-    pointer-events: auto;
-}
-.header-wrapper.header-scrolled .header {
-    padding-top: initial !important; 
-    padding-bottom: initial !important;
-}
-
-/* ============================
-   First Screen
-============================ */
-.about-page-container {
-    min-height: 100vh;
-    padding-top: 50px;
+  }
+  
+  /* About Info 區塊 */
+  .about-page-container {
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.about-page-label {
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    color: var(--title-color);
-    margin: 0 10%;
-}
-
-.about-page-subtitle {
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-    color: var(--title-color);
-    margin: 0 10%;
-}
-
-/* ============================
-   Scroll Indicator
-============================ */
-.scroll-indicator {
+    text-align: center;
+    padding: 0 20px;
+  }
+  .about-page-label {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  .about-page-subtitle {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Scroll Indicator */
+  .scroll-down-indicator {
     position: fixed;
-    left: 10%;
-    bottom: 0;
-    z-index: 50;
-}
-.scroll-text {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    padding: 10px 20px;
-    background-color: #222;
-    color: #fff;
-    border-radius: 10px 10px 0 0;
-}
-.scroll-text.fade-in { opacity: 1; }
-
-/* ============================
-   Folder Stack
-============================ */
-.folder-stack-container {
+    bottom: 20px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    border-bottom: 2px solid #553728;
+    border-right: 2px solid #553728;
+    transform: translateX(-50%) rotate(45deg);
+    animation: bounce 1.5s infinite;
+    z-index: 100;
+  }
+  @keyframes bounce {
+    0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0) rotate(45deg);}
+    40% { transform: translateX(-50%) translateY(8px) rotate(45deg);}
+    60% { transform: translateX(-50%) translateY(4px) rotate(45deg);}
+  }
+  
+  /* Folder Stack 區塊 */
+  .folder-stack-container-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 300px;
-}
-
-.folder-section {
+    height: 500vh; /* 例如，給予足夠的滾動空間 */
+  }
+  .folder-stack-container {
     position: relative;
+    top: 0;
+    height: 100vh;
     width: 100%;
-    min-height: 150vh; /* 確保每一區要滑過足夠距離，下一區才會覆蓋 */
-}
-
-/* Sticky：固定在視窗 */
-.sticky-wrapper {
-    position: sticky;
-    top: 5vh; 
-    width: 100%;
-    z-index: inherit;
-}
-
-/* ============================
-   Tabs
-============================ */
-.folder-tab-group {
-    width: 100%;
-    margin: 0 auto -1px auto;
-    display: flex;
-    gap: 5px;
-}
-
-.tab-label {
-    height: var(--folder-tab-height);
-    padding: 5px 50px 0 50px;
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 -5px 10px rgba(0,0,0,0.12);
-}
-
-/* Folder Content */
-.folder-content-container {
-    width: 97%;
-    margin: 0;
-    left: 0;
-}
-
-.folder {
-    border: none;
-    border-radius: 0 10px 10px 10px;
+  }
+  
+  .folder {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    padding: 3%;
+    background-color: var(--off-white);
     box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-
-    /* 讓高度自動撐到 folder-content-height */
-    min-height: var(--folder-content-height);
-    padding: 3% 6%;
-    overflow: auto;
-    display: flex;
-    align-items: center;
-}
-
-/* 讓未到達的 folder 完全隱藏 */
-.hidden-section {
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* 不能被點到 */
-    transform: translateY(50px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* 滑到時才顯示 */
-.visible-section {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* ============================
-   Profile容器
-============================ */
-/* Profile Folder 背景色 */
-.folder-key-profile .folder {
-    background-color: #6a5650;
-}
-/* Profile folder 的 Tab */
-.tab-profile {
-    background-color: #6a5650;
-    color: #fff;
-    border: none;
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-}
-
-.folder-threeParts {
+    z-index: 10;
+    will-change: transform, opacity;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  }
+  
+  /* Profile Folder */
+  .folder-threeParts {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 3%;
-    box-sizing: border-box; /* 防止 padding 撐大高度產生捲軸 */
-    overflow: hidden; 
-}
-  
-/* 左邊文字區域 */
-.profile-description {
+    align-items: flex-start;
+  }
+  .profile-description {
     flex: 1;
-}
-  
-/* 中文段落 */
-.pro-des-zh {
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-    font-family: 'Noto Sans TC', serif;
-    color: var(--off-white);
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-    margin: 0 0 5rem 0;
-    transition: color 0.5s ease;
-}
-  
-/* 英文段落 */
-.pro-des-en {
-    font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
-    font-family: 'Noto Sans TC', serif;
-    color: var(--off-white);
-    line-height: 1.6;
-    letter-spacing: 0.3px;
-    transition: color 0.5s ease;
-}
-  
-/* 右邊圖片區域 */
-.profile-photo {
+    padding-right: 20px;
+  }
+  .profile-photo {
     flex: 1;
     display: flex;
-    justify-content: right;
-}
-  
-.profile-photo img {
+    justify-content: flex-end;
+  }
+  .profile-photo img {
     width: 100%;
     max-width: 350px;
     border-radius: 10px;
     object-fit: cover;
-}
-
-/* ============================
-   Skills容器 (新的 Grid 表格樣式)
-============================ */
-/* Skills Folder 背景色 */
-.folder-key-skills .folder {
-    background-color: #b09382;
-}
-/* Skills folder 的 Tab */
-.tab-skills {
-    background-color: #b09382;
-    color: #28140a; 
-    border: none;
-    border-radius: 10px 10px 0 0;
-}
-
-/* 1. 外層容器設定 Grid 佈局 */
-.skills-grid-container {
-    width: 100%;
+  }
+  
+  /* Skills Folder */
+  .skills-grid-container {
     display: grid;
-    /* 設定 4 欄：SKILLESTS 一欄，SOFTWARES/LANGUAGES 三欄 */
-    grid-template-columns: 1.5fr 1fr 1fr 1fr; 
-    /* 第一行固定為 auto，不會被壓扁 */
-    grid-template-rows: auto 1fr;
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-    color: var(--text-color);
-    border: 1px dotted #28140a; /* 最外層的邊框 */
-    margin: 0 auto;
-}
-
-/* 2. 表頭樣式 - 定位在 Grid Row 1 */
-.skills-header {
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    font-weight: bold;
-    padding: 20px 10px;
-    border-bottom: 1px dotted #28140a;
-    text-transform: uppercase;
-}
-
-/* SKILLESTS 表頭佔據第一欄，第一行 */
-.skillests-header {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+  }
+  .skills-header {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .skillests-single-cell {
     grid-column: 1 / 2;
-    grid-row: 1; /* 確保在第 1 行 */
-    border-right: 1px dotted #28140a;
-}
-
-/* SOFTWARES 表頭跨越第二、三、四欄，第一行 */
-.softwares-header {
+    padding: 5px;
+  }
+  .software-cell {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  .softwares-languages-area {
     grid-column: 2 / 5;
-    grid-row: 1; /* 確保在第 1 行 */
-}
-
-/* 3. SKILLESTS 內容樣式 - 單一單元格容器 */
-.skillests-single-cell {
-    /* 佔據第一欄 */
-    grid-column: 1 / 2;
-    
-    /* === 關鍵修正：從第 2 行開始，垂直跨越所有行 (確保不重疊) === */
-    grid-row: 2 / -1; 
-    
-    padding: 10px 10px;
-    border-right: 1px dotted #28140a;
-    border-bottom: none; 
-}
-
-/* 數字樣式 */
-.skill-number {
-    display: inline-block; 
-    width: 2em; 
-    padding: 15px 0;
-    text-align: right; 
-    /* 確保 SKILLESTS 內容在單元格內不分行 */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.skill-number, .skill-description {
-    display: inline-block;
-    vertical-align: middle; /* 讓兩者垂直置中 */
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-}
-
-/* 4. SOFTWARES 和 LANGUAGES 區域 (關鍵複雜佈局) */
-.softwares-languages-area {
-    /* 讓這個容器跨越 2, 3, 4 欄 */
-    grid-column: 2 / 5; 
-    
-    /* === 關鍵修正：讓內容從第二行開始！(確保不重疊) === */
-    grid-row: 2 / -1; 
-    
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  /* 內部建立三欄 Grid */
-    gap: 0;
-}
-
-.software-row {
-    display: contents; /* 讓 Grid 自動控制每一個 cell 高度一致 */
-}
-
-/* SOFTWARES 內容單元格 */
-.software-cell {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+  .languages-header {
+    font-weight: 700;
+    grid-column: 1 / -1;
+    margin-top: 10px;
+  }
+  .languages-cell {
+    grid-column: 1 / -1;
+    padding: 5px 0;
+  }
+  
+  /* Experiences Folder */
+  .experiences-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .experience-card {
     padding: 10px;
-    border-bottom: 1px dotted #28140a;
-    
-    /* 垂直分隔線 */
-    border-right: 1px dotted #28140a;
-    
-    /* 確保 SOFTWARES 內容不分行 */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    /* 關鍵：統一高度 */
+    border-radius: 8px;
+    background-color: #ddd;
     display: flex;
-    align-items: center;    /* 垂直置中內容 */
-    min-height: 40px;       /* 可調整統一格子高度 */
-    box-sizing: border-box;  /* 包含 padding 與 border 在內 */
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .experience-card .row-cell {
+    flex: 1 1 30%;
+    min-width: 150px;
+  }
+  
+  /* RWD */
+  /* RWD (Responsive Web Design) 區塊 */
+
+/* --- 1. Max Width: 1200px 斷點 --- */
+/* (針對 Profile Folder 調整寬度，使其在較大螢幕上更緊湊) */
+@media (max-width: 1200px) {
+  .folder {
+      /* 在稍小的螢幕上，稍微縮小 folder 寬度，以避免觸碰到邊緣 */
+      width: 95%;
+      max-width: 1000px;
+      padding: 4%;
+  }
 }
 
-/* 移除每行的第三個單元格的右邊界 */
-.software-cell:nth-child(3n) {
-    border-right: none;
-}
+/* --- 2. Max Width: 1024px 斷點 (Tablet Portrait) --- */
+@media (max-width: 1024px) {
+  /* About Info 區塊 */
+  .about-page-label {
+      font-size: 2.5rem;
+  }
+  
+  /* Folder 基礎 */
+  .folder {
+      /* 在平板上放寬 folder 寬度以利用空間 */
+      width: 90%;
+      max-width: 900px; 
+      padding: 5%;
+  }
 
-/* 5. LANGUAGES 區塊 */
-.languages-header {
-    /* 跨越 SOFTWARES 區域的三欄 */
-    grid-column: 1 / 4; 
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-    border-bottom: 1px dotted #28140a; /* 粗實線分隔 */
-    text-transform: uppercase;
-}
+  /* Profile Folder (WeiRu 圖片和描述) */
+  .folder-threeParts {
+      /* 堆疊：圖片在描述下方或上方 */
+      flex-direction: column;
+      align-items: center;
+      gap: 20px; /* 增加間距 */
+  }
+  .profile-description,
+  .profile-photo {
+      width: 100%; /* 佔滿可用寬度 */
+      max-width: 500px; /* 限制內容最大寬度以保持可讀性 */
+      padding-right: 0;
+  }
+  .profile-photo {
+      /* 在堆疊模式下，讓圖片居中 */
+      justify-content: center;
+      order: -1; /* 將圖片放在描述上方 (可選) */
+  }
+  .profile-photo img {
+      max-width: 300px; /* 稍微縮小圖片尺寸 */
+  }
 
-.languages-cell {
-    /* 跨越 SOFTWARES 區域的三欄 */
-    grid-column: 1 / 4;
-    display: flex;
-    align-items: center;
-    padding: 10px 10px;
-}
+  /* Skills Folder */
+  .skills-grid-container {
+      /* 從 4 欄變為 1 欄，讓內容垂直堆疊 */
+      grid-template-columns: 1fr;
+      padding: 0; /* 移除內邊距，利用 folder 的 padding */
+  }
+  .skillests-single-cell {
+      grid-column: 1 / -1; /* 佔滿整欄 */
+  }
+  .softwares-languages-area {
+      grid-column: 1 / -1; /* 佔滿整欄 */
+      /* 將 Softwares 從 3 欄變為 2 欄，更適合平板 */
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+  }
+  .languages-header,
+  .languages-cell {
+      grid-column: 1 / -1;
+  }
 
-
-/* ========================================================== */
-/* EXPERIENCES SECTION 樣式 (三欄表格) */
-/* ========================================================== */
-
-/* Experiences Folder 背景色 */
-.folder-key-experiences .folder {
-    background-color: #cbc4b9;
-}
-/* Experiences folder 的 active Tab */
-.tab-experiences {
-    background-color: #cbc4b9;
-    color: var(--title-color);
-    border: none;
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
-}
-
-.experiences-container {
-    width: 100%;
-    padding: 40px 20px; 
-    font-family: monospace, sans-serif;
-    color: #333;
-    background-color: #fff; 
-}
-
-.experiences-title {
-    font-family: 'Times New Roman', serif;
-    font-size: 2em; 
-    font-weight: 400;
-    margin-bottom: 30px;
-    color: #444;
-}
-
-.experiences-table {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1.5fr; 
-    border-top: 1px solid #333; 
-}
-
-.table-header {
-    display: contents; 
-}
-
-.header-cell {
-    padding: 10px 10px;
-    font-size: 0.8em;
-    font-weight: bold;
-    border-bottom: 1px dotted #888; 
-    text-transform: uppercase;
-}
-
-.table-row {
-    display: contents; 
-}
-
-.row-cell {
-    padding: 12px 10px;
-    font-size: 0.9em;
-    line-height: 1.5;
-    border-bottom: 1px dotted #888; 
-}
-
-.row-cell.year,
-.row-cell.company {
-    border-right: 1px dotted #888;
+  /* Experiences Folder */
+  .experience-card {
+      /* 堆疊：將時間、公司、職位垂直堆疊 */
+      flex-direction: column;
+      gap: 5px; /* 減少卡片內部間距 */
+  }
+  .experience-card .row-cell {
+      flex: 1 1 100%; /* 每個 row-cell 佔滿一行 */
+      min-width: unset; /* 移除 min-width 限制 */
+  }
 }
 
 
-/* ============================
-   RWD
-============================ */
+/* --- 3. Max Width: 768px 斷點 (Mobile) --- */
 @media (max-width: 768px) {
-    .folder-tab-group,
-    .folder-content-container {
-        width: 92%;
-        margin: 0 auto;
-    }
-    .tab-label { padding: 0 12px; }
-    .folder { height: 380px; }
-    .folder-threeParts {
-        height: 100%;
-        flex-direction: column;
-        align-items:center;
-    }
-    
-    .profile-description {
-        flex: none;
-    }
-    
-    .profile-photo {
-        width: 80%;
-    }
-    
-    /* RWD: Skills Grid 調整 */
-    .skills-grid-container {
-        /* 在小螢幕上將 SKILLESTS 內容放在頂部，SOFTWARES/LANGUAGES 放在下方 */
-        grid-template-columns: 1fr; /* 單欄 */
-        border: none;
-        margin: 0;
-    }
-    
-    .skills-header {
-        grid-column: 1 / 2;
-        border-right: none !important;
-        border-top: 1px dotted #333;
-    }
-    
-    .skillests-header { 
-        grid-row: 1; 
-    }
-    .softwares-header {
-        grid-row: 3; /* 將 SOFTWARES 表頭移到 SKILLESTS 內容之後 */
-        border-top: 1px dotted #333;
-    }
-    
-    /* SKILLESTS 內容單元格 */
-    .skillests-single-cell {
-        grid-column: 1 / 2;
-        grid-row: 2; /* 放在 SKILLESTS 表頭下方 */
-        border-right: none;
-        border-bottom: 1px dotted #333;
-        white-space: normal; /* 允許換行 */
-    }
+  /* About Info 區塊 */
+  .about-page-label {
+      font-size: 2rem;
+  }
+  .about-page-subtitle {
+      font-size: 0.95rem;
+      padding: 0 10px;
+  }
 
-    /* SOFTWARES/LANGUAGES 區域 */
-    .softwares-languages-area {
-        grid-column: 1 / 2;
-        grid-row: 4; /* 放在 SOFTWARES 表頭下方 */
-        grid-template-columns: 1fr 1fr; /* 內部調整為 2 欄 */
-    }
-    
-    .software-cell:nth-child(2n) {
-        border-right: none;
-    }
-    .software-cell:nth-child(3n) {
-        border-right: 1px dotted #888; /* 覆寫 desktop 樣式 */
-    }
-    
-    .languages-header, .languages-cell {
-        grid-column: 1 / 3; /* 跨越 2 欄 */
-    }
+  /* Folder 基礎 */
+  .folder {
+      /* 在手機上保持高寬度，但減少內邊距 */
+      width: 95%; 
+      padding: 8% 5%; /* 上下更多，左右保持 */
+  }
+
+  /* Profile Folder */
+  .profile-photo img {
+      max-width: 250px; /* 進一步縮小圖片 */
+  }
+  .pro-des-zh, .pro-des-en {
+      font-size: 0.9rem; /* 縮小文字，提高閱讀效率 */
+  }
+
+  /* Skills Folder */
+  .skills-grid-container {
+      gap: 15px; /* 增加主要區塊間距 */
+  }
+  .softwares-languages-area {
+      /* 在手機上，Softwares 變回 1 欄 */
+      grid-template-columns: 1fr;
+  }
+  .software-cell,
+  .skill-description {
+      font-size: 0.9rem;
+  }
+
+  /* Experiences Folder */
+  .experience-card {
+      padding: 8px;
+  }
+  .experience-card .row-cell {
+      font-size: 0.9rem;
+  }
+  
+  /* Scroll Indicator */
+  .scroll-down-indicator {
+      bottom: 10px; /* 將指示器稍微上移 */
+  }
+}
+
+/* --- 4. Max Width: 480px 斷點 (Small Mobile) --- */
+@media (max-width: 480px) {
+  .about-page-label {
+      font-size: 1.8rem;
+  }
+  .about-page-subtitle {
+      font-size: 0.85rem;
+  }
+  .profile-photo img {
+      max-width: 100%; /* 讓圖片填滿其容器 (profile-photo) */
+  }
+  .folder {
+      padding: 8% 4%; /* 略微減少 padding */
+  }
 }

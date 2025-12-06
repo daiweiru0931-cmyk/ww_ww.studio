@@ -1,282 +1,202 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import Lenis from 'lenis';
 import './AboutPage.css';
 import HeaderMenu from "./HeaderMenu"; 
 import Footer from "./Footer";
 
+const skillsData = {
+  skillests: [
+    ["01", "Graphic Design"], ["02", "Branding"], ["03", "Illustration"],
+    ["04", "Web Design"], ["05", "Visual Content Planning"], ["06", "Taste Profiling"],
+  ],
+  softwares: [
+    ["Adobe Photoshop", "Adobe Illustrator", "Adobe Indesign"],
+    ["Adobe After Effects", "Adobe Premiere Pro", "Procreate"],
+    ["Lightroom", "Figma", "Procreate"], 
+    ["HTML5 / CSS3 / JavaScript", "TypeScript", "React.js"],
+    ["Vite", "VS Code", "GitHub"],
+  ],
+  languages: ["Mandarin Chinese / English"],
+};
+
+const experiencesData = [
+  { year: "2024/05 - PRESENT", company: "Online Works", position: "Freelance Graphic Designer" },
+  { year: "2025/01 - 2025/10", company: "Greystone College", position: "Front-End Development Certificate Program" },
+  { year: "2018/08 - 2024/04", company: "薰衣草森林股份有限公司", position: "資深品牌設計師" },
+  { year: "2020", company: "APD 亞太設計年鑑", position: "入選 第十六屆" },
+  { year: "2016/08 - 2018/03", company: "加聯達股份有限公司", position: "視覺 / 產品設計師" },
+  { year: "2016", company: "金點概念設計獎", position: "受邀參加" },
+  { year: "2012/09 - 2016/06", company: "朝陽科技大學 工業設計學系", position: "學士學位" },
+];
+
 const AboutPage = () => {
-  const [scrollState, setScrollState] = useState('initial'); 
-  const [visibleSections, setVisibleSections] = useState([false, false, false]); 
-  const sectionRefs = useRef([]);
-  const headerRef = useRef(null);
+  const folderRefs = useRef([]);
 
-  /* ---------- 進入頁面時滾動到最上方 ---------- */
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const lenis = new Lenis({
+      duration: 1.5,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
 
-  /* ---------- Header 滾動效果 ---------- */
-  useEffect(() => {
+    const folderEnterPositions = [0, 1200, 2400];
+    const folderDurations = [800, 800, 800];
+    const slideUpDistance = 600;
+
     const onScroll = () => {
-      const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  /* ---------- 設定 CSS 變數 header 高度 ---------- */
-  useEffect(() => {
-    if (headerRef.current) {
-      const height = headerRef.current.offsetHeight;
-      document.documentElement.style.setProperty('--header-height', `${height}px`);
-    }
-  }, []);
-
-  /* ---------- 控制每個 section 何時進場 ---------- */
-  useEffect(() => {
-    const handleVisibility = () => {
-      setVisibleSections((prev) =>
-        sectionRefs.current.map((el, i) => {
-          if (!el) return prev[i];
-          const rect = el.getBoundingClientRect();
-          const triggerPoint = window.innerHeight * 0.6;
-          return rect.top < triggerPoint ? true : prev[i];
-        })
-      );
-    };
-
-    window.addEventListener("scroll", handleVisibility);
-    handleVisibility();
-    return () => window.removeEventListener("scroll", handleVisibility);
-  }, []); // <-- 修正這裡：空陣列，避免無限迴圈
-
-  /* ---------- Scroll State 原邏輯 ---------- */
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const headerHeight = headerRef.current ? headerRef.current.offsetHeight : 0;
-      const stickyThreshold = headerHeight + 50;
-
-      if (!sectionRefs.current[0]) return;
-
-      const skillsOffset = sectionRefs.current[1].offsetTop;
-      const experiencesOffset = sectionRefs.current[2].offsetTop;
-
-      if (scrollY < 10) {
-        setScrollState('initial');
-      } else if (scrollY < skillsOffset - stickyThreshold) {
-        setScrollState('profile');
-      } else if (scrollY < experiencesOffset - stickyThreshold) {
-        setScrollState('skills');
-      } else {
-        setScrollState('experiences');
+      const scroll = lenis.scroll;
+  
+      folderRefs.current.forEach((folder, i) => {
+          if (!folder) return;
+  
+          let progress = (scroll - folderEnterPositions[i]) / folderDurations[i];
+          progress = Math.min(Math.max(progress, 0), 1);
+  
+          // 確保位置固定且中心點在 50%/50%
+          folder.style.position = 'fixed';
+          folder.style.left = '50%';
+          folder.style.top = '50%';
+  
+          // --- 核心邏輯：實現居中堆疊和進入動畫 ---
+          const initialYOffset = 100; // 初始時的額外 Y 軸偏移 (用於進入動畫)
+          const stackOffset = i * 30; // 每個 folder 的堆疊偏移量
+          
+          // 1. 進入動畫：讓 folder 從上方滑入
+          // currentYOffset 隨著 progress 從 initialYOffset (100) 減少到 0
+          const currentYOffset = initialYOffset * (1 - progress); 
+          
+          // 2. 堆疊效果：讓 folder 在進入後維持堆疊偏移 (stackOffset)
+          // stackDisplacement 隨著 progress 從 0 增加到 stackOffset (i*30)
+          const stackDisplacement = stackOffset * progress; 
+          
+          // 最終的 translate Y 軸：
+          // calc(-50%              // 垂直居中
+          //        + ${currentYOffset}px // 進入時的額外偏移 (讓它從上方進入)
+          //        - ${stackDisplacement}px) // 最終的堆疊偏移 (讓它往上堆)
+          
+          folder.style.transform = `translate(-50%, calc(-50% + ${currentYOffset}px - ${stackDisplacement}px))`;
+          
+          folder.style.opacity = progress;
+          folder.style.zIndex = 10 + i;
+      });
+  
+      // --- 滑出 (Slide Up) 邏輯 ---
+      const lastProgress = (scroll - folderEnterPositions[2] - folderDurations[2]) / 600;
+      if (lastProgress > 0) {
+          folderRefs.current.forEach((folder, i) => {
+              // 滑出時，我們讓 folder 從其最終的堆疊居中位置 calc(-50% - i*30px) 開始向上移動
+              
+              // 最終的 translate Y 軸：
+              // calc(-50%                 // 垂直居中
+              //        - ${i * 30}px       // 堆疊偏移
+              //        - ${slideUpDistance * lastProgress}px) // 向上滑出距離
+              folder.style.transform = `translate(-50%, calc(-50% - ${i * 30}px - ${slideUpDistance * lastProgress}px))`;
+          });
       }
-    };
+  };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    lenis.on("scroll", onScroll);
+
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
   }, []);
 
-  const folderTextMap = {
-    initial: 'Scroll Down'
-  };
+  const renderMultiLine = (text) =>
+    text.split("\n").map((line, i) => <React.Fragment key={i}>{line}<br /></React.Fragment>);
 
-  const sectionTitles = ['Profile', 'Skills', 'Experiences'];
-  const folderKeys = ['profile', 'skills', 'experiences'];
-
-  const scrollToSection = (index) => {
-    const offset = headerRef.current ? headerRef.current.offsetHeight : 0;
-    const element = sectionRefs.current[index];
-    if (element) {
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-    }
-  };
-
-  const getTabsForSection = (index) => sectionTitles.slice(0, index + 1);
-
-// Skills 表格數據整理  
-  const skillsData = {
-    skillests: [
-      ["01", "Graphic Design"],
-      ["02", "Branding"],
-      ["03", "Illustration"],
-      ["04", "Web Design"],
-      ["05", "Visual Content Planning"],
-      ["06", "Taste Profiling"],
-    ],
-    softwares: [
-      ["Adobe Photoshop", "Adobe Illustrator", "Adobe Indesign"],
-      ["Adobe After Effects", "Adobe Premiere Pro", "Procreate"],
-      ["Lightroom", "Figma", "Procreate"], // 第三行數據
-      ["HTML5 / CSS3 / JavaScript", "TypeScript", "React.js"],
-      ["Vite", "VS Code", "GitHub"],
-    ],
-    languages: [
-     "Mandarin Chinese / English",
-    ],
-  };
+  const folderKeys = ["profile", "skills", "experiences"];
 
   return (
     <div className="about-page">
-      <HeaderMenu ref={headerRef} />
+      <HeaderMenu />
 
-      {/* 第一屏 */}
+      {/* About Info 區塊 */}
       <section className="about-page-container">
         <h1 className="about-page-label">( About ) me</h1>
         <p className="about-page-subtitle">
           專注於品牌設計和網頁設計的細節設計師，對跨領域元素轉化為數位體驗有著濃厚的興趣。
         </p>
+        <div className="scroll-down-indicator" />
       </section>
 
-      {/* Scroll Down */}
-      <div className="scroll-indicator">
-        {Object.entries(folderTextMap).map(([key, text]) => (
-          <span
-            key={key}
-            className={`scroll-text ${scrollState === key ? 'fade-in' : 'fade-out'}`}
-          >
-            {text}
-          </span>
-        ))}
-      </div>
-
-      {/* 資料夾堆疊 */}
-      <div className="folder-stack-container">
-        {folderKeys.map((key, idx) => (
-          <section
-            key={key}
-            ref={(el) => (sectionRefs.current[idx] = el)}
-            className={`folder-section folder-key-${key} ${scrollState === key ? "visible-section" : "hidden-section"}`}
-            style={{ zIndex: idx + 10 }}
-          >
+      {/* Folder Stack 區塊 */}
+      <section className="folder-stack-container-wrapper">
+        <div className="folder-stack-container">
+          {folderKeys.map((key, idx) => (
             <div
-              className="sticky-wrapper"
-              style={{
-                opacity: visibleSections[idx] ? 1 : 0,
-                transform: visibleSections[idx] ? "translateY(0)" : "translateY(120px)",
-                transition: "all 0.6s ease"
-              }}
+              key={key}
+              ref={(el) => (folderRefs.current[idx] = el)}
+              className={`folder folder-key-${key}`}
             >
-              {/* Tab group */}
-              <div className="folder-tab-group">
-                {getTabsForSection(idx).map((title, tabIdx) => {
-                  const sectionIndex = sectionTitles.indexOf(title);
-                  return (
-                    <div
-                      key={title}
-                      className={`tab-label tab-${folderKeys[sectionIndex]}`} // 用 CSS 控制顏色
-                      onClick={() => scrollToSection(sectionIndex)}
-                    >
-                      <span className="label-text">{title}</span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Folder Content */}
-              <div className="folder-content-container">
-                <div className="folder">
-                  <div className="folder-threeParts">
-                    {key === 'profile' && (
-                      <>
-                        <div className="profile-description">
-                          <p className="pro-des-zh">
-                          來自台灣的視覺&網站設計師 瑋儒。
-                          <br/><br/>台灣 朝陽科技大學工業設計系，學士學位。加拿大 Greystone College前端開發專業，結業證書。
-                          <br/><br/>專注於平面設計、網站設計與數位媒體領域，累積了豐富的實務經驗。
-                          熱愛視覺敘事，擅長融合多種媒材與技能，持續突破創意邊界，致力打造兼具美感與功能性的品牌體驗。
-                          </p>
-                        
-                          <p className="pro-des-en">
-                          WeiRu is a Visual and Web Designer from Taiwan.
-                          <br/><br/>Holds a Bachelor's degree in Industrial Design from Chaoyang University of Technology 
-                          and a certificate in Front-End Development from Greystone College, Canada.
-                          <br/><br/>Specializing in graphic design, web design, and digital media, I leverage extensive 
-                          experience and a passion for visual storytelling to craft brand experiences that are both beautiful and highly functional.
-                          </p>
-                        </div>
-                        <div className="profile-photo">
-                        <img src="/src/assets/profile/profile-photo-wei.jpg" alt="profile photo" />
-                        </div>
-                      </>
-                    )}
-
-                    {key === 'skills' && (
-                      <div className="skills-grid-container">
-                        
-                        {/* SKILLESTS 表頭 */}
-                        <div className="skills-header skillests-header">SKILLESTS</div>
-                        
-                        {/* SOFTWARES 表頭 */}
-                        <div className="skills-header softwares-header">SOFTWARES</div>
-                        
-                        {/* ========================================================== */}
-                        {/* 關鍵修正: SKILLESTS 集中區塊 (單一單元格) */}
-                        {/* ========================================================== */}
-                        <div className="grid-row-item skillests-single-cell">
-                          {skillsData.skillests.map((itemPair, index) => (
-                            <React.Fragment key={`sks-frag-${index}`}>
-                              {/* 渲染數字、空格、描述 */}
-                              <span className="skill-number">{itemPair[0]}</span>
-                              &nbsp;&nbsp;&nbsp; 
-                              <span className="skill-description">{itemPair[1]}</span>
-                              
-                              {/* 除了最後一項，都添加換行 */}
-                              {index < skillsData.skillests.length - 1 && <br />}
-                            </React.Fragment>
-                          ))}
-                        </div>
-
-                        {/* SOFTWARES/LANGUAGES 內容 (需跨行/跨列渲染) */}
-                        <div className="softwares-languages-area">
-                          {/* SOFTWARES 內容 */}
-                          {skillsData.softwares.map((row, rowIndex) => (
-                            <React.Fragment key={`swr-${rowIndex}`}>
-                              {row.map((cell, cellIndex) => (
-                                <div className="software-cell" key={`swc-${rowIndex}-${cellIndex}`}>
-                                  {cell}
-                                </div>
-                              ))}
-                            </React.Fragment>
-                          ))}
-
-                          {/* LANGUAGES 表頭 */}
-                          <div className="languages-header">LANGUAGES</div>
-
-                          {/* LANGUAGES 內容 */}
-                          <div className="languages-cell">
-                            {skillsData.languages[0]}
-                          </div>
-
-                        </div>
-                        
-                      </div>
-                    )}
-
-                    {key === 'experiences' && (
-                      <>
-                        <h2>工作經歷 (Experiences)</h2>
-                        <p><strong>UX/UI 設計師 - XYZ 科技公司 (2022 - 2024)</strong></p>
-                        <ul>
-                          <li>主導行動應用介面設計，提高留存率 15%。</li>
-                          <li>與工程合作確保設計精準還原。</li>
-                        </ul>
-                        <p><strong>平面設計師 - ABC 品牌顧問 (2020 - 2022)</strong></p>
-                        <ul>
-                          <li>負責品牌識別與視覺設計。</li>
-                        </ul>
-                      </>
-                    )}
+              {key === "profile" && (
+                <div className="folder-threeParts">
+                  <div className="profile-description">
+                    <p className="pro-des-zh">
+                      來自台灣的視覺&網站設計師 瑋儒。
+                      <br /><br />
+                      台灣 朝陽科技大學工業設計系，學士學位。加拿大 Greystone College前端開發專業，結業證書。
+                      <br /><br />
+                      專注於平面設計、網站設計與數位媒體領域，累積了豐富的實務經驗。
+                    </p>
+                    <p className="pro-des-en">
+                      WeiRu is a Visual and Web Designer from Taiwan.
+                      <br /><br />
+                      Holds a Bachelor's degree in Industrial Design from Chaoyang University of Technology and a
+                      certificate in Front-End Development from Greystone College, Canada.
+                    </p>
+                  </div>
+                  <div className="profile-photo">
+                    <img src="/src/assets/profile/profile-photo-wei.jpg" alt="profile photo" />
                   </div>
                 </div>
-              </div>
+              )}
+
+              {key === "skills" && (
+                <div className="skills-grid-container">
+                  <div className="skills-header skillests-header">SKILLESTS</div>
+                  <div className="skills-header softwares-header">SOFTWARES</div>
+                  <div className="skillests-single-cell">
+                    {skillsData.skillests.map((pair, index) => (
+                      <React.Fragment key={index}>
+                        <span className="skill-number">{pair[0]}</span>&nbsp;&nbsp;&nbsp;
+                        <span className="skill-description">{pair[1]}</span>
+                        {index < skillsData.skillests.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                  <div className="softwares-languages-area">
+                    {skillsData.softwares.map((row, rIdx) =>
+                      row.map((cell, cIdx) => (
+                        <div className="software-cell" key={`sw-${rIdx}-${cIdx}`}>{cell}</div>
+                      ))
+                    )}
+                    <div className="languages-header">LANGUAGES</div>
+                    <div className="languages-cell">{skillsData.languages[0]}</div>
+                  </div>
+                </div>
+              )}
+
+              {key === "experiences" && (
+                <div className="experiences-container">
+                  {experiencesData.map((exp, i) => (
+                    <div className="experience-card" key={i}>
+                      <div className="row-cell year">{renderMultiLine(exp.year)}</div>
+                      <div className="row-cell company">{renderMultiLine(exp.company)}</div>
+                      <div className="row-cell position">{renderMultiLine(exp.position)}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </section>
-        ))}
-      </div>
-      
-      {/* Footer */}
+          ))}
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
