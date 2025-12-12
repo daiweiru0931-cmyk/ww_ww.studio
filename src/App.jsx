@@ -18,6 +18,8 @@ const heroImages = [
   { src: heroImg03, alt: "Hero Sample 3" },
 ];
 
+import serviceCircle from './assets/service/service-circle.png';
+
 // Taste images
 import tasteBranding01 from './assets/taste/taste-branding-01.jpg'; 
 import tasteBranding02 from './assets/taste/taste-branding-02.jpg'; 
@@ -169,7 +171,7 @@ function App() {
         <section className="about-why-how-what">
           <div className="about-content-boxes">
 
-          <span className="section-label">( About )</span>
+          <span className="about-label">( About )</span>
 
             {/* WHY */}
             <div 
@@ -233,60 +235,54 @@ function App() {
 
         {/* Service */}
         <section className="service" ref={serviceRef}>
-          <span className="section-label">( Service )</span>
-          <div className="service-container">
             <div className="service-wrapper">
 
               <div className="service-item-left">
-                <h3>Graphic Design</h3>
-                <p>從標誌設計、名片、傳單、手冊到活動主視覺與產品包裝，以一致的品牌語言打造能引起共鳴的視覺設計。</p>
-                <div className="service-image-placeholder-large"></div>
+              <span className="service-label">( Service )</span>
+                <p>
+                  從標誌、名片、傳單、手冊，到活動主視覺與產品包裝，以一致且富有辨識度的品牌語言打造能引發情感共鳴的視覺設計。
+                  同時，也專注於建立兼具美感與良好使用體驗的網站，期望與品牌攜手打造更具深度與獨特性的線上呈現。
+                </p>
               </div>
 
               <div className="service-item-right">
-                <h3>Web Design</h3>
-                <p>打造兼具視覺吸引力與使用者體驗的網站。期待與品牌一同開創更多獨特的線上呈現。</p>
-                <div className="service-image-placeholder-large"></div>
+                <div className="service-image">
+                <img src={serviceCircle} alt="service" />
+                </div>
               </div>
 
             </div>
-          </div>
+          
         </section>
 
-        {/* Taste */}
+       {/* Taste */}
         <section className="taste">
-          <span className="section-label">( Taste )</span>
-          <div className="taste-content-wrapper">
+          <div className="taste-wrapper">
 
+            <span className="taste-label">( Taste )</span>
+              
             {/* Taste left */}
-            <div className="taste-left-spacer taste-carousel">
+            <div className="taste-photo-gallery">
               <img 
                 src={tasteImages[currentTasteImgIndex].src}
                 alt={tasteImages[currentTasteImgIndex].alt}
-                className="taste-carousel-img-left active"
+                className="taste-img active"
               />
-              <div className="carousel-dots">
-                {tasteImages.map((_, idx) => (
-                  <span 
-                    key={idx}
-                    className={`carousel-dot ${idx === currentTasteImgIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentTasteImgIndex(idx)}
-                  ></span>
-                ))}
-              </div>
             </div>
 
             {/* Right card */}
             <div className="taste-right-card">
               <div className="taste-text-box">
+                <span className="taste-title-dot"></span>
                 <h4 className="card-title">Wendy's Kitchen</h4>
-                <p className="card-description-en">It's a gentle space between flavor and feeling, where food becomes another form of design.</p>
+                <p className="card-description-en">
+                  It's a gentle space between flavor and feeling, where food becomes another form of design.
+                </p>
               </div>
             </div>
 
           </div>
         </section>
-
         <Footer />
       </div>
     </>

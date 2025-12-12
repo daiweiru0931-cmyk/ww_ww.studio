@@ -32,9 +32,9 @@ const HeaderMenu = () => {
       const windowHeight = window.innerHeight;
       const docHeight = document.body.offsetHeight;
 
-      const isAtFooter = scrollY + windowHeight >= docHeight - 150;
+      const isAtFooter = scrollY + windowHeight >= docHeight - 500;
       setAtFooter(isAtFooter);
-      setShowBottomMenu(scrollY > 100 && !isAtFooter);
+      setShowBottomMenu(scrollY > 80 && !isAtFooter);
     };
 
     window.addEventListener("scroll", handleScroll);

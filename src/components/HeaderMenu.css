@@ -7,7 +7,7 @@
   box-sizing: border-box;
   top: 0;
   left: 0;
-  padding: 1rem 2%;
+  padding: 1.5rem 3%;
   z-index: 9999;
   display: flex;
   justify-content: space-between;
@@ -28,10 +28,10 @@
 }
 
 .logo {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Inter', 'Noto Sans TC', serif;
   font-weight: bold;
   font-size: 1.4rem;
-  color: var(--title-color);
+  color: #a65f32;
   white-space: nowrap;
   z-index: 2000;
 }
@@ -80,7 +80,7 @@
 /* CONTACT 按鈕 */
 .contact-btn {
   background-color: var(--link-btn);
-  color: #fff;
+  color: hwb(0 100% 0% / 0.877);
   border: none;
   border-radius: 2.4rem;
   padding: 0.6rem 1rem;
@@ -121,7 +121,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--menu-btn);
+  background-color: rgba(255, 255, 255, 0.8);
   color: var(--link-btn);
   border: none;
   border-radius: 50%;
@@ -186,7 +186,7 @@
 }
 
 .contact-inside-btn:hover {
-  background-color: var(--link-btn);
+  background-color: var(--btn-hover);
 }
 
 /* ==============================

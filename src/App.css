@@ -1,21 +1,22 @@
 /* General Styles & Utilities */
 :root {
   /* 顏色變數 */
-  --Background-Color: #f6f3ef;
-  --Neutral-Black: #1a1a1a;
+  --background-color: #f6f3ef;
+  --title-black: #1a1a1a;
+  --text-black: #1a1a1a;
   --Neutral-Gray: #666666;
   --Neutral-Light: #f5f5f5;
   --Primary-Deep: #a65f32;
   --Primary-Warm: #d9824c;
 
-  --link-btn: #553728;
+  --link-btn: #a65f32;
   --btn-hover: #b09382;
-  --label-color: #553728;
+  
   
   --light-gray: #999;
   --menu-btn: #fff;
   --divider-color: #777;
-  --footer-bg: #222;
+  --footer-bg: #1a1a1a;
   --footer-text: #ccc;
   --footer-btn: #b09382;
   --dark-placeholder-bg: #111;
@@ -24,7 +25,7 @@
 body {
   font-family: 'Inter', 'Noto Sans TC', serif;
   background-color: var(--Background-Color); 
-  color: var(--Neutral-Black);
+  color: var(--title-black);
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -49,13 +50,15 @@ ul {
 
 /* Dark Mode */
 body.dark-mode {
-  --background-color: #222;  
-  --title-color: #fff; 
-  --text-color: #ccc;       
-  --label-color: #fff;     
-  --gray-color: #ccc;      
-  --light-gray: #aaa;  
-  --menu-btn: #aaa;  
+  --background-color: #1a1a1a;
+  --title-black: #f5f5f5;
+  --text-black: #f5f5f5;
+  --Neutral-Gray: #666666;
+  --Neutral-Light: #f5f5f5;
+  --Primary-Deep: #a65f32;
+  --Primary-Warm: #d9824c;
+
+    
   --divider-color: #777;     
   --footer-bg: #222;      
   --footer-text: #ccc;     
@@ -70,8 +73,8 @@ body.dark-mode {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 6rem 3% 2rem 3%;
-  gap: 1rem;
+  padding: 8rem 3% 2rem 3%;
+  gap: 5rem;
   flex-wrap: wrap;
 }
 
@@ -83,8 +86,8 @@ body.dark-mode {
   display: block;
   font-size: clamp(3rem, 5vw, 6rem);
   font-weight: 500;
-  line-height: 1.2;
-  color: var(--Neutral-Black);
+  letter-spacing: -2px;
+  color: var(--title-black);
   margin: 0;
 }
 
@@ -109,12 +112,12 @@ body.dark-mode {
 .info-box {
   width: 380px;
   height: 35px;
-  border: 1px solid var(--Neutral-Gray);
+  border: 1px solid #999;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   background-color: #fff;
   box-sizing: border-box;
 }
@@ -127,8 +130,9 @@ body.dark-mode {
 }
 
 .info-text {
-  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem); 
-  color: var(--Neutral-Black);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  padding-left: 0.5rem; 
+  color: var(--text-black);
 }
 
 .info-btn {
@@ -137,7 +141,7 @@ body.dark-mode {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--Neutral-Black);
+  color: var(--title-black);
   transition: transform 0.2s ease;
 }
 
@@ -153,7 +157,7 @@ body.dark-mode {
   align-items: center;
   min-width: 250px;
   background-color: var(--dark-placeholder-bg);
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
   height: 600px;
   position: relative;
@@ -212,12 +216,12 @@ body.dark-mode {
   flex-wrap: nowrap;
 }
 
-.section-label {
+.about-label {
   flex: 0 0 30%;  /* 標題寬度略窄 */
   min-width: 120px;
   font-size: clamp(3rem, 5vw, 6rem);
   font-weight: 300;
-  color: var(--Neutral-Black);
+  color: var(--title-black);
   display: flex;
   align-items: center;
   justify-content: center; /* 水平置中，可改 flex-start */
@@ -228,7 +232,7 @@ body.dark-mode {
   flex: 1 1 20%; /* Box 寬度窄 */
   min-width: 200px;
   height: 350px;
-  border-radius: 6px;
+  border-radius: 10px;
   background-color: var(--Neutral-Light);
   position: relative;
   perspective: 1000px;
@@ -300,7 +304,7 @@ body.dark-mode {
 
 .flipped-text {
     font-size: clamp(3rem, 5vw, 6rem);
-    color: white;
+    color: #ffffff;
     font-weight: 600;
     margin: 0;
 }
@@ -309,140 +313,157 @@ body.dark-mode {
    Service Section
 ============================== */
 .service {
-  padding: 10rem 10%;
+  padding: 5rem 5%;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .service-wrapper {
   display: flex;
-  justify-content: space-between;
-  gap: 5rem;
-  margin-top: 3rem;
+  justify-content: space-between; 
+  gap: 2rem;         
 }
 
-.service-item-left, 
-.service-item-right {
-  flex: 1 1 45%;
+.service-item-left {
+  flex: 1 1 50%;
   position: relative;
-  padding-bottom: 400px;
+  color: #f5f5f5;
 }
 
-.service-item-left h3, .service-item-right h3 {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: bold;
-  color: var(--title-color);
-  margin-top: 0;
+.service-label{
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 300;
+  color: var(--title-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
 }
 
-.service-item-left p, .service-item-right p {
+.service-item-left p {
   font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  color: var(--Neutral-Gray);
-  line-height: 1.8;
-  letter-spacing: 0.5px;
-  margin: 0 0 1.5rem 0;
+  color: #f5f5f5;
+  line-height: 2.3;
+  letter-spacing: 1px;
+  padding: 3rem 5rem 0 5rem;
+  margin: 0;
 }
 
-.service-image-placeholder-large {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 350px;
-  background-color: var(--dark-placeholder-bg);
-  border-radius: 10px;
+.service-item-right {
+  flex: 1 1 50%;
+  position: relative;
 }
+
+.service-image {
+  display: flex;
+  justify-content: center;  /* 水平置中 */
+  align-items: center;      /* 垂直置中 */
+  width: 100%;
+  height: 100%;
+}
+
+.service-image img {
+  width: 70%;          
+  height: auto;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 
 /* ==============================
    Taste Section
 ============================== */
 .taste {
-  padding: 10rem 10%;
-  display: flex;
-  flex-direction: column;
+  padding: 15rem 5% 15rem 5%;
 }
 
-.taste-content-wrapper {
+.taste-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1200px;
-  gap: 5rem;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative; /* 讓卡片 absolute 定位 */
 }
 
-.taste-left-spacer {
-  flex: 1 1 50%;
+.taste-label {
+  flex: 0 0 30%; 
+  min-width: 120px;
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 300;
+  color: var(--title-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 3%;
+}
+
+.taste-photo-gallery {
+  flex: 1 1 70%;
   min-width: 350px;
-  position: relative;
+  position: relative; /* 保留輪播圖定位 */
   height: clamp(350px, 40vw, 450px);
   overflow: hidden;
 }
 
-.taste-carousel-img-left {
-  width: 100%;
+.taste-img {
+  width: 80%;
   height: 100%;
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
+  z-index: 10;
   transition: opacity 0.8s ease-in-out; 
   border-radius: 10px;
 }
 
-.taste-carousel-img-left.active {
+.taste-img.active {
   opacity: 1;
-}
-
-.taste-left-spacer .carousel-dots {
-  position: absolute;
-  bottom: 25px;
-  left: 25px;
-  display: flex;
-  gap: 10px;
   z-index: 20;
 }
 
-.taste-left-spacer .carousel-dot {
-  width: 10px;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.taste-left-spacer .carousel-dot.active {
-  background-color: var(--dark-placeholder-bg);
-  transform: scale(1.2);
-}
-
+/* 卡片設定 */
 .taste-right-card {
-  flex: 1 1 40%;
-  min-width: 300px;
+  position: absolute;
+  top: 90%;           
+  right: 5%;          /* 距離右邊，改成 % 可隨寬度調整 */
+  transform: translateY(-50%);
+  z-index: 100;
+  width: 10%;         
   background-color: var(--Primary-Deep);
   color: white;
-  padding: 3rem;
+  padding: 1.5rem;
   border-radius: 10px;
-  align-self: flex-end;
-  margin-bottom: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.taste-title-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: #b09382;
+  border-radius: 50%;
+  margin: 0;
 }
 
 .card-title {
-  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin: 0.2rem 0 1.5rem 0;
 }
 
 .card-description-en {
-  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
   line-height: 1.6;
+  margin: 0;
 }
+
   
 /* Footer  */
 .split-text{
   font-size: clamp(3rem, 8vw, 6rem);
-  color: #a57864;
+  color: var(--Neutral-Gray);
   margin: 0 0 5rem 0;
 }
 
@@ -472,7 +493,7 @@ body.dark-mode {
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: bold;
   margin: 0;
-  color: var(--footer-text);
+  color: var(--Primary-Deep);
 }
 
 .footer-nav ul {

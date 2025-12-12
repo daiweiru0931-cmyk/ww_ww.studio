@@ -123,12 +123,12 @@ export default function DecryptedText({
     return () => current && observer.unobserve(current);
   }, [hasAnimated]);
 
-  // 播放序列 (已修正的通用邏輯)
+  // 播放序列
   useEffect(() => {
     if (!hasAnimated) return;
 
     let timeout;
-    const LOOP_DELAY = 12000; // 總循環間隔
+    const LOOP_DELAY = 5000; // 總循環間隔
     const LINE_DELAY = 500; // 行間延遲
 
     // 啟動一個新循環
@@ -205,9 +205,7 @@ export default function DecryptedText({
             }}
           >
             {isHtmlContent ? (
-                // 如果包含 <br />，我們只能使用 dangerouslySetInnerHTML，並犧牲逐字動畫
-                // 由於 DecryptedText 已經是逐字動畫，我們需要先將 <br /> 替換為一個佔位符 (例如 |)
-                // 這樣逐字解密才能正確處理
+                
                 <span 
                     // 為了避免複雜化，我們假設外部調用者會盡量避免在 DecryptedText 中傳入 <br />
                     // 如果必須傳入 <br />，則動畫效果會比較差

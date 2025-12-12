@@ -10,7 +10,7 @@ const DarkModeMulti = ({ targetRef }) => {
       const viewportHeight = window.innerHeight;
 
       const isVisibleEnough =
-        rect.top < viewportHeight * 0.3 && rect.bottom > viewportHeight * 0.3;
+        rect.top < viewportHeight * 0.5 && rect.bottom > viewportHeight * 0.5;
 
       if (isVisibleEnough) {
         document.body.classList.add("dark-mode");
