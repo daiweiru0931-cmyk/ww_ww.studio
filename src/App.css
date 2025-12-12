@@ -74,11 +74,13 @@ body.dark-mode {
   justify-content: space-between;
   align-items: flex-start;
   padding: 8rem 3% 2rem 3%;
-  gap: 5rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
 .hero-left {
+  flex: 0 0 50%;   /* 不放大、不縮小、固定占 50% */
+  max-width: 50%;
   margin: 10rem 0 0 2%;
 }
 
@@ -86,9 +88,13 @@ body.dark-mode {
   display: block;
   font-size: clamp(3rem, 5vw, 6rem);
   font-weight: 500;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
   color: var(--title-black);
   margin: 0;
+}
+
+.encrypted {
+  font-size: clamp(1rem, 2vw, 1.5rem);
 }
 
 .hero-bottom-left {
@@ -205,31 +211,37 @@ body.dark-mode {
    About - WHY/HOW/WHAT
 ============================== */
 .about-why-how-what {
-  padding: 15rem 5% 15rem 5%;
+  padding: 15rem 5%;
 }
 
 .about-content-boxes {
   display: flex;
-  gap: 1.2rem; /* 小間距 */
+  gap: 3rem; /* 小間距 */
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; 
 }
 
 .about-label {
   flex: 0 0 30%;  /* 標題寬度略窄 */
-  min-width: 120px;
+  min-width: 250px;
   font-size: clamp(3rem, 5vw, 6rem);
   font-weight: 300;
   color: var(--title-black);
   display: flex;
-  align-items: center;
-  justify-content: center; /* 水平置中，可改 flex-start */
-  padding-right: 3%; /* 可視需求 */
+  align-items: flex-start;
+  justify-content: center; 
+}
+
+.about-boxes-wrapper {
+  flex: 1; /* 佔據所有剩餘空間 (70%) */
+  display: flex;
+  gap: 1.2rem; /* 三個資訊框之間的小間距 */
+  justify-content: space-between; 
 }
 
 .about-info-box {
-  flex: 1 1 20%; /* Box 寬度窄 */
+  flex: 1 1 0; /* 讓三個資訊框平均分配 .about-boxes-wrapper 的空間 */
   min-width: 200px;
   height: 350px;
   border-radius: 10px;
@@ -570,23 +582,209 @@ body.dark-mode {
    RWD
 ============================== */
 @media (max-width: 1024px) {
-  .about-content-boxes { flex-wrap: wrap; justify-content: center; }
-  .section-label { flex: 0 0 100%; justify-content: center; margin-bottom: 1rem; }
-  .about-info-box { flex: 1 1 80%; margin-bottom: 1rem; }
+  .about-content-boxes { 
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 2rem; 
+  }
+  .section-label { 
+    flex: 0 0 100%; 
+    justify-content: center; 
+    margin-bottom: 3rem; 
+    min-width: auto; /* 清除桌面 min-width 限制 */
+  }
+  .about-boxes-wrapper {
+    flex: 0 0 100%; /* 佔據整行寬度 */
+    justify-content: center; /* 讓三個資訊框在這一行內居中 */
+    gap: 2rem; /* 資訊框之間的間距 */
+  }
+  .about-info-box { 
+    flex: 0 0 calc(33.333% - 2rem);
+    max-width: calc(33.333% - 2rem);
+  }
 }
 
 @media (max-width: 768px) {
-  .hero { padding: 10rem 1.5rem 0 1.5rem; flex-direction: column; align-items: center; }
-  .hero-left, .hero-right { width: 100%; min-width: auto; flex-direction: column; align-items:center; text-align: center; }
-  .hero-right { height: 350px; }
-  .about-why-how-what { padding: 4rem 1.5rem 6rem 1.5rem; }
-  .about-content-boxes { flex-direction: column; gap: 1.5rem; }
-  .about-info-box { width: 100%; min-width: auto; height: 200px; }
+  .hero { 
+    padding: 10rem 1.5rem 0 1.5rem; 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  .hero-left {
+    width: 100%;   
+    max-width: 100%;   
+    margin: 0 auto;    
+    display: flex;
+    flex-direction: column; /* 因為標題是多行，所以保持垂直排列 */
+    align-items: center; /* 讓 h1-text (子元素) 水平置中 */
+    text-align: center;
+  }
+  .hero-left .h1-text {
+    white-space: nowrap; /* 強制文字不換行 */
+    margin: 0;
+  }
+  .hero-left, .hero-right { 
+    width: 100%; 
+    min-width: auto; 
+  }
+  .info-box-container {
+    display: flex;        
+    justify-content: center; 
+    width: 100%;
+  }
+  .hero-right { 
+    aspect-ratio: 3 / 4; /* 設置長寬比為 3:4 (寬度:高度) */
+    max-width: 80%;       
+    background-color: transparent; 
+    position: relative;
+    margin: 3rem auto;
+  }
+  .hero-carousel-container{
+    padding: 0;
+    height: 100%;
+  }
+  .hero-carousel-img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* 圖片不被拉伸，但會裁切邊緣 */
+  }
+  .hero-carousel-img.active {
+    width: 100%; 
+    height: 100%; /* 強制高度為 100% */
+  }
+  .about-why-how-what { 
+    padding: 8rem 5%; 
+  }
+  .about-label {
+    justify-content: center; 
+    align-items: center;
+    flex: 0 0 100%; /* 標題佔滿整行 */
+    margin-bottom: 1rem;
+  }
+  .about-boxes-wrapper {
+    flex-direction: row; /* 改成水平排列三個卡片 */
+    flex-wrap: wrap;     /* 如果螢幕太小會自動換行 */
+    justify-content: center; /* 水平置中三個卡片 */
+    gap: 1.5rem; /* 卡片間距 */
+  }
+  .about-info-box { 
+    flex: 0 0 calc(33.333% - 2rem); /* 三個卡片平均分配空間 */
+    max-width: calc(33.333% - 2rem);
+    height: auto; /* 高度自動適應內容 */
+    min-height: 250px; 
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .flipper, .front, .back {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;   
+    box-sizing: border-box;
+  }
+  .box-title {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    margin-bottom: 1.5rem; 
+  }
+
+  .box-description {
+    font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+    line-height: 1.4;
+  }
 }
 
 @media (max-width: 480px) {
-  .hero { padding: 10rem 1rem 0 1rem; }
-  .hero-right { height: 300px; }
-  .about-why-how-what { padding: 3rem 1rem 5rem 1rem; }
-  .about-info-box { padding: 1.5rem; height: 180px; }
+  .hero { 
+    padding: 8rem 1rem 0 1rem; /* 上下內距稍微縮小 */
+  }
+
+  .hero-left {
+    width: auto;          /* 讓寬度自適應文字 */
+    max-width: 100%;      /* 不超出父容器 */
+    margin: 0 auto;       /* 水平置中 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left .h1-text {
+    font-size: clamp(2.5rem, 6vw, 4rem); /* 調整文字大小以避免換行 */
+    white-space: nowrap;                  /* 強制不換行 */
+    margin: 0;
+  }
+
+  .hero-right { 
+    aspect-ratio: 3 / 4; 
+    max-width: 90%;       /* 螢幕小時放大圖片容器 */
+    height: auto;         /* 高度自適應 */
+    background-color: transparent; 
+    position: relative;
+    margin: 2rem auto;    /* 上下間距調整 */
+  }
+
+  .hero-carousel-container {
+    padding: 0;
+    height: 100%;
+  }
+
+  .hero-carousel-img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+  }
+
+  .hero-carousel-img.active {
+    width: 100%; 
+    height: 100%;
+  }
+
+  .about-why-how-what { 
+    padding: 5rem 1rem;  /* 小螢幕縮小內距 */
+  }
+
+  .about-label {
+    flex: 0 0 100%; 
+    margin-bottom: 0.5rem;
+    justify-content: center; 
+    align-items: center;
+    font-size: clamp(2rem, 5vw, 3rem); /* 調整標題大小 */
+  }
+
+  .about-boxes-wrapper {
+    flex-direction: column; /* 小螢幕改成垂直排列 */
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-info-box { 
+    flex: 0 0 90%;      /* 每個卡片佔大部分寬度 */
+    max-width: 90%;
+    min-height: 200px; 
+    padding: 1rem; 
+    box-sizing: border-box;
+  }
+
+  .flipper, .front, .back {
+    width: 100%;
+    height: 100%;
+    padding: 1rem;   
+    box-sizing: border-box;
+  }
+
+  .box-title {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    margin-bottom: 1rem;
+  }
+
+  .box-description {
+    font-size: clamp(0.625rem, 2.5vw, 0.75rem);
+    line-height: 1.3;
+  }
+
+  .info-box-container {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 }

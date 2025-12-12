@@ -136,7 +136,7 @@ function App() {
               ]}
               speed={50}
               maxIterations={1}
-              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+              characters="abcdefghijklmnopqrstuvwxyz"
               encryptedClassName="encrypted"
               parentClassName="all-letters"
             />
@@ -172,6 +172,9 @@ function App() {
           <div className="about-content-boxes">
 
           <span className="about-label">( About )</span>
+          
+          {/* 將 WHY/HOW/WHAT 放在一起 */}
+          <div className="about-boxes-wrapper">
 
             {/* WHY */}
             <div 
@@ -226,7 +229,7 @@ function App() {
                 </div>
               </div>
             </div>
-
+          </div>
           </div>
         </section>
 
