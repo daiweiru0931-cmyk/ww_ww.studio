@@ -102,7 +102,7 @@ function App() {
         {/* Hero section */}
         <section className="hero">
           
-          {/* Hero-left */}
+          {/* Hero-left: 包含標題與打字框 */}
           <div 
             className="hero-left"
             style={{ 
@@ -110,24 +110,6 @@ function App() {
               height: heroLeftDimensions.height > 0 ? `${heroLeftDimensions.height}px` : 'auto',
             }}
           >
-            <div 
-              ref={finalContentRef}
-              style={{ 
-                position: 'absolute', 
-                visibility: 'hidden', 
-                pointerEvents: 'none',
-                maxWidth: '45%'
-              }}
-            >
-              <span className="h1-text all-letters">Exploring Frontend</span>
-              <div className="hero-bottom-left">
-                <h5 style={{ margin: '12px 0 5px 0' }}>視覺與網站 創意開發</h5>
-                <div className="search-box-simulated" style={{ border: '1px solid #666', background: '#fff', padding: '0.5rem 1rem', borderRadius: '5px' }}>
-                  <span className="search-text" style={{ color: '#28140a', marginRight: '1rem' }}>based in Taiwan</span>
-                  <span className="search-close" style={{ color: '#28140a' }}>+</span>
-                </div>
-              </div>
-            </div>
 
             <DecryptedText
               texts={[
