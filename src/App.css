@@ -607,7 +607,8 @@ body.dark-mode {
 /* 768px ｜ Tablet / Mobile */
 @media (max-width: 768px) {
   .hero { 
-    padding: 10rem 0 0 0; 
+    padding: 0; 
+    display: flex;
     flex-direction: column; 
     align-items: center; 
     width: 100%;
@@ -615,15 +616,17 @@ body.dark-mode {
   }
 
   .hero-left {
-    width: 100% !important;   /* 強制覆蓋 JSX 的 inline-style */
-    max-width: 100%;   
-    height: auto !important;
-    margin: 0 auto;    
+    min-height: 100vh;   /* ⭐ 滿版畫面 */
+    min-height: 100svh;  /* ⭐ 手機安全高度 */
+    width: 100%;
+    max-width: 100svh;
+    margin: 0;
+    padding: 0;    
     display: flex;
     flex-direction: column; 
+    justify-content: center;
     align-items: center; 
     text-align: center;
-    padding: 0 1.5rem; /* 讓文字保持安全邊距 */
     box-sizing: border-box;
   }
 
@@ -632,6 +635,7 @@ body.dark-mode {
     white-space: nowrap; /* 強制不換行 */
     margin: 0;
     line-height: 1.2;
+    letter-spacing: -1px;
   }
 
   .hero-bottom-left {
@@ -658,9 +662,9 @@ body.dark-mode {
     width: 100%;
     max-width: 90%;       
     aspect-ratio: 3 / 4; 
+    height: auto;        /* 讓 aspect-ratio 主導高度 */
     margin: 2rem 0 0 0; /* 貼齊底部，移除右間距 */
     border-radius: 0;    /* 滿版圖片移除圓角 */
-    height: auto;        /* 讓 aspect-ratio 主導高度 */
   }
 
   .hero-carousel-container {
@@ -848,19 +852,24 @@ body.dark-mode {
 /* 480px ｜ Small Mobile */
 @media (max-width: 480px) {
   .hero { 
-    padding: 10rem 0 0 0; 
+    padding: 0; 
+  }
+
+  .hero-left {
+    min-height: 100vh;
+    min-height: 100svh;
   }
 
   .hero-left .h1-text {
     font-size: clamp(1.6rem, 7.2vw, 2.2rem); 
+    letter-spacing: -1px;
   }
   .hero-right { 
     width: 100%;
     max-width: 100%;       
-    aspect-ratio: 3 / 4; 
-    margin: 2rem 0 0 0; /* 貼齊底部，移除右間距 */
+    min-height: 100vh;
+    min-height: 100svh;
     border-radius: 0;    /* 滿版圖片移除圓角 */
-    height: auto;        /* 讓 aspect-ratio 主導高度 */
   }
 
   .about-boxes-wrapper {
