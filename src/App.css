@@ -19,7 +19,7 @@
   --footer-bg: #1a1a1a;
   --footer-text: #ccc;
   --footer-btn: #b09382;
-  --dark-placeholder-bg: #111;
+  --dark-placeholder-bg: #1a1a1a;
 }
 
 html, body {
@@ -27,7 +27,7 @@ html, body {
   overflow-x: hidden; /* 徹底禁止水平滑動 */
   position: relative;
   font-family: 'Inter', 'Noto Sans TC', serif;
-  background-color: var(--Background-Color); 
+  background-color: var(--background-color); 
   color: var(--title-black);
   line-height: 1.6;
   margin: 0;
@@ -60,13 +60,11 @@ body.dark-mode {
   --Neutral-Light: #f5f5f5;
   --Primary-Deep: #a65f32;
   --Primary-Warm: #d9824c;
-
     
   --divider-color: #777;     
-  --footer-bg: #222;      
+  --footer-bg: #1a1a1a;      
   --footer-text: #ccc;     
   --footer-btn: #cda596; 
-  --dark-placeholder-bg: #333;
 }
 
 /* ==============================
@@ -583,9 +581,7 @@ body.dark-mode {
    RWD – Responsive Layout
 ===================================================== */
 
-/* =====================================
-   1024px ｜ Tablet Landscape
-===================================== */
+/* 1024px ｜ Tablet Landscape */
 @media (max-width: 1024px) {
   .about-content-boxes { 
     flex-wrap: wrap;
@@ -608,6 +604,7 @@ body.dark-mode {
   }
 }
 
+/* 768px ｜ Tablet / Mobile */
 @media (max-width: 768px) {
   .hero { 
     padding: 10rem 0 0 0; 
@@ -643,7 +640,6 @@ body.dark-mode {
     width: 100%;
   }
 
-  /* --- Info Box 穩定置中設定 --- */
   .info-box-container {
     width: 100%;
     display: flex;
@@ -677,7 +673,6 @@ body.dark-mode {
     border-radius: 0;
   }
 
-  /* --- About Section --- */
   .about-why-how-what { 
     padding: 10rem 5% 0 5%; 
     display: block;
@@ -774,6 +769,7 @@ body.dark-mode {
   .service-item-right{
     padding-top: 3rem;
   }
+
   .service-image img {
     width: 80%;
   }
@@ -794,6 +790,7 @@ body.dark-mode {
     width: 100%;
     gap: 0; 
   }
+
   .taste-label {
     margin-bottom: 3rem;
   }
@@ -848,13 +845,13 @@ body.dark-mode {
   }
 }
 
+/* 480px ｜ Small Mobile */
 @media (max-width: 480px) {
   .hero { 
     padding: 10rem 0 0 0; 
   }
 
   .hero-left .h1-text {
-    /* 針對窄螢幕微調，避免 nowrap 撐開寬度 */
     font-size: clamp(1.6rem, 7.2vw, 2.2rem); 
   }
   .hero-right { 
@@ -866,7 +863,6 @@ body.dark-mode {
     height: auto;        /* 讓 aspect-ratio 主導高度 */
   }
 
-  /* --- About Box 手機版垂直排列 --- */
   .about-boxes-wrapper {
     flex-direction: column;
     align-items: center;
@@ -891,7 +887,7 @@ body.dark-mode {
   }
 
   .taste-photo-gallery {
-    height: 600px; /* 小手機縮小高度 */
+    height: 600px; 
   }
   
   .taste-right-card {
