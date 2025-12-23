@@ -413,36 +413,34 @@ body.dark-mode {
 }
 
 .taste-photo-gallery {
-  flex: 1 1 70%;
-  min-width: 350px;
-  position: relative; /* 保留輪播圖定位 */
+  position: relative;
+  width: 100%;
   height: clamp(350px, 40vw, 450px);
   overflow: hidden;
 }
 
 .taste-img {
-  width: 80%;
+  position: absolute;
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
-  z-index: 10;
   transition: opacity 0.8s ease-in-out; 
   border-radius: 10px;
 }
 
 .taste-img.active {
   opacity: 1;
-  z-index: 20;
+  z-index: 2;
 }
 
 /* 卡片設定 */
 .taste-right-card {
   position: absolute;
-  top: 90%;           
-  right: 5%;          /* 距離右邊，改成 % 可隨寬度調整 */
+  top: 100%;           
+  right: 3%;          /* 距離右邊，改成 % 可隨寬度調整 */
   transform: translateY(-50%);
   z-index: 100;
   width: 10%;         
@@ -581,10 +579,13 @@ body.dark-mode {
   margin: 0;
 }
 
-/* ==============================
-   RWD 調整開始
-============================== */
+/* =====================================================
+   RWD – Responsive Layout
+===================================================== */
 
+/* =====================================
+   1024px ｜ Tablet Landscape
+===================================== */
 @media (max-width: 1024px) {
   .about-content-boxes { 
     flex-wrap: wrap;
@@ -608,9 +609,8 @@ body.dark-mode {
 }
 
 @media (max-width: 768px) {
-  /* --- Hero Section 滿版設定 --- */
   .hero { 
-    padding: 8rem 0 0 0; /* 左右歸零，讓圖片滿版 */
+    padding: 10rem 0 0 0; 
     flex-direction: column; 
     align-items: center; 
     width: 100%;
@@ -655,14 +655,12 @@ body.dark-mode {
     max-width: 360px; 
     height: 40px;          /* 固定高度防止打字跳動 */
     margin: 0 auto !important;
-    flex-shrink: 0;        /* 防止被壓縮 */
     overflow: hidden;
   }
 
-  /* --- 圖片滿版設定 --- */
   .hero-right { 
     width: 100%;
-    max-width: 100%;       
+    max-width: 90%;       
     aspect-ratio: 3 / 4; 
     margin: 2rem 0 0 0; /* 貼齊底部，移除右間距 */
     border-radius: 0;    /* 滿版圖片移除圓角 */
@@ -680,30 +678,192 @@ body.dark-mode {
   }
 
   /* --- About Section --- */
-  .about-why-how-what { padding: 6rem 5%; }
-  .about-boxes-wrapper { 
-    flex-wrap: wrap; 
-    flex-direction: row; 
+  .about-why-how-what { 
+    padding: 10rem 5% 0 5%; 
+    display: block;
   }
+
+  .about-content-boxes {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+
+  .about-label { 
+    flex: 0 0 100%; 
+    justify-content: center; 
+    margin-bottom: 3rem; 
+    font-size: 3rem;
+  }
+
+  .about-boxes-wrapper { 
+    flex-direction: column; /* 垂直排列 */
+    width: 100%;
+    align-items: center;
+    gap: 2.5rem; 
+  }
+
   .about-info-box { 
-    flex: 0 0 calc(50% - 1rem); /* 改為兩人一排 */
-    max-width: calc(50% - 1rem);
-    height: 300px;
+    flex: 0 0 auto; 
+    width: 90%;          /* 寬度佔 90% 並置中 */
+    max-width: 380px; /* 限制寬度讓手機版比例較好看 */
+    height: 320px;   /* 固定高度 */
+    margin: 0 auto;
+    background-color: transparent; /* 讓底下的 front 顏色主導 */
+  }
+
+  .front, .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px; /* 確保圓角一致 */
+    box-sizing: border-box;
+  }
+
+  .front {
+    z-index: 2;
+    background-color: #ffffff; /* ⭐️ 強制白色底色 */
+    color: #1a1a1a;            /* 確保文字清晰 */
+    padding: 2.5rem 2rem;       /* 增加內距 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 加入微陰影提升層次 */
+  }
+
+  .back {
+    background-color: var(--Primary-Deep);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+  }
+
+  .box-title {
+    margin: 0 0 1.5rem 0; /* 手機版縮小間距 */
+  }
+
+  .box-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .service{
+    padding: 10rem 5% 0 5%;
+  }
+  .service-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .service-label{
+    padding: 0;
+    margin-bottom: 3rem;
+  }   
+
+  .service-item-left p {
+    padding: 0 2rem;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .service-item-right{
+    padding-top: 3rem;
+  }
+  .service-image img {
+    width: 80%;
+  }
+
+  .taste {
+    padding: 10rem 5%; 
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .taste-wrapper {
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    align-items: center;
+    width: 100%;
+    gap: 0; 
+  }
+  .taste-label {
+    margin-bottom: 3rem;
+  }
+
+  .taste-photo-gallery {
+    width: 100%;
+    height: 450px; 
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 1; 
+    background-color: #eee; /* 佔位色 */
+  }
+
+  .taste-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+  }
+
+  .taste-img.active {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .taste-right-card {
+    position: absolute; /* 關鍵：脫離文件流 */
+    bottom: 0;          /* 貼齊底部 */
+    right: 3%;          /* 距離右邊 5% 的間距 */
+    width: 30%;         /* 調整寬度，確保不會超出螢幕 */
+    max-width: fit-content;
+    height: auto; 
+    min-height: fit-content; 
+    padding: 1.5rem;
+    z-index: 10;          /* 確保卡片在圖片之上 */
+    background-color: #8B4513; /* 更新為你的深色背景 */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    text-align: left; /* 回歸左對齊閱讀較順 */
+    transform: translateY(-60%);
+  }
+
+  .taste-right-card h3, 
+  .taste-right-card p {
+    margin: 0.5rem 0;
+    color: #fff;
   }
 }
 
 @media (max-width: 480px) {
   .hero { 
-    padding: 6rem 0 0 0; 
+    padding: 10rem 0 0 0; 
   }
 
   .hero-left .h1-text {
     /* 針對窄螢幕微調，避免 nowrap 撐開寬度 */
     font-size: clamp(1.6rem, 7.2vw, 2.2rem); 
   }
-
   .hero-right { 
-    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 100%;       
+    aspect-ratio: 3 / 4; 
+    margin: 2rem 0 0 0; /* 貼齊底部，移除右間距 */
+    border-radius: 0;    /* 滿版圖片移除圓角 */
+    height: auto;        /* 讓 aspect-ratio 主導高度 */
   }
 
   /* --- About Box 手機版垂直排列 --- */
@@ -713,41 +873,33 @@ body.dark-mode {
   }
 
   .about-info-box { 
-    flex: 0 0 100%;      
-    max-width: 90%;
-    width: 90%;
-    height: 280px;
+    width: 95%;      
+    height: 340px;
   }
 
-  /* --- Service & Taste 手機版優化 --- */
-  .service-wrapper, .taste-wrapper {
+  .flipped-text {
+    font-size: 4rem;
+  }
+
+  .service-wrapper {
     flex-direction: column;
     text-align: center;
   }
 
   .service-item-left p {
-    padding: 2rem 1rem;
+    padding: 0rem 1.5rem;
   }
 
   .taste-photo-gallery {
-    min-width: 100%;
-    width: 100%;
+    height: 600px; /* 小手機縮小高度 */
   }
   
-  .taste-img {
-    width: 100%;
-  }
-
   .taste-right-card {
-    position: relative;
-    top: auto;
-    right: auto;
-    transform: none;
-    width: 80%;
-    margin: -2rem auto 0; /* 稍微向上疊在圖片上 */
+    transform: translateY(-70%);
   }
+  
 }
 
 /* {
   outline: 1px solid red !important;
-} */
+} 

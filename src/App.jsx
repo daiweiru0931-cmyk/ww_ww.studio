@@ -248,14 +248,17 @@ function App() {
               
             {/* Taste left */}
             <div className="taste-photo-gallery">
-              <img 
-                src={tasteImages[currentTasteImgIndex].src}
-                alt={tasteImages[currentTasteImgIndex].alt}
-                className="taste-img active"
-              />
+              {/* 使用 map 渲染所有圖片，確保空間被撐開且切換平滑 */}
+              {tasteImages.map((img, idx) => (
+                <img 
+                  key={idx}
+                  src={img.src}
+                  alt={img.alt}
+                  className={`taste-img ${idx === currentTasteImgIndex ? 'active' : ''}`}
+                />
+              ))}
             </div>
 
-            {/* Right card */}
             <div className="taste-right-card">
               <div className="taste-text-box">
                 <span className="taste-title-dot"></span>
@@ -265,7 +268,6 @@ function App() {
                 </p>
               </div>
             </div>
-
           </div>
         </section>
         <Footer />
