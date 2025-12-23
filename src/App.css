@@ -74,15 +74,19 @@ body.dark-mode {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 8rem 3% 2rem 3%;
+  min-height: calc(100svh - var(--header-height, 0px));
+  padding: 0 3% 2rem 3%;
   gap: 3rem;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .hero-left {
   flex: 0 0 50%;   /* 不放大、不縮小、固定占 50% */
   max-width: 50%;
-  margin: 10rem 0 0 2%;
+  margin: 0 0 0 2%; 
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-left .h1-text {
@@ -607,31 +611,28 @@ body.dark-mode {
 /* 768px ｜ Tablet / Mobile */
 @media (max-width: 768px) {
   .hero { 
-    padding: 0; 
     display: flex;
     flex-direction: column; 
-    align-items: center; 
-    width: 100%;
-    overflow-x: hidden;
+    padding: 0 !important; /* 移除內距，由子元素控制 */
+    gap: 0;
   }
 
   .hero-left {
-    min-height: 100vh;   /* ⭐ 滿版畫面 */
-    min-height: 100svh;  /* ⭐ 手機安全高度 */
     width: 100%;
-    max-width: 100svh;
-    margin: 0;
-    padding: 0;    
+    max-width: 100vw;
+    min-height: calc(100svh - var(--header-height, 0px)); 
+    margin: 0 !important;
     display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
     text-align: center;
     box-sizing: border-box;
+    padding: 2rem;
   }
 
   .hero-left .h1-text {
-    font-size: clamp(1.8rem, 8vw, 2.8rem); 
+    font-size: clamp(2rem, 8vw, 3.5rem);
     white-space: nowrap; /* 強制不換行 */
     margin: 0;
     line-height: 1.2;
@@ -639,7 +640,7 @@ body.dark-mode {
   }
 
   .hero-bottom-left {
-    margin-top: 2rem;
+    margin-top: 4rem;
     align-items: center;
     width: 100%;
   }
@@ -651,7 +652,7 @@ body.dark-mode {
   }
 
   .info-box {
-    width: 90% !important; /* 寬度固定比例 */
+    width: 100% !important; /* 寬度固定比例 */
     max-width: 360px; 
     height: 40px;          /* 固定高度防止打字跳動 */
     margin: 0 auto !important;
@@ -662,18 +663,19 @@ body.dark-mode {
     width: 100%;
     max-width: 90%;       
     aspect-ratio: 3 / 4; 
-    height: auto;        /* 讓 aspect-ratio 主導高度 */
-    margin: 2rem 0 0 0; /* 貼齊底部，移除右間距 */
+    height: auto; /* 讓 aspect-ratio 主導高度 */
     border-radius: 0;    /* 滿版圖片移除圓角 */
+    margin: 0 auto;
   }
 
-  .hero-carousel-container {
-    padding: 0; /* 移除容器內距 */
+  .hero-carousel-container,
+  .hero-carousel-img {
+    width: 100%;
+    height: 100%;
   }
 
   .hero-carousel-img {
-    width: 100%; 
-    height: 100%; 
+    object-fit: cover; 
     border-radius: 0;
   }
 
@@ -852,24 +854,31 @@ body.dark-mode {
 /* 480px ｜ Small Mobile */
 @media (max-width: 480px) {
   .hero { 
-    padding: 0; 
+    min-height: auto; 
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
   }
 
   .hero-left {
-    min-height: 100vh;
-    min-height: 100svh;
+    width: 100%;
+    min-height: calc(100svh - var(--header-height, 0px));
+    padding: 2rem;
   }
 
   .hero-left .h1-text {
-    font-size: clamp(1.6rem, 7.2vw, 2.2rem); 
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+    line-height: 1.2;
     letter-spacing: -1px;
   }
   .hero-right { 
     width: 100%;
-    max-width: 100%;       
-    min-height: 100vh;
-    min-height: 100svh;
-    border-radius: 0;    /* 滿版圖片移除圓角 */
+    max-width: 100%; 
+    min-height: 80svh; 
+    margin: 0 auto;
+    border-radius: 0;
+
+    
   }
 
   .about-boxes-wrapper {
@@ -905,6 +914,6 @@ body.dark-mode {
   
 }
 
-/* {
+* {
   outline: 1px solid red !important;
 } 

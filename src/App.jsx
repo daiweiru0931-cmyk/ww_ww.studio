@@ -35,36 +35,29 @@ function App() {
   const navigate = useNavigate();
   const serviceRef = useRef(null);
   const headerRef = useRef(null);
+
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  const [heroLeftDimensions, setHeroLeftDimensions] = useState({ width: 0, height: 0 });
-  const finalContentRef = useRef(null);
-
+  /* ✅【關鍵】同步 header 高度 → CSS 變數 */
   useEffect(() => {
-    if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
+    const header = headerRef.current;
+    if (!header) return;
 
-    const handleResize = () => {
-      if (headerRef.current) setHeaderHeight(headerRef.current.offsetHeight);
-      if (finalContentRef.current) {
-        setHeroLeftDimensions({
-          width: finalContentRef.current.offsetWidth,
-          height: finalContentRef.current.offsetHeight,
-        });
-      }
+    const setHeaderHeightVar = () => {
+      const height = header.offsetHeight;
+      setHeaderHeight(height);
+
+      document.documentElement.style.setProperty(
+        '--header-height',
+        `${height}px`
+      );
     };
-    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    setHeaderHeightVar();
+    window.addEventListener('resize', setHeaderHeightVar);
+
+    return () => window.removeEventListener('resize', setHeaderHeightVar);
   }, []);
-
-  useEffect(() => {
-    if (finalContentRef.current && heroLeftDimensions.width === 0) {
-      setHeroLeftDimensions({
-        width: finalContentRef.current.offsetWidth,
-        height: finalContentRef.current.offsetHeight,
-      });
-    }
-  }, [heroLeftDimensions.width]);
 
   // Hero carousel
   const [currentHeroImgIndex, setCurrentHeroImgIndex] = useState(0);
@@ -96,21 +89,16 @@ function App() {
 
   return (
     <>
+      {/* ✅ headerRef 正確掛上 */}
       <HeaderMenu ref={headerRef} studioName="W.W. Studio" contactLabel="CONTACT" />
+
+      {/* 🔸 paddingTop 可留（保險），hero-left 主要用 CSS calc */}
       <div className="App" style={{ paddingTop: `${headerHeight}px` }}>
 
         {/* Hero section */}
         <section className="hero">
-          
-          {/* Hero-left: 包含標題與打字框 */}
-          <div 
-            className="hero-left"
-            style={{ 
-              width: heroLeftDimensions.width > 0 ? `${heroLeftDimensions.width}px` : 'auto',
-              height: heroLeftDimensions.height > 0 ? `${heroLeftDimensions.height}px` : 'auto',
-            }}
-          >
 
+          <div className="hero-left">
             <DecryptedText
               texts={[
                 { text: "Brand Designer", className: "h1-text" },
@@ -131,7 +119,6 @@ function App() {
             </div>
           </div>
 
-          {/* --- Hero-right (UPDATED VERSION) --- */}
           <div className="hero-right">
             <div className="hero-carousel-container">
               <div className="hero-carousel-stack">

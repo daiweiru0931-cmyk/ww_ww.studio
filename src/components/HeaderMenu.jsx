@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import "./HeaderMenu.css";
 import { Link } from "react-router-dom";
 
-const HeaderMenu = () => {
+const HeaderMenu = forwardRef((props, ref) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBottomMenu, setShowBottomMenu] = useState(false);
   const [atFooter, setAtFooter] = useState(false);
@@ -17,7 +17,6 @@ const HeaderMenu = () => {
         e.target.closest(".contact-inside-btn") ||
         e.target.closest(".close-btn");
 
-      // 點擊 menu 外且不是 menu item，就關閉
       if (!clickedMenuItems) setMenuOpen(false);
     };
 
@@ -25,12 +24,12 @@ const HeaderMenu = () => {
     return () => document.removeEventListener("click", handleOutsideClick);
   }, []);
 
-  // 滾動控制底部按鈕顯示
+  // 滾動控制
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
-      const docHeight = document.body.offsetHeight;
+      const docHeight = document.documentElement.scrollHeight;
 
       const isAtFooter = scrollY + windowHeight >= docHeight - 500;
       setAtFooter(isAtFooter);
@@ -43,8 +42,7 @@ const HeaderMenu = () => {
   }, []);
 
   return (
-    <header className={`header ${atFooter ? "at-footer" : ""}`}>
-
+    <header ref={ref} className={`header ${atFooter ? "at-footer" : ""}`}>
       {/* Logo */}
       {!showBottomMenu && !atFooter && (
         <Link
@@ -91,44 +89,24 @@ const HeaderMenu = () => {
             <span></span>
           </div>
           <span className="menu-label">MENU</span>
-
-          <div
-            className="contact-inside-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              alert("CONTACT clicked!");
-            }}
-          >
-            CONTACT
-          </div>
+          <div className="contact-inside-btn">CONTACT</div>
         </button>
       </div>
 
-      {/* 半屏下滑選單 */}
+      {/* 選單內容 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <ul className="side-menu-list">
-          <li><Link to="/about" className="menu-about-li" onClick={() => setMenuOpen(false)}>About</Link></li>
-          <li><Link to="/works" className="menu-works-li" onClick={() => setMenuOpen(false)}>Works</Link></li>
-          <li><Link to="/service" className="menu-service-li" onClick={() => setMenuOpen(false)}>Service</Link></li>
-          <li><Link to="/taste" className="menu-taste-li" onClick={() => setMenuOpen(false)}>Taste</Link></li>
+          <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
+          <li><Link to="/works" onClick={() => setMenuOpen(false)}>Works</Link></li>
+          <li><Link to="/service" onClick={() => setMenuOpen(false)}>Service</Link></li>
+          <li><Link to="/taste" onClick={() => setMenuOpen(false)}>Taste</Link></li>
         </ul>
-
-        {/* X 關閉按鈕 */}
-        <button
-          className={`close-btn ${menuOpen ? "open" : ""}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            setMenuOpen(false);
-          }}
-          aria-label="Close menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
+        <button className="close-btn" onClick={() => setMenuOpen(false)}>
+          <span></span><span></span><span></span>
         </button>
       </div>
     </header>
   );
-};
+});
 
 export default HeaderMenu;
