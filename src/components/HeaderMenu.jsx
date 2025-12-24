@@ -96,13 +96,41 @@ const HeaderMenu = forwardRef((props, ref) => {
       {/* 選單內容 */}
       <div className={`side-menu ${menuOpen ? "open" : ""}`}>
         <ul className="side-menu-list">
-          <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
-          <li><Link to="/works" onClick={() => setMenuOpen(false)}>Works</Link></li>
-          <li><Link to="/service" onClick={() => setMenuOpen(false)}>Service</Link></li>
-          <li><Link to="/taste" onClick={() => setMenuOpen(false)}>Taste</Link></li>
+          <li>
+            <Link to="/about" data-text="About" onClick={() => setMenuOpen(false)}>
+              About
+              <span className="menu-underline"></span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/works" data-text="Works" onClick={() => setMenuOpen(false)}>
+              Works
+              <span className="menu-underline"></span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/service" data-text="Service" onClick={() => setMenuOpen(false)}>
+              Service
+              <span className="menu-underline"></span>
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/taste" data-text="Taste" onClick={() => setMenuOpen(false)}>
+              Taste
+              <span className="menu-underline"></span>
+            </Link>
+          </li>
         </ul>
-        <button className="close-btn" onClick={() => setMenuOpen(false)}>
-          <span></span><span></span><span></span>
+        <button
+          className={`close-btn ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </header>

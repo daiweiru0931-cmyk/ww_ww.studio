@@ -80,7 +80,9 @@ body.dark-mode {
   flex-wrap: wrap;
   box-sizing: border-box;
 }
-
+/* ==============================
+   左側內容
+============================== */
 .hero-left {
   flex: 0 0 50%;
   margin: 0 0 0 2%; 
@@ -160,6 +162,54 @@ body.dark-mode {
   color: var(--Primary-Warm);
 }
 
+/* 下拉視窗 */
+.dropdown-intro-modal {
+  position: absolute;       /* 讓視窗跟 .info-box 對齊 */
+  top: 100%;                /* 往下展開，緊貼 info-box */
+  left: 0;
+  width: 380px;              /* 與 info-box 同寬 */
+  background-color: #fff;   /* 白色背景 */
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 1rem;
+  box-sizing: border-box;
+  margin-top: 5px;          /* info-box 與下拉視窗間距 */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* 當 isIntroOpen 為 true 時，顯示下拉視窗 */
+.info-box-container .dropdown-intro-modal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 下拉視窗內部 */
+.modal-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.modal-title-text {
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  font-weight: bold;
+  color: var(--Primary-Deep);
+}
+
+/* 下拉視窗文字內容 */
+.modal-body-content {
+  font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+  line-height: 1.6;
+  color: var(--text-black);
+}
+/* ==============================
+   右側內容
+============================== */
 .hero-right {
   flex: 1;
   display: flex;
@@ -317,8 +367,8 @@ body.dark-mode {
 
 .flipped-text {
     font-size: clamp(3rem, 5vw, 6rem);
-    color: #ffffff;
     font-weight: 600;
+    color: #ffffff;
     margin: 0;
 }
 
@@ -623,6 +673,15 @@ body.dark-mode {
     object-fit: cover; 
   }
 
+  .modal-header-controls {
+    justify-content: flex-start; 
+    align-items: flex-start;   
+  }
+
+  .modal-body-content {
+    text-align: left;  
+  }
+
   .about-content-boxes { 
     flex-wrap: wrap;
     justify-content: center; 
@@ -687,16 +746,25 @@ body.dark-mode {
 
   .info-box-container {
     width: 100%;
+    max-width: 360px; 
     display: flex;
     justify-content: center;
+    position: relative;
   }
 
   .info-box {
-    width: 100% !important; /* 寬度固定比例 */
-    max-width: 360px; 
-    height: 40px;          /* 固定高度防止打字跳動 */
+    width: 100% !important; 
+    height: 40px;       
     margin: 0 auto !important;
     overflow: hidden;
+  }
+
+  /* 下拉視窗 */
+  .dropdown-intro-modal {
+    position: absolute;    
+    top: calc(100% + 5px); 
+    left: 0;            
+    width: 100%; 
   }
 
   .hero-right { 
@@ -952,6 +1020,6 @@ body.dark-mode {
   
 }
 
-/* {
+* {
   outline: 1px solid red !important;
 } 

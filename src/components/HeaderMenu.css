@@ -194,20 +194,17 @@
 ============================== */
 .side-menu {
   position: fixed;
-  bottom: 0;
-  left: 0;
+  inset: 0; /* top:0 right:0 bottom:0 left:0 */
   width: 100%;
-  height: 60%;
+  height: 100%;
   background-color: #fff;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+  /* box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); */
   padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* ✅ 讓選單垂直置中 */
-  gap: 3.5rem;
+  align-items: center;     /* 水平置中 */
+  justify-content: center; /* 垂直置中 */
   transform: translateY(100%);
-  transition: transform 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 102;
 }
 
@@ -219,12 +216,12 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  align-items: center; /* 確保文字真正置中 */
+  gap: 3rem;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(24px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -234,20 +231,77 @@
 }
 
 .side-menu-list li a {
-  font-size: 1.2rem;
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-weight: 300;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.5;
+  color: transparent; /* 隱藏實體文字 */
+  text-decoration: none;
+}
+
+.side-menu-list li a::before,
+.side-menu-list li a::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
   color: var(--link-btn);
-  transition: color 0.3s ease;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.side-menu-list li a:hover {
-  color: var(--btn-hover);
+.side-menu-list li a::before {
+  top: 0;
+  transform: translateY(0);
 }
 
+.side-menu-list li a::after {
+  top: 100%;
+  transform: translateY(0);
+}
+
+.side-menu-list li a:hover::before {
+  transform: translateY(-100%);
+}
+
+.side-menu-list li a:hover::after {
+  transform: translateY(-100%);
+}
+
+.menu-underline {
+  position: absolute;
+  left: 50%;
+  bottom: 0.1em;
+  width: 0;
+  height: 2px;
+  background-color: var(--link-btn);
+  transform: translateX(-50%);
+  transition: width 0.35s ease;
+  pointer-events: none;
+}
+
+.side-menu-list li a:hover .menu-underline {
+  width: 100%;
+}
+
+/* hover 顏色同步 */
+.side-menu-list li a:hover::before,
+.side-menu-list li a:hover::after {
+  color: var(--btn-hover); 
+}
+.side-menu-list li a:hover .menu-underline {
+  background-color: var(--btn-hover); 
+}
 
 /* ==============================
    關閉按鈕
 ============================== */
 .close-btn {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -302,46 +356,31 @@
 /* ==============================
    RWD
 ============================== */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .header {
-    padding: 1rem 5%;
+    padding: 1.2rem 4%;
   }
   .logo {
     font-size: 1.2rem;
   }
-  .menu-btn {
-    font-size: 1rem;
+  .header-right {
+    gap: 0.8rem;
   }
-  .contact-inside-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
+  .menu-icon {
+    width: 26px;
+    height: 20px;
   }
-  .menu-icon-small {
-    width: 16px;
-    height: 10px;
+  .menu-icon span {
+    height: 1.8px;
   }
-
-  .side-menu {
-    height: 60%; /* 半屏置中 */
-    padding: 0;
-    justify-content: center; /* 垂直置中 */
-    align-items: center;     /* 水平置中 */
-    gap: 5rem;
+  .contact-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.75rem;
   }
 
-  .side-menu-list {
-    gap: 2rem;
-  }
-
-  .side-menu-list li {
-    font-size: 1rem;
-    text-align: center; /* 文字置中 */
-  }
-}
-
-@media (max-width: 480px) {
+  /* 底部按鈕 */
   .bottom-buttons {
-    bottom: 20px; /* 避免貼到底 */
+    bottom: 25px;
   }
   .menu-btn {
     width: 45px;
@@ -352,10 +391,136 @@
   .contact-inside-btn {
     font-size: 0.75rem;
   }
+
+  /* 下拉選單 */
   .side-menu {
-    height: 70%; /* 手機完全置中顯示 */
+    padding: 0 2rem;
+    gap: 2rem;
   }
-  .side-menu-list li {
+  .side-menu-list {
+    gap: 2.5rem;
+  }
+  .side-menu-list li a {
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  }
+
+  /* Close 按鈕位置 */
+  .close-btn {
+    top: 3rem;
+    right: 3rem;
+  }
+}
+
+/* ==============================
+   Tablet / 小於等於 768px
+============================== */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 5%;
+  }
+  .logo {
+    font-size: 1.1rem;
+  }
+  .header-right {
+    gap: 0.6rem;
+  }
+  .menu-icon {
+    width: 24px;
+    height: 18px;
+  }
+  .menu-icon span {
+    height: 1.5px;
+  }
+  .contact-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  /* 底部按鈕 */
+  .bottom-buttons {
+    bottom: 20px;
+  }
+  .menu-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
+  }
+  .menu-label,
+  .contact-inside-btn {
+    font-size: 0.7rem;
+  }
+
+  /* 下拉選單 */
+  .side-menu {
+    padding: 0 1.5rem;
+    gap: 1.5rem;
+  }
+  .side-menu-list {
+    gap: 2rem;
+  }
+  .side-menu-list li a {
+    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+  }
+
+  .close-btn {
+    top: 2rem;
+    right: 2rem;
+  }
+}
+
+/* ==============================
+   Mobile / 小於等於 480px
+============================== */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem 4%;
+  }
+  .logo {
+    font-size: 1rem;
+  }
+  .header-right {
+    gap: 0.5rem;
+  }
+  .menu-icon {
+    width: 20px;
+    height: 16px;
+  }
+  .menu-icon span {
+    height: 1.2px;
+  }
+  .contact-btn {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.65rem;
+  }
+
+  /* 底部按鈕 */
+  .bottom-buttons {
+    bottom: 15px;
+  }
+  .menu-btn {
+    width: 38px;
+    height: 38px;
     font-size: 0.9rem;
+  }
+  .menu-label,
+  .contact-inside-btn {
+    font-size: 0.65rem;
+  }
+
+  /* 下拉選單 */
+  .side-menu {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+  .side-menu-list {
+    gap: 1.5rem;
+  }
+  .side-menu-list li a {
+    font-size: clamp(1rem, 1.2vw, 1.25rem);
+  }
+
+  .close-btn {
+    top: 1.5rem;
+    right: 1.5rem;
   }
 }

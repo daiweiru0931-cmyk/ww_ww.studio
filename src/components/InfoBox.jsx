@@ -14,7 +14,6 @@ const InfoBox = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  // 新增：控制懸浮視窗的開關
   const [isIntroOpen, setIsIntroOpen] = useState(false);
 
   useEffect(() => {
@@ -50,7 +49,6 @@ const InfoBox = () => {
   };
 
   return (
-    // 外層容器：給它 position: relative，讓懸浮視窗可以在其下方定位
     <div className="info-box-container"> 
         <div className="info-box">
             <div className="info-left">
@@ -64,7 +62,7 @@ const InfoBox = () => {
                     }}
                 />
                 {/* 展開時，這裡的文字最好停止打字或顯示固定文字 */}
-                <span className="info-text">{isIntroOpen ? "Welcome to my portfolio" : displayText}</span>
+                <span className="info-text">{isIntroOpen ? "Welcome to my portfolio!" : displayText}</span>
             </div>
             {/* 點擊按鈕時切換狀態 */}
             <button className="info-btn" onClick={handleToggleIntro}>
