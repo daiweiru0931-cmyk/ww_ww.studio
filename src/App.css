@@ -877,8 +877,6 @@ body.dark-mode {
     min-height: 80svh; 
     margin: 0 auto;
     border-radius: 0;
-
-    
   }
 
   .about-boxes-wrapper {
@@ -914,6 +912,6 @@ body.dark-mode {
   
 }
 
-* {
+/* {
   outline: 1px solid red !important;
 } 
