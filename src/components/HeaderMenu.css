@@ -394,17 +394,33 @@
 
   /* 下拉選單 */
   .side-menu {
-    padding: 0 2rem;
-    gap: 2rem;
-  }
-  .side-menu-list {
-    gap: 2.5rem;
-  }
-  .side-menu-list li a {
-    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    padding: 0 0.5rem;        /* 讓邊界不要貼邊 */
+    width: 100vw;              /* 滿版寬度 */
+    max-width: 100%;           /* 確保不超出螢幕 */
+    height: 100vh;             /* 全屏高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* 垂直置中 */
+    align-items: center;       /* 水平置中 */
   }
 
-  /* Close 按鈕位置 */
+  .side-menu-list {
+    width: 100%;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    padding: 0;
+    margin: 0;
+  }
+  .side-menu-list li a {
+    font-size: clamp(2.5rem, 4.2vw, 5rem);
+    font-weight: 300;
+    text-align: center; 
+    display: block;
+    width: 100%;
+  }
+
   .close-btn {
     top: 3rem;
     right: 3rem;
@@ -419,21 +435,21 @@
     padding: 1rem 5%;
   }
   .logo {
-    font-size: 1.1rem;
+    font-size: 2rem;
   }
   .header-right {
     gap: 0.6rem;
   }
   .menu-icon {
-    width: 24px;
-    height: 18px;
+    width: 30px;
+    height: 22px;
   }
   .menu-icon span {
-    height: 1.5px;
+    height: 1.8px;
   }
   .contact-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
   }
 
   /* 底部按鈕 */
@@ -443,28 +459,45 @@
   .menu-btn {
     width: 42px;
     height: 42px;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   .menu-label,
   .contact-inside-btn {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   /* 下拉選單 */
   .side-menu {
-    padding: 0 1.5rem;
-    gap: 1.5rem;
+    padding: 0 0.5rem;        /* 讓邊界不要貼邊 */
+    width: 100vw;              /* 滿版寬度 */
+    max-width: 100%;           /* 確保不超出螢幕 */
+    height: 100vh;             /* 全屏高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* 垂直置中 */
+    align-items: center;       /* 水平置中 */
   }
+
   .side-menu-list {
-    gap: 2rem;
+    width: 100%;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    padding: 0;
+    margin: 0;
   }
   .side-menu-list li a {
-    font-size: clamp(1.2rem, 1.5vw, 1.4rem);
+    font-size: clamp(2.5rem, 4.2vw, 5rem);
+    font-weight: 300;
+    text-align: center; 
+    display: block;
+    width: 100%;
   }
 
   .close-btn {
-    top: 2rem;
-    right: 2rem;
+    top: 3rem;
+    right: 3rem;
   }
 }
 
@@ -473,24 +506,24 @@
 ============================== */
 @media (max-width: 480px) {
   .header {
-    padding: 0.8rem 4%;
+    padding: 1rem 5%;
   }
   .logo {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
   .header-right {
     gap: 0.5rem;
   }
   .menu-icon {
-    width: 20px;
-    height: 16px;
+    width: 28px;
+    height: 20px;
   }
   .menu-icon span {
-    height: 1.2px;
+    height: 1.5px;
   }
   .contact-btn {
-    padding: 0.35rem 0.7rem;
-    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   /* 底部按鈕 */
@@ -509,18 +542,37 @@
 
   /* 下拉選單 */
   .side-menu {
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 0 0.5rem;        /* 讓邊界不要貼邊 */
+    width: 100vw;              /* 滿版寬度 */
+    max-width: 100%;           /* 確保不超出螢幕 */
+    height: 100vh;             /* 全屏高度 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* 垂直置中 */
+    align-items: center;       /* 水平置中 */
   }
+
   .side-menu-list {
-    gap: 1.5rem;
+    width: 100%;
+    max-width: 360px;          /* 適合手機寬度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 0;
+    margin: 0;
   }
+
   .side-menu-list li a {
-    font-size: clamp(1rem, 1.2vw, 1.25rem);
+    font-size: clamp(2.5rem, 4.2vw, 5rem);
+    font-weight: 300;
+    text-align: center; 
+    display: block;
+    width: 100%;
   }
 
   .close-btn {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: 2rem;
+    right: 2rem;
   }
 }
