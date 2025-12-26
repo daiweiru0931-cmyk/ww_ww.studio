@@ -9,17 +9,16 @@
   --Primary-Deep: #a65f32;
   --Primary-Warm: #d9824c;
 
+  --menu-btn: #fff;
   --link-btn: #a65f32;
   --btn-hover: #b09382;
+  --dark-bg: #1a1a1a;
   
-  
-  --light-gray: #999;
-  --menu-btn: #fff;
-  --divider-color: #777;
   --footer-bg: #1a1a1a;
   --footer-text: #ccc;
   --footer-btn: #b09382;
-  --dark-placeholder-bg: #1a1a1a;
+
+  --header-height: 80px;
 }
 
 html, body {
@@ -60,8 +59,7 @@ body.dark-mode {
   --Neutral-Light: #f5f5f5;
   --Primary-Deep: #a65f32;
   --Primary-Warm: #d9824c;
-    
-  --divider-color: #777;     
+        
   --footer-bg: #1a1a1a;      
   --footer-text: #ccc;     
   --footer-btn: #cda596; 
@@ -529,6 +527,7 @@ body.dark-mode {
 }
 
 .footer {
+  height: 100%;
   position: relative;
   background-color: var(--footer-bg); 
   color: var(--footer-text); 

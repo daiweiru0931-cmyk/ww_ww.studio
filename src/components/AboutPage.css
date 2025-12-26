@@ -1,406 +1,151 @@
-:root {
-    --background-color: #f6f3ef;
-    --title-color: #28140a;
-    --text-color: #28140a;
-    --off-white: #fcfaf2;
-  }
-  
-  body {
-    margin: 0;
-    font-family: 'Libre Baskerville', 'Noto Sans TC', serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-  
-  /* About Info 區塊 */
-  .about-page-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-  }
-  .about-page-label {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  .about-page-subtitle {
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-    margin: 0 auto;
-  }
-  
-  /* Scroll Indicator */
-  .scroll-down-indicator {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    width: 30px;
-    height: 30px;
-    border-bottom: 2px solid #b09382;
-    border-right: 2px solid #b09382;
-    transform: translateX(-50%) rotate(45deg);
-    animation: bounce 1.5s infinite;
-    z-index: 100;
-    transition: opacity 0.4s ease; /* 讓顯示/隱藏有過渡 */
-    opacity: 1;
-    pointer-events: auto;
-  }
-  @keyframes bounce {
-    0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0) rotate(45deg);}
-    40% { transform: translateX(-50%) translateY(8px) rotate(45deg);}
-    60% { transform: translateX(-50%) translateY(4px) rotate(45deg);}
-  }
-  
-  /* Folder Stack 區塊 */
-  .folder-stack-container-wrapper {
-    position: relative;
-    width: 100%;
-    height: 700vh; /* 例如，給予足夠的滾動空間 */
-  }
-  .folder-stack-container {
-    position: relative;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-  }
-  .folder {
-    position: fixed;
-    top: 50vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-    width: 100%;
+.about-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-hero {
+  height: calc(100svh - var(--header-height, 80px)); 
+  margin-top: var(--header-height, 80px); 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;   
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.about-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.about-introduce{
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  margin-top: 1rem;
+}
+
+/* Scroll indicator */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 30px;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SVG 上下浮動動畫 */
+.scroll-down-indicator svg {
+  animation: arrowFloat 1.2s infinite;
+}
+
+/* 動畫：上下浮動 */
+@keyframes arrowFloat {
+  0% {
+    transform: translateY(0);
     opacity: 0;
-    z-index: 10;
-    will-change: transform, opacity;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   }
-  
-  /* WHY Folder */
-  .why-folder-container {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 3%;
-    background-color: #b09382;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    color: #fff;
-    box-sizing: border-box;
+  30% {
+    opacity: 1;
   }
-  .why-title {
-    flex: 1;
-    margin: 0;
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
   }
-  .why-title h2{
-    font-size: 5rem;
-    margin-left:  10%;
+  100% {
+    transform: translateY(0);
+    opacity: 0;
   }
-  .why-description {
-    flex: 1;
-    font-family: 'Noto Sans TC', serif;
-    font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
-  }
-  .zh-text, .en-text {
-    margin: 5% 10%;
-  }
-  .en-text{
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  }
+}
 
-  /* HOW Folder */
-  .how-folder-container {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 3%;
-    background-color: #a67763;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    color: #fff;
-    box-sizing: border-box;
-  }
-  .how-title {
-    flex: 1;
-    margin: 0;
-  }
-  .how-title h2{
-    font-size: 5rem;
-    margin-left:  10%;
-  }
-  .how-description {
-    flex: 1;
-    font-family: 'Noto Sans TC', serif;
-    font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
-  }
-  .zh-text, .en-text {
-    margin: 5% 10%;
-  }
-  .en-text{
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  }
+/* WHW section */
+.whw-section {
+  background: var(--dark-bg);
+  padding: 5rem 10%;
+  margin: 0;
+  overflow-x: hidden;  
+}
 
-  /* WHAT Folder */
-  .what-folder-container {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 3%;
-    background-color: #b09382;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    color: #fff;
-    box-sizing: border-box;
-  }
-  .what-title {
-    flex: 1;
-    margin: 0;
-  }
-  .what-title h2{
-    font-size: 5rem;
-    margin-left:  10%;
-  }
-  .what-description {
-    flex: 1;
-    font-family: 'Noto Sans TC', serif;
-    font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
-  }
-  .zh-text, .en-text {
-    margin: 5% 10%;
-  }
-  .en-text{
-    font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
-  }
-  
-  /* Skills Folder */
-  .skills-container {
-    display: flex;
-    height: 100vh;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 3%;
-    border-radius: 8px;
-    background-color: #a67763;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    color: #fff;
-    box-sizing: border-box;
-  }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 10px;
-    padding: 20px;
-  }
-  .skills-header {
-    font-weight: 700;
-    margin-bottom: 5px;
-  }
-  .skillests-single-cell {
-    grid-column: 1 / 2;
-    padding: 5px;
-  }
-  .software-cell {
-    padding: 5px;
-    border-bottom: 1px dotted #ccc;
-  }
-  .softwares-languages-area {
-    grid-column: 2 / 5;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
-  .languages-header {
-    font-weight: 700;
-    grid-column: 1 / -1;
-    margin-top: 10px;
-  }
-  .languages-cell {
-    grid-column: 1 / -1;
-    padding: 5px 0;
-  }
-  
-  /* Experiences Folder */
-  .experiences-container {
-    display: flex;
-    height: 100vh;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 3%;
-    border-radius: 8px;
-    background-color: #d7cfc6;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    color: #fff;
-    box-sizing: border-box;
-  }
-  .experiences-grid {
-    display: flex;
+.whw-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Text */
+.text-content-side {
+  flex: 0 50%;
+  color: #fff;
+}
+
+.text-index {
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 300;
+  color: var(--Primary-Deep);
+}
+
+.text-title{
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-weight: 600;
+}
+
+.text-en{
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+/* Card stage */
+.card-stage {
+  flex: 1;
+  position: relative;
+  height: 100svh;
+}
+
+/* Card */
+.card {
+  width: 360px;
+  height: 260px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  background-color: var(--Primary-Deep);
+  color: white;
+  /* 絕對定位置中法 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 往回推自身寬高的一半 */
+}
+
+.card-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+
+/* Mobile */
+@media (max-width: 992px) {
+  .card-inner {
     flex-direction: column;
-    gap: 15px;
   }
-  .experience-card {
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .experience-card .row-cell {
-    flex: 1 1 30%;
-    min-width: 150px;
-  }
-  
-  /* RWD */
-  /* RWD (Responsive Web Design) 區塊 */
 
-/* --- 1. Max Width: 1200px 斷點 --- */
-/* (針對 Profile Folder 調整寬度，使其在較大螢幕上更緊湊) */
-@media (max-width: 1200px) {
-  .folder {
-      /* 在稍小的螢幕上，稍微縮小 folder 寬度，以避免觸碰到邊緣 */
-      width: 95%;
-      max-width: 1000px;
-      padding: 4%;
+  .card-stage {
+    height: 520px;
   }
 }
 
-/* --- 2. Max Width: 1024px 斷點 (Tablet Portrait) --- */
-@media (max-width: 1024px) {
-  /* About Info 區塊 */
-  .about-page-label {
-      font-size: 2.5rem;
-  }
-  
-  /* Folder 基礎 */
-  .folder {
-      /* 在平板上放寬 folder 寬度以利用空間 */
-      width: 90%;
-      max-width: 900px; 
-      padding: 5%;
-  }
-
-  /* Profile Folder (WeiRu 圖片和描述) */
-  .folder-threeParts {
-      /* 堆疊：圖片在描述下方或上方 */
-      flex-direction: column;
-      align-items: center;
-      gap: 20px; /* 增加間距 */
-  }
-  .profile-description,
-  .profile-photo {
-      width: 100%; /* 佔滿可用寬度 */
-      max-width: 500px; /* 限制內容最大寬度以保持可讀性 */
-      padding-right: 0;
-  }
-  .profile-photo {
-      /* 在堆疊模式下，讓圖片居中 */
-      justify-content: center;
-      order: -1; /* 將圖片放在描述上方 (可選) */
-  }
-  .profile-photo img {
-      max-width: 300px; /* 稍微縮小圖片尺寸 */
-  }
-
-  /* Skills Folder */
-  .skills-grid-container {
-      /* 從 4 欄變為 1 欄，讓內容垂直堆疊 */
-      grid-template-columns: 1fr;
-      padding: 0; /* 移除內邊距，利用 folder 的 padding */
-  }
-  .skillests-single-cell {
-      grid-column: 1 / -1; /* 佔滿整欄 */
-  }
-  .softwares-languages-area {
-      grid-column: 1 / -1; /* 佔滿整欄 */
-      /* 將 Softwares 從 3 欄變為 2 欄，更適合平板 */
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-  }
-  .languages-header,
-  .languages-cell {
-      grid-column: 1 / -1;
-  }
-
-  /* Experiences Folder */
-  .experience-card {
-      /* 堆疊：將時間、公司、職位垂直堆疊 */
-      flex-direction: column;
-      gap: 5px; /* 減少卡片內部間距 */
-  }
-  .experience-card .row-cell {
-      flex: 1 1 100%; /* 每個 row-cell 佔滿一行 */
-      min-width: unset; /* 移除 min-width 限制 */
-  }
-}
-
-
-/* --- 3. Max Width: 768px 斷點 (Mobile) --- */
-@media (max-width: 768px) {
-  /* About Info 區塊 */
-  .about-page-label {
-      font-size: 2rem;
-  }
-  .about-page-subtitle {
-      font-size: 0.95rem;
-      padding: 0 10px;
-  }
-
-  /* Folder 基礎 */
-  .folder {
-      /* 在手機上保持高寬度，但減少內邊距 */
-      width: 95%; 
-      padding: 8% 5%; /* 上下更多，左右保持 */
-  }
-
-  /* Profile Folder */
-  .profile-photo img {
-      max-width: 250px; /* 進一步縮小圖片 */
-  }
-  .pro-des-zh, .pro-des-en {
-      font-size: 0.9rem; /* 縮小文字，提高閱讀效率 */
-  }
-
-  /* Skills Folder */
-  .skills-grid-container {
-      gap: 15px; /* 增加主要區塊間距 */
-  }
-  .softwares-languages-area {
-      /* 在手機上，Softwares 變回 1 欄 */
-      grid-template-columns: 1fr;
-  }
-  .software-cell,
-  .skill-description {
-      font-size: 0.9rem;
-  }
-
-  /* Experiences Folder */
-  .experience-card {
-      padding: 8px;
-  }
-  .experience-card .row-cell {
-      font-size: 0.9rem;
-  }
-  
-  /* Scroll Indicator */
-  .scroll-down-indicator {
-      bottom: 10px; /* 將指示器稍微上移 */
-  }
-}
-
-/* --- 4. Max Width: 480px 斷點 (Small Mobile) --- */
-@media (max-width: 480px) {
-  .about-page-label {
-      font-size: 1.8rem;
-  }
-  .about-page-subtitle {
-      font-size: 0.85rem;
-  }
-  .profile-photo img {
-      max-width: 100%; /* 讓圖片填滿其容器 (profile-photo) */
-  }
-  .folder {
-      padding: 8% 4%; /* 略微減少 padding */
-  }
-}
+/* {
+  outline: 1px solid red !important;
+} 
