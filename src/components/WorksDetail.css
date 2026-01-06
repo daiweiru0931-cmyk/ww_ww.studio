@@ -1,0 +1,154 @@
+.works-detail-wrapper {
+  background-color: var(--background-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Project Name and Detail */
+.project-main-content {
+  margin-top: var(--header-height, 80px);
+  padding: 10%;
+  width: 100%;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* left part */
+.project-left {
+  flex: 1;
+}
+
+.tags {
+  margin-bottom: 10px;
+}
+
+.tag-btn {
+  display: inline-block;
+  border: 1px solid var(--Neutral-Gray);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
+  margin-right: 10px;
+}
+
+.project-title {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+  line-height: 1.5;
+  color: var(--title-black);
+  max-width: 600px;
+  margin: 0;
+}
+
+/* 右側區塊：文字資訊列表 */
+.project-right {
+  flex-shrink: 0;
+}
+
+.info-list {
+  list-style: none;
+  font-size: 13px;
+  line-height: 2;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li span {
+  font-weight: 600;
+}
+
+/* 圖片展示區域 */
+.detail-gallery {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8%;
+  gap: 30px; /* 圖片與圖片之間的垂直間距 */
+}
+
+.detail-image-box {
+  width: 100%;
+  overflow: hidden;
+}
+
+.detail-image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* border: 1px solid rgba(0,0,0,0.05); 可選：增加極淡描邊 */
+}
+
+/* 底部按鈕區 */
+.detail-footer {
+  margin: 100px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.3s ease;
+  padding: 10px 20px;
+}
+
+.back-btn:hover {
+  color: #000;
+  transform: translateX(-5px); /* 輕微位移增加動態感 */
+}
+
+/* ---------------------------------
+   RWD 響應式調整
+--------------------------------- */
+
+/* 平板尺寸 */
+@media (max-width: 992px) {
+  .detail-header {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .header-right {
+    width: 100%;
+  }
+
+  .detail-title {
+    max-width: 100%;
+  }
+}
+
+/* 手機尺寸 */
+@media (max-width: 480px) {
+  .works-detail-wrapper {
+    padding-top: 100px; /* 縮減頂部內距 */
+  }
+
+  .detail-header {
+    margin-bottom: 40px;
+  }
+
+  .detail-title {
+    font-size: 22px;
+  }
+
+  .info-list {
+    font-size: 12px;
+  }
+
+  .detail-gallery {
+    gap: 20px; /* 縮小圖片間距 */
+  }
+}
+
+/* {
+  outline: 1px solid red !important;
+} 

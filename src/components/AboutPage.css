@@ -134,18 +134,316 @@
   color: #fff;
 }
 
+/* profile section */
+.profile-section {
+  padding: 5rem 5%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
 
-/* Mobile */
-@media (max-width: 992px) {
-  .card-inner {
+.profile-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 0;
+}
+
+/* 左側標籤 ( Profile ) */
+.profile-item-left {
+  flex: 0 0 30%;
+}
+
+.profile-label {
+  min-width: 120px;
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 300;
+  color: var(--title-black);
+}
+
+/* 右側內容區域 */
+.profile-item-right {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* 上方文字敘述區 */
+.profile-connect {
+  margin-bottom: 80px;
+}
+
+.profile-connect p {
+  font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
+  margin-bottom: 0;
+  color: var(--text-black);
+}
+
+/* 下方表格區域 */
+.profile-table {
+  border-top: 1px solid #999; /* 頂部裝飾線 */
+  width: 100%;
+}
+
+.table-row {
+  display: flex;
+  padding: 16px 0;
+  border-bottom: 1px solid #999; /* 分隔線 */
+  align-items: center;
+}
+
+.label {
+  width: 220px; 
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  color: var(--Neutral-Gray);
+  letter-spacing: 1.5px;
+  font-weight: 300;
+}
+
+.value {
+  font-size: clamp(0.8125rem, 0.8vw + 0.3rem, 0.9375rem);
+  color: var(--text-black);
+  letter-spacing: 0.5px;
+  line-height: 26px;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.exp-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.exp-role {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-black);
+}
+
+.exp-meta {
+  font-size: 0.85rem;
+  color: var(--Neutral-Gray);
+}
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.edu-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.edu-degree {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-black);
+}
+
+.edu-meta {
+  font-size: 0.85rem;
+  color: var(--Neutral-Gray);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tags span {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  color: var(--text-black);
+}
+
+/* =====================================================
+   RWD – Responsive Layout
+===================================================== */
+/* 1024px ｜ Tablet Landscape */
+@media (max-width: 1024px) {
+
+  /* Hero */
+  .about-hero {
+    padding: 0 5%;
+  }
+
+  /* WHW section */
+  .whw-section {
+    padding: 4rem 5%;
+  }
+
+  .whw-inner {
     flex-direction: column;
+    gap: 3rem;
+  }
+
+  .text-content-side {
+    flex: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-index {
+    font-size: clamp(2.5rem, 6vw, 4rem);
   }
 
   .card-stage {
-    height: 520px;
+    width: 100%;
+    height: 60vh;
+  }
+
+  /* Profile */
+  .profile-item-left {
+    flex: 0 0 25%;
+  }
+
+  .profile-item-right {
+    flex: 0 0 75%;
+  }
+
+  .profile-connect {
+    margin-bottom: 60px;
+  }
+}
+
+/* 768px ｜ Tablet / Mobile */
+@media (max-width: 768px) {
+
+  /* Hero */
+  .about-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .about-introduce {
+    font-size: 1rem;
+  }
+
+  /* WHW */
+  .whw-section {
+    padding: 3rem 6%;
+  }
+
+  .text-title {
+    font-size: 1.5rem;
+  }
+
+  .text-en {
+    font-size: 1rem;
+  }
+
+  .card-stage {
+    height: 50vh;
+  }
+
+  .card {
+    width: 300px;
+    height: 220px;
+  }
+
+  /* Profile */
+  .profile-wrapper {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .profile-item-left,
+  .profile-item-right {
+    flex: none;
+    width: 100%;
+  }
+
+  .profile-item-right {
+    align-items: flex-start;
+  }
+
+  .profile-label {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .profile-connect p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .label {
+    width: 120px;
+  }
+}
+
+/* 480px ｜ Small Mobile */
+@media (max-width: 480px) {
+
+  /* Hero */
+  .about-hero {
+    padding: 0 6%;
+  }
+
+  .about-title {
+    font-size: 2.2rem;
+  }
+
+  .about-introduce {
+    font-size: 0.95rem;
+  }
+
+  /* WHW */
+  .text-index {
+    font-size: 2.5rem;
+  }
+
+  .card-stage {
+    height: 45vh;
+  }
+
+  .card {
+    width: 260px;
+    height: 200px;
+  }
+
+  .card-inner {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  /* Profile */
+  .profile-section {
+    padding: 3rem 6%;
+  }
+
+  .profile-connect {
+    margin-bottom: 40px;
+  }
+
+  .profile-connect p {
+    font-size: 0.95rem;
+  }
+
+  .table-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .label {
+    width: auto;
+    font-size: 0.9rem;
+  }
+
+  .value {
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 }
 
 /* {
   outline: 1px solid red !important;
-} */
+} 

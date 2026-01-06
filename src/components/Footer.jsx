@@ -35,9 +35,8 @@ const Footer = () => {
           <ul>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/works">Works</Link></li>
-            <li><Link to="/service">Service</Link></li>
             <li><Link to="/taste">Taste</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/service">Service</Link></li>
           </ul>
         </nav>
         <div className="footer-info">
@@ -45,7 +44,7 @@ const Footer = () => {
             <h5>Online Office</h5>
             <p>Mail : daiweiru0931@gmail.com</p>
             <p className="footer-instagram">
-              Instagram :
+              Instagram : 
               <a
                 href="https://www.instagram.com/ww__ww.studio/"
                 target="_blank"

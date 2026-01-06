@@ -4,8 +4,8 @@
   --background-color: #f6f3ef;
   --title-black: #1a1a1a;
   --text-black: #1a1a1a;
-  --Neutral-Gray: #666666;
-  --Neutral-Light: #f5f5f5;
+  --Neutral-Gray: #666;
+  --Neutral-Light: #999;
   --Primary-Deep: #a65f32;
   --Primary-Warm: #d9824c;
 
@@ -629,7 +629,6 @@ body.dark-mode {
 /* =====================================================
    RWD – Responsive Layout
 ===================================================== */
-
 /* 1024px ｜ Tablet Landscape */
 @media (max-width: 1024px) {
   .hero { 

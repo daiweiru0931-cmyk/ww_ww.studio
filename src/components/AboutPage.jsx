@@ -45,7 +45,7 @@ const AboutPage = () => {
         <div className="whw-inner">
 
           <div className="text-content-side">
-            <span className="text-index">' 0{activeIndex + 1}</span>
+            <span className="text-index">0{activeIndex + 1}'</span>
             <h2 className="text-title">{contentData[activeIndex].label}</h2>
             <p className="text-en">{contentData[activeIndex].en}</p>
           </div>
@@ -66,9 +66,88 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="exp-section">
-        <div className="exp">
-          <h1>my exp</h1>
+      <section className="profile-section">
+        <div className="profile-wrapper">
+          <div className="profile-item-left">
+            <span className="profile-label">( Profile )</span>
+          </div>
+        
+          <div className="profile-item-right">
+            <div className="profile-connect">
+              <p>I am a visual designer from Taiwan with a background in self-learning and professional training across design and digital technologies.
+              My work centers on graphic design, web design, and digital media, where I have built strong experience through projects.</p>
+              <p>Driven by a passion for visual storytelling, I enjoy blending multiple disciplines and mediums to push creative boundaries and create brand experiences that balance aesthetics with functionality.</p>
+            </div>
+
+            <div className="profile-table">
+              <div className="table-row">
+                <span className="label">NAME</span>
+                <span className="value">Wei Ru, Tai</span>
+              </div>
+              <div className="table-row">
+                <span className="label">EXPERIENCE</span>
+
+                <div className="experience-list">
+
+                  <div className="exp-item">
+                    <span className="exp-role">Graphic Designer</span>
+                    <span className="exp-meta">自由接案 / Taiwan · 2024 – Present</span>
+                  </div>
+
+                  <div className="exp-item">
+                    <span className="exp-role">Video Editor</span>
+                    <span className="exp-meta">EMPOWER BASKETBALL / Canada · 2025 – 2026</span>
+                  </div>
+
+                  <div className="exp-item">
+                    <span className="exp-role">Brand Designer</span>
+                    <span className="exp-meta">薰衣草森林股份有限公司 / Taiwan · 2018 – 2024</span>
+                  </div>
+
+                  <div className="exp-item">
+                    <span className="exp-role">Graphic Designer</span>
+                    <span className="exp-meta">加聯達股份有限公司 / Taiwan · 2016 – 2018</span>
+                  </div>
+
+                </div>
+              </div>
+              
+              <div className="table-row">
+                <span className="label">EDUCATION</span>
+
+                <div className="education-list">
+
+                  <div className="edu-item">
+                    <span className="edu-degree">Front End Development</span>
+                    <span className="edu-meta">
+                      Greystone College / Canada · 2025
+                    </span>
+                  </div>
+
+                  <div className="edu-item">
+                    <span className="edu-degree">Industrial Design</span>
+                    <span className="edu-meta">
+                      Chaoyang University / Taiwan · 2016
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="table-row">
+                <span className="label">SKILLS</span>
+
+                <div className="skill-tags">
+                  <span>Graphic Design</span>
+                  <span>Branding</span>
+                  <span>Web Design</span>
+                  <span>Illustration</span>
+                  <span>Visual Content Planning</span>
+                  <span>Taste Profiling</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

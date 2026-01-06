@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import icon from "../assets/wei-info-icon.png";
+import icon from "../../public/assets/wei-info-icon.png";
 
 const InfoBox = () => {
   const texts = [
