@@ -69,21 +69,28 @@
 /* WHW section */
 .whw-section {
   background: var(--dark-bg);
-  padding: 5rem 10%;
+  width: 100%;
+  padding: 5rem 0;
   margin: 0;
-  overflow-x: hidden;  
+  overflow-x: hidden; 
+  position: relative; 
 }
 
 .whw-inner {
   width: 100%;
   display: flex;
   align-items: center;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Text */
 .text-content-side {
-  flex: 0 50%;
+  flex: 0 0 50%;
   color: #fff;
+  padding-left: 10%;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
 .text-index {
@@ -101,26 +108,33 @@
   font-size: clamp(1rem, 1.5vw, 1.25rem);
 }
 
-/* Card stage */
 .card-stage {
-  flex: 1;
+  flex: 0 0 50%;
   position: relative;
-  height: 100svh;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center; /* 讓內容物在水平軸置中 */
+  align-items: center;
+  box-sizing: border-box;
 }
 
-/* Card */
+/* CardSwap 包裹層 */
+.card-swap-wrapper {
+  position: relative;
+  width: 100%;  /* 確保撐滿舞台寬度 */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card {
   width: 360px;
   height: 260px;
   border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
   background-color: var(--Primary-Deep);
-  color: white;
-  /* 絕對定位置中法 */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* 往回推自身寬高的一半 */
+  color: #fff;
 }
 
 .card-inner {
@@ -270,34 +284,24 @@
 ===================================================== */
 /* 1024px ｜ Tablet Landscape */
 @media (max-width: 1024px) {
-
   /* Hero */
   .about-hero {
     padding: 0 5%;
   }
 
-  /* WHW section */
-  .whw-section {
-    padding: 4rem 5%;
-  }
-
   .whw-inner {
-    flex-direction: column;
-    gap: 3rem;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
   }
 
   .text-content-side {
-    flex: none;
-    width: 100%;
-    text-align: center;
-  }
-
-  .text-index {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    flex: 0 0 50%;
+    text-align: left;
   }
 
   .card-stage {
-    width: 100%;
+    flex: 1;
     height: 60vh;
   }
 
@@ -317,7 +321,6 @@
 
 /* 768px ｜ Tablet / Mobile */
 @media (max-width: 768px) {
-
   /* Hero */
   .about-title {
     font-size: clamp(2.5rem, 8vw, 3.5rem);
@@ -329,7 +332,56 @@
 
   /* WHW */
   .whw-section {
-    padding: 3rem 6%;
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .whw-inner {
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  
+    align-items: center;
+    gap: 0; 
+  }
+
+  .card-stage {
+    order: 1;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0;
+  }
+
+  .card {
+    position: relative;
+    top: auto;
+    left: auto;
+  }
+
+  .text-content-side {
+    order: 2;
+    width: 100%;
+    max-width: 90%; /* 避免文字貼邊 */
+    text-align: center;
+    padding-left: 0; 
+    margin-top: 2rem; /* 與卡片保持距離 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-index, .text-title, .text-en {
+    margin: 0 auto;
+    display: block;
   }
 
   .text-title {
@@ -340,24 +392,13 @@
     font-size: 1rem;
   }
 
-  .card-stage {
-    height: 50vh;
-  }
-
-  .card {
-    width: 300px;
-    height: 220px;
-  }
-
   /* Profile */
   .profile-wrapper {
     flex-direction: column;
-    gap: 48px;
   }
 
   .profile-item-left,
   .profile-item-right {
-    flex: none;
     width: 100%;
   }
 
@@ -375,13 +416,12 @@
   }
 
   .label {
-    width: 120px;
+    width: 150px;
   }
 }
 
 /* 480px ｜ Small Mobile */
 @media (max-width: 480px) {
-
   /* Hero */
   .about-hero {
     padding: 0 6%;
@@ -446,4 +486,4 @@
 
 /* {
   outline: 1px solid red !important;
-} 
+} */

@@ -27,6 +27,8 @@ const CardSwap = ({ children, delay, cardDistance, verticalDistance, onCardChang
         ...slot,
         position: 'absolute',
         top: '50%',
+        left: '50%',      
+        xPercent: -50,  
         yPercent: -50
       });
     });

@@ -110,21 +110,7 @@
    RWD 響應式調整
 --------------------------------- */
 
-/* 平板尺寸 */
-@media (max-width: 992px) {
-  .detail-header {
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .header-right {
-    width: 100%;
-  }
 
-  .detail-title {
-    max-width: 100%;
-  }
-}
 
 /* 手機尺寸 */
 @media (max-width: 480px) {

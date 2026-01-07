@@ -53,8 +53,8 @@ const AboutPage = () => {
           <div className="card-stage">
             <CardSwap
               delay={5000}
-              cardDistance={40}
-              verticalDistance={30}
+              cardDistance={15}
+              verticalDistance={20}
               onCardChange={setActiveIndex}
             >
               <Card><div className="card-inner why">WHY</div></Card>
