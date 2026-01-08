@@ -209,9 +209,9 @@
 .label {
   width: 220px; 
   font-size: clamp(1rem, 1.5vw, 1.25rem);
-  color: var(--Neutral-Gray);
+  color: var(--Primary-Deep);
   letter-spacing: 1.5px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .value {
@@ -370,7 +370,7 @@
   .text-content-side {
     order: 2;
     width: 100%;
-    max-width: 90%; /* 避免文字貼邊 */
+    max-width: 90%; 
     text-align: center;
     padding-left: 0; 
     margin-top: 2rem; /* 與卡片保持距離 */
@@ -393,30 +393,70 @@
   }
 
   /* Profile */
+  .profile-section {
+    padding: 3rem 5%;
+    height: auto !important;
+    min-height: 100vh;  
+    display: block;  /* 移除 flex 置中，改用區塊流，防止高度擠壓 */
+    overflow: visible;
+  }
+  
   .profile-wrapper {
     flex-direction: column;
+    height: auto;
+    gap: 40px;
   }
 
   .profile-item-left,
   .profile-item-right {
     width: 100%;
+    flex: none;
   }
 
   .profile-item-right {
-    align-items: flex-start;
+    align-items: flex-start; 
   }
 
   .profile-label {
     font-size: clamp(2.5rem, 8vw, 4rem);
   }
 
-  .profile-connect p {
-    font-size: 1rem;
-    line-height: 1.7;
+  .profile-connect {
+    margin-bottom: 50px; 
+  }
+
+  .profile-table {
+    border-top: 1px solid #999;
+    width: 100%;
+  }
+
+  .table-row {
+    flex-direction: column; 
+    align-items: flex-start;
+    padding: 20px 0;  
+    gap: 10px;
   }
 
   .label {
-    width: 150px;
+    width: 100%;  
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .value {
+    width: 100%; 
+    padding-left: 0;
+    font-size: 0.95rem;
+  }
+
+  /* 列表與標籤間距優化 */
+  .experience-list, 
+  .education-list {
+    gap: 20px;
+  }
+
+  .skill-tags {
+    gap: 10px;
   }
 }
 
@@ -459,31 +499,38 @@
     padding: 3rem 6%;
   }
 
+  .profile-wrapper {
+    gap: 30px;
+  }
+
+  .profile-label {
+    font-size: 2.8rem;
+  }
+
   .profile-connect {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .profile-connect p {
     font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .table-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+    padding: 16px 0;
+    gap: 8px;
   }
 
   .label {
-    width: auto;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    letter-spacing: 1px;
   }
 
   .value {
     font-size: 0.9rem;
-    line-height: 1.6;
+  }
+
+  .skill-tags {
+    gap: 8px;
   }
 }
-
-/* {
-  outline: 1px solid red !important;
-} */

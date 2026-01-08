@@ -58,17 +58,11 @@
     border: 1px solid var(--Neutral-Gray);
     padding: 6px 22px;
     border-radius: 999px;
-
     font-size: clamp(0.9375rem, 1vw + 0.5rem, 1.125rem);
     letter-spacing: 0.04em;
-
     color: var(--text-black);
     cursor: pointer;
-
-    transition:
-        color 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.25s ease;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.25s ease;
 }
 
 .filter-btn::before {
@@ -91,7 +85,6 @@
     color: #fff;
 }
 
-/* Active 狀態 */
 .filter-btn.active {
     color: #fff;
     border-color: transparent;
@@ -111,6 +104,8 @@
     flex: 0 0 50%;
     margin-left: 50%;
     padding: 5% 0;
+    min-height: 80vh; /* 保證作品+分頁空間 */
+    box-sizing: border-box;
 }
 
 .accordion-gallery {
@@ -127,12 +122,9 @@
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-
-    /* 初始動畫效果 */
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-
     height: 250px;
     position: relative;
 }
@@ -142,9 +134,10 @@
     transform: translateY(0);
 }
 
+.gallery-item:hover,
 .gallery-item.is-expanded {
     height: 450px;
-    background-color: #000;
+    background-color: #000; /* 黑色背景 */
 }
 
 .item-content {
@@ -160,7 +153,6 @@
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* Hover & 展開效果 */
 .gallery-item:hover img,
 .gallery-item.is-expanded img {
     opacity: 0.3;
@@ -175,7 +167,7 @@
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.5s ease 0.2s;
-    color: #ffffff;
+    color: #fff;
 }
 
 .gallery-item:hover .project-info,
@@ -197,10 +189,20 @@
 
 /* ---------- 分頁器 ---------- */
 .pagination-container {
-    margin-top: 80px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
     padding-bottom: 40px;
+    width: 100%;
+}
+
+.right-pagination {
+    position: sticky;
+    bottom: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 5;
 }
 
 .pagination-numbers {
@@ -211,7 +213,6 @@
 
 .page-num {
     font-size: 16px;
-    font-family: 'Inter', sans-serif;
     color: var(--Neutral-Light);
     cursor: pointer;
     transition: all 0.3s ease;
@@ -258,26 +259,151 @@
 .page-arrow.prev { margin-right: 15px; }
 .page-arrow.next { margin-left: 15px; }
 
-/* ---------- RWD 手機版 ---------- */
-@media (max-width: 768px) {
-    .works-main-content {
-        flex-direction: column;
+/* =====================================================
+   RWD – Responsive Layout
+===================================================== */
+@media (max-width: 1024px) {
+    .works-main-content { padding: 0 5%; }
+    .works-left-section { width: calc(50% - 5%); }
+    .works-title { 
+        font-size: clamp(2.5rem, 6vw, 4.5rem); 
+        margin-bottom: 16px; 
     }
-
-    .works-left-section {
-        position: relative;
-        height: auto;
-        top: 0;
-        padding: 60px 20px;
-        transform: none;
+    .filter-buttons { gap: 10px; }
+    .filter-btn { 
+        padding: 5px 18px; 
+        font-size: 0.95rem; 
     }
-
-    .works-right-section {
-        flex: 0 0 100%;
-        padding: 20px 0;
+    .works-right-section { 
+        margin-left: 48%; 
+        padding: 4% 0; 
     }
-
-    .gallery-item.is-expanded {
-        height: 350px;
-    }
+    .accordion-gallery { gap: 8px; }
+    .gallery-item { height: 220px; border-radius: 10px; }
+    .gallery-item.is-expanded { height: 380px; }
+    .project-info { left: 28px; bottom: 28px; }
+    .project-info h3 { font-size: 1.2rem; }
+    .project-info p { font-size: 0.65rem; }
+    .pagination-container { margin-top: 60px; padding-bottom: 30px; }
+    .pagination-numbers { gap: 24px; }
 }
+
+@media (max-width: 768px) {
+    .works-main-content { 
+        display: block !important; 
+        position: relative !important; 
+        margin-top: var(--header-height, 80px); 
+        padding: 3rem 5%; 
+    }
+    .works-left-section { 
+        position: relative !important; 
+        transform: none !important; 
+        top: auto; 
+        left: auto; 
+        width: 100%; 
+        margin-bottom: 50px; 
+        align-items: center; 
+        text-align: center; 
+    }
+    .left-content-inner { align-items: center; }
+    .works-title { 
+        font-size: clamp(2.5rem, 10vw, 4rem); 
+        margin-bottom: 1.5rem; 
+    }
+    .works-right-section { 
+        width: 100%; 
+        margin-left: 0; 
+        padding: 0; 
+        min-height: 50vh; 
+    }
+    .accordion-gallery { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 8rem 1.5rem; 
+        margin-bottom: 5rem;
+    }
+    .gallery-item { 
+        height: auto; 
+        flex-shrink: 0; 
+        background-color: transparent; 
+        overflow: visible; 
+        display: flex; 
+        flex-direction: column; 
+        opacity: 1; 
+        transform: none; 
+    }
+    .item-content { 
+        position: relative; 
+        height: 380px; 
+        width: 100%; 
+        border-radius: 10px; 
+        overflow: visible; 
+    }
+    .item-content img, 
+    .gallery-item:hover .item-content img, 
+    .gallery-item.is-expanded .item-content img { 
+        object-fit: cover; 
+        border-radius: 10px; 
+        opacity: 1; 
+        filter: none; 
+        transform: none; 
+    }
+    .project-info { 
+        position: relative; 
+        display: block; 
+        bottom: 0; 
+        left: auto; 
+        padding: 0; 
+        min-height: 60px;
+        opacity: 1; 
+        visibility: visible; 
+        transform: none; 
+        text-align: left; 
+        z-index: 5; 
+    }
+    .project-info h3 { 
+        font-size: 1.25rem; 
+        margin: 0; 
+        color: var(--text-black); 
+        display: block; 
+    }
+    .project-info p { 
+        font-size: 0.8rem; 
+        margin: 0; 
+        color: var(--Neutral-Gray); 
+        display: block; 
+    }
+    .pagination-container { 
+        margin-top: 150px; 
+        padding-bottom: 20px; 
+    }
+    .pagination-numbers { gap: 18px; }
+    .page-num { font-size: 14px; }
+    .page-arrow { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+    .works-main-content { padding: 2.5rem 5%; }
+    .works-left-section { margin-bottom: 40px; }
+    .works-title { font-size: 2.8rem; margin-bottom: 1.25rem; }
+    .filter-buttons { flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .filter-btn { padding: 5px 16px; font-size: 0.85rem; }
+    .accordion-gallery { 
+        grid-template-columns: 1fr; 
+        gap: 6rem; 
+    }
+    .item-content { height: 450px; }
+    .project-info h3 { font-size: 1.1rem; }
+    .project-info p { 
+        font-size: 0.8rem; 
+    }
+    .pagination-container { 
+        margin-top: 150px; 
+        padding-bottom: 20px; 
+    }
+    .pagination-numbers { gap: 14px; }
+    .page-num { font-size: 13px; }
+    .page-arrow { font-size: 15px; }
+}
+
+

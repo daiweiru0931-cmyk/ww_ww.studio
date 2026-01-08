@@ -955,6 +955,24 @@ body.dark-mode {
     margin: 0.5rem 0;
     color: #fff;
   }
+
+  .footer {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-content {
+    align-items: center; 
+  }
+
+  .footer-office p{
+    text-align: start;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 0;
+  }
 }
 
 /* 480px ｜ Small Mobile */
@@ -1016,6 +1034,14 @@ body.dark-mode {
     transform: translateY(-70%);
   }
   
+  .footer-nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
 }
 
 /* {
