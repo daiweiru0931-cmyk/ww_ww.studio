@@ -29,7 +29,7 @@
 .tag-btn {
   display: inline-block;
   border: 1px solid var(--Neutral-Gray);
-  padding: 5px 15px;
+  padding: 3px 15px;
   border-radius: 20px;
   font-size: clamp(0.6875rem, 0.6vw + 0.2rem, 0.8125rem);
   margin-right: 10px;
@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 8%;
-  gap: 30px; /* 圖片與圖片之間的垂直間距 */
+  gap: 10px; /* 圖片與圖片之間的垂直間距 */
 }
 
 .detail-image-box {
@@ -80,7 +80,6 @@
   width: 100%;
   height: auto;
   display: block;
-  /* border: 1px solid rgba(0,0,0,0.05); 可選：增加極淡描邊 */
 }
 
 /* 底部按鈕區 */

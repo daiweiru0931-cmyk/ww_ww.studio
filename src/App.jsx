@@ -8,9 +8,11 @@ import './App.css';
 import { useNavigate } from 'react-router-dom';
 
 const heroImages = [
-  { src: '/assets/works/works-img01.jpg', alt: "Hero Sample 1" },
-  { src: '/assets/works/works-img02.jpg', alt: "Hero Sample 2" },
-  { src: '/assets/works/works-img03.jpg', alt: "Hero Sample 3" },
+  { src: '/assets/works/WG-Signage System.jpg', alt: "Hero Sample 1" },
+  { src: '/assets/works/WG-LafoPoster.jpg', alt: "Hero Sample 2" },
+  { src: '/assets/works/WGB-CI Membership.jpg', alt: "Hero Sample 3" },
+  { src: '/assets/works/WG-Forest Menu.jpg', alt: "Hero Sample 4" },
+  { src: '/assets/works/WG-Herbal Tea Packaging.jpg', alt: "Hero Sample 5" },
 ];
 
 const tasteImages = [
@@ -28,7 +30,7 @@ function App() {
   const headerRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
-  /* ✅ 同步 header 高度 → CSS 變數 */
+  /* 同步 header 高度 → CSS 變數 */
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -74,7 +76,7 @@ function App() {
 
   return (
     <>
-      <HeaderMenu ref={headerRef} studioName="W.W. Studio" contactLabel="CONTACT" />
+      <HeaderMenu ref={headerRef} studioName="W.W. Design Studio" contactLabel="CONTACT" />
 
       <div className="App" style={{ paddingTop: `${headerHeight}px` }}>
         {/* Hero section */}

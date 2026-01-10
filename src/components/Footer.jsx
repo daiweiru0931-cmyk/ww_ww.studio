@@ -28,7 +28,7 @@ const Footer = () => {
 
       <div className="footer-content">
         <Link to="/" className="footer-logo">
-          <img src="ww-logo.svg" alt="WW Studio Logo" />
+          <img src="ww-logo.svg" alt="WW Design Studio Logo" />
           <h3>WW Studio</h3>
         </Link>
         <nav className="footer-nav">
@@ -58,7 +58,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>Copyright © 2025 WW Studio</p>
+        <p>Copyright © 2025 WW Design Studio</p>
       </div>
     </footer>
   );
