@@ -262,6 +262,7 @@
 /* =====================================================
    RWD – Responsive Layout
 ===================================================== */
+/* 1024px ｜ Tablet Landscape */
 @media (max-width: 1024px) {
     .works-main-content { padding: 0 5%; }
     .works-left-section { width: calc(50% - 5%); }
@@ -288,6 +289,7 @@
     .pagination-numbers { gap: 24px; }
 }
 
+/* 768px ｜ Tablet / Mobile */
 @media (max-width: 768px) {
     .works-main-content { 
         display: block !important; 
@@ -382,6 +384,7 @@
     .page-arrow { font-size: 16px; }
 }
 
+/* 480px ｜ Small Mobile */
 @media (max-width: 480px) {
     .works-main-content { padding: 2.5rem 5%; }
     .works-left-section { margin-bottom: 40px; }
